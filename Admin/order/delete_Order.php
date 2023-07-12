@@ -4,7 +4,7 @@ require_once '../../core/boot.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['delete']) && is_array($_POST['delete'])) {
         $ids = $_POST['delete'];
-        $result = delete_categories($ids);
+        $result = delete_orders($ids);
 
         if ($result > 0) {
             echo 'Xóa thành công ' . $result . ' bản ghi.';

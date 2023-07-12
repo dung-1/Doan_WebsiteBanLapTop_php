@@ -158,7 +158,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?php echo BASE_URL . '/Admin/user/index.php'; ?>" class="nav-link">
                                 <i class="nav-icon fa-solid fas fa-user"></i>
                                 <p>QUẢN LÝ NHÂN VIÊN</p>
                             </a>
@@ -180,7 +180,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="<?php echo BASE_URL . '/Admin/order_detail/index.php'; ?>" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>CHI TIẾT HÓA ĐƠN</p>
                                     </a>
@@ -188,7 +188,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?php echo BASE_URL . '/Admin/customer/index.php'; ?>" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>QUẢN LÝ KHÁCH HÀNG</p>
                             </a>

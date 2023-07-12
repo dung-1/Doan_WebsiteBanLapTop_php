@@ -1,7 +1,7 @@
 <?php
 define('DB_NAME', 'doanwebsite');
 define('DB_USER', 'root');
-define('DB_USER_PASS', 'dungditu130502@');
+define('DB_USER_PASS', 'Hung0976661824');
 
 function get_pdo(){
     $pdo = null;

@@ -74,35 +74,6 @@ function update_category($id, $name)
     $stmt->execute();
 }
 
-class categoryModel {
-    public function deletecategories($ids) {
-        try {
-            $pdo = get_pdo();
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            // Escape the IDs to prevent SQL injection
-            $escapedIds = array_map(function ($id) use ($pdo) {
-                return $pdo->quote($id);
-            }, $ids);
-
-            // Create the comma-separated list of IDs
-            $idList = implode(',', $escapedIds);
-
-            // Delete the selected items
-            $query = "DELETE FROM categories WHERE category_id IN ($idList)";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute();
-
-            // Check if any rows were affected
-            $rowCount = $stmt->rowCount();
-
-            return $rowCount > 0;
-        } catch (PDOException $e) {
-            return false;
-        }
-    }
-}
-
 function delete_categories($ids)
 {
     global $pdo;

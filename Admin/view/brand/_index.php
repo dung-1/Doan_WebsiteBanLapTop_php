@@ -1,4 +1,4 @@
-    <?php include_once 'C:/xampp/htdocs/Project-php-mysql/Admin/view/inc/headerAdmin.php' ?>
+    <?php include_once '../view/inc/headerAdmin.php' ?>
 
     <!--ADD BRAND-->
     <div class="modal fade" id="studentaddmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -147,4 +147,4 @@
     </div>
     <!-- /.content-wrapper -->
 
-    <?php include_once 'C:/xampp/htdocs/Project-php-mysql/Admin/view/inc/footerAdmin.php' ?>
+    <?php include_once '../view/inc/footerAdmin.php' ?>

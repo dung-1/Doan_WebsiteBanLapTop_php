@@ -82,34 +82,7 @@ function update_brand($id, $name, $date, $country)
     $stmt->execute();
 }
 
-class BrandModel {
-    public function deleteBrands($ids) {
-        try {
-            $pdo = get_pdo();
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            // Escape the IDs to prevent SQL injection
-            $escapedIds = array_map(function ($id) use ($pdo) {
-                return $pdo->quote($id);
-            }, $ids);
-
-            // Create the comma-separated list of IDs
-            $idList = implode(',', $escapedIds);
-
-            // Delete the selected items
-            $query = "DELETE FROM brands WHERE brand_id IN ($idList)";
-            $stmt = $pdo->prepare($query);
-            $stmt->execute();
-
-            // Check if any rows were affected
-            $rowCount = $stmt->rowCount();
-
-            return $rowCount > 0;
-        } catch (PDOException $e) {
-            return false;
-        }
-    }
-}
 
 function delete_brands($ids)
 {
@@ -117,6 +90,14 @@ function delete_brands($ids)
     $placeholders = implode(',', array_fill(0, count($ids), '?'));
     $sql = "DELETE FROM brands WHERE brand_id IN ($placeholders)";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute($ids);
-    return $stmt->rowCount();
+    if ($stmt) {
+        if ($stmt->execute($ids)) {
+            return $stmt->rowCount();
+        }
+        header('Location: ../view/inc/error_delete.php');
+
+    } else {
+        header('Location: ../view/inc/error_delete.php');
+        // Chắc chắn kết thúc chương trình sau khi chuyển hướng
+    }
 }

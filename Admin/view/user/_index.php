@@ -1,4 +1,4 @@
-<?php include_once '../view/inc/headerAdmin.php' ?>
+    <?php include_once '../view/inc/headerAdmin.php' ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -7,9 +7,8 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Hóa Đơn</h1>
+                        <h1>Nhân Viên</h1>
                     </div>
-
                 </div>
             </div>
             <!-- /.container-fluid -->
@@ -21,33 +20,39 @@
                     <div class="col-12">
                         <!-- /.card -->
                         <div class="card">
-                         
+
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <form method="POST" action="../order/delete_Order.php">
+                                <form method="POST" action="../customer/delete_customer.php">
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr class="text-center">
                                                 <th><input type="checkbox" id="select-all"> Chọn Tất Cả</th>
-                                                <th>ID Hóa Đơn</th>
-                                                <th>Tên Khách Hàng</th>
-                                                <th>Ngày Mua</th>
-                                                <th>Tổng Thanh Toán</th>
-                                                <th>Trạng Thái</th>
+                                                <th>ID Nhân Viên</th>
+                                                <th>Tên Nhân Viên/th>
+                                                <th> Email</th>
+                                                <th>Giới Tính</th>
+                                                <th>Ngày Sinh</th>
+                                                <th>Số Điện Thoại</th>
+                                                <th>Tên Tài Khoản</th>
+                                                <th>Mật Khẩu</th>
+
                                             </tr>
                                         </thead>
 
                                         <tbody>
                                             <?php $index = 0; ?>
-                                            <?php foreach ($order_list as $order) : ?>
+                                            <?php foreach ($user_list as $user) : ?>
                                                 <tr class="text-center">
-                                                    <td><input type="checkbox" class="checkbox " name="delete[]" value="<?php echo $order['id']; ?>"></td>
-                                                    <td class="td"><?php echo $order['id']; ?></td>
-                                                    <td class="td"><?php echo $order['name']; ?></td>
-                                                    <td class="td"><?php echo $order['date']; ?></td>
-                                                    <td class="td"><?php echo $order['total_amount']; ?></td>
-                                                    <td class="td"><?php echo $order['status']; ?></td>
-                                                 
+                                                    <td><input type="checkbox" class="checkbox " name="delete[]" value="<?php echo $user['id']; ?>"></td>
+                                                    <td class="td"><?php echo $user['id']; ?></td>
+                                                    <td class="td"><?php echo $user['full_name']; ?></td>
+                                                    <td class="td"><?php echo $user['email']; ?></td>
+                                                    <td class="td"><?php echo $user['gender']; ?></td>
+                                                    <td class="td"><?php echo $user['birthdate']; ?></td>
+                                                    <td class="td"><?php echo $user['phone']; ?></td>
+                                                    <td class="td"><?php echo $user['user_name']; ?></td>
+                                                    <td class="td"><?php echo $user['password']; ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -70,4 +75,4 @@
     </div>
     <!-- /.content-wrapper -->
 
-    <?php include_once '../view/inc/footerAdmin.php' ?>
+    <?php include_once 'C:/xampp/htdocs/Project-php-mysql/Admin/view/inc/footerAdmin.php' ?>
