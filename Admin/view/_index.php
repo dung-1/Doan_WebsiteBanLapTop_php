@@ -1,13 +1,11 @@
 <?php
-session_start();
+
 if (isset($_SESSION['username'])) {
-  $_SESSION['username'];
   if ($_SESSION['role'] == 'customer') {
     header('location:../View/user.php');
     exit();
   }
-}
-else{
+} else {
   header('location:../View/loginPage.php');
   exit();
 }  ?>
