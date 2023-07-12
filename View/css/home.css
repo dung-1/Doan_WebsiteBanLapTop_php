@@ -69,15 +69,15 @@ header .navbar__cart {
 
 header .navbar__cart .cart-quantity-counter {
     position: absolute;
-    right: 90px;
-    top: 20px;
+    right: 66px;
+    top: -4px;
     background: #2b80dd;
     color: #fff;
     padding: 3px 5px 2px 5px;
     font-size: 14px;
     font-weight: bold;
     text-align: center;
-    line-height: 14px;
+    line-height: 16px;
     border-radius: 9999px;
 }
 
@@ -109,6 +109,43 @@ header .menu .menu__toggler {
 .spanner2 img {
     width: 100%;
 }
+/* product_deal */
+.box-home-deal {
+    width: 100%;
+    float: left;
+    margin-bottom: 20px;
+    border: solid 1px #ec3237;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.box-home-deal .title {
+    width: 100%;
+    float: left;
+    padding: 5px 15px;
+    background: #ec3237;
+}
+.box-home-deal .title .txt {
+    float: left;
+    height: 40px;
+    padding-left: 40px;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ffffff;
+    line-height: 40px;
+    background: url(../../public/img/icons/icon_fire_white.png) no-repeat;
+    background-size: auto 40px;
+    background-position: left center;
+    text-decoration: none;
+}
+.box-home-deal .title .vm-deal {
+    float: right;
+    font-size: 14px;
+    color: #ffffff;
+    line-height: 40px;
+    font-weight: 300;
+}
+
 
 .products .pro-head {
     margin-bottom: 10px;
@@ -127,7 +164,36 @@ header .menu .menu__toggler {
     text-decoration: none;
     color: #fff;
 }
+.product-item .product__show .card .card-body .product_price {
+    font-size: 16px;
+    color:#a29c9cd7;
+    margin-left: 10px;
+    text-decoration: line-through;
+    padding-top: 5px;
+    font-style: normal;
+}
+.product-item .product__show .card .card-body .product_discount-price {
+    font-size: 20px;
+    color: red;
+    font-weight: 600;
+}
+.product-item .product__show .card img {
+    max-width: 270px;
+    max-height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+}
+.product-item .product__show .card .card-title{
+    font-size: 18px;
+    font-weight: 800;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.product-item .product__show .card .card-info{
+    font-size: 16px;
 
+    font-family:'Times New Roman', Times, serif;
+}
 
 
 /* footer */

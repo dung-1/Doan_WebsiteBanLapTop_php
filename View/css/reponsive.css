@@ -3,19 +3,8 @@
     .hide-mobile {
         display: none;
     }
-    .product-item card {
-        max-width: 80%;
-       }
-    .product-item .card-img-top {
-        max-width: 80%;
-    }
+    
 }
-
-  
-
-
-
-
 
 /* Tablet: width >= 740px and width < 1024px */
 @media only screen and (min-width: 740px) and (max-width: 1024px) {
@@ -23,11 +12,9 @@
         display: none;
     }    
     header .navbar__search-form {
-        width: 100%;
+       flex-grow: 1; 
     }
-    .product-item card {
-        max-width: 80%;
-       }
+    
 }
 /* PC: width >= 1024px */
 @media only screen and (min-width: 64em) {

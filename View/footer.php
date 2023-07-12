@@ -74,7 +74,7 @@
                                 <!-- end_info_tintuc -->
                                 <div class="title-tintuc">
                                     <a href="">ASUS ra mắt màn hình gaming tần số quét cao, độ phân giải 5K</a>
-                                </div>
+                                </div>  
                                 <!-- end_title_tintuc -->
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                             <li>Gửi góp ý, khiếu nại</li>
                             <li class="baohanh-item mt-3">
                                 <a href="http://www.online.gov.vn/Home/WebDetails/76577?AspxAutoDetectCookieSupport=1" class="thongbaobct">
-                                    <img src="img/footer/footer-icon.png"></a>
+                                    <img src="../public/img/footer/footer-icon.png"></a>
                             </li>
                         </ul>
                     </div>
