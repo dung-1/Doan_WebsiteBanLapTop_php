@@ -65,12 +65,35 @@
 
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="far fa-comments"></i>
-            <span class="badge badge-danger navbar-badge">3</span>
-          </a>
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="fa-solid fa-gear"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right  ">
+                       <a href="#" class="dropdown-item ">
+                            <!-- Message Start -->
+                            
+                            <div class="media " >
+                                <div class="media-body fs-1 text-dark">
+                                <i class="fa-solid fa-unlock-keyhole text-info"></i>   Đổi mật Khẩu
+                                </div>
+                            </div>
+                            <!-- Message End -->  
+                        </a>
 
-        </li>
+                        <a href="#" class="dropdown-item">
+                            <!-- Message Start -->
+                            
+                            <div class="media">
+                                <div class="media-body">
+                                <i class="fa-solid fa-right-from-bracket text-info"></i>    Đăng Xuất
+                                </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+
+
+                    </div>
+                </li>
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
@@ -157,14 +180,14 @@
 
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="<?php echo BASE_URL . '/Admin/category/index.php'; ?>" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>LOẠI SẢN PHẨM</p>
                   </a>
 
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="<?php echo BASE_URL . '/Admin/product/index.php'; ?>" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>SẢN PHẨM</p>
                   </a>
@@ -172,7 +195,7 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="<?php echo BASE_URL . '/Admin/user/index.php'; ?>" class="nav-link">
                 <i class="nav-icon fa-solid fas fa-user"></i>
                 <p>
                   QUẢN LÝ NHÂN VIÊN
@@ -190,13 +213,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="<?php echo BASE_URL . '/Admin/order/index.php'; ?>" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>HÓA ĐƠN</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="<?php echo BASE_URL . '/Admin/order_detail/index.php'; ?>" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>CHI TIẾT HÓA ĐƠN</p>
                   </a>
@@ -204,7 +227,7 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="<?php echo BASE_URL . '/Admin/customer/index.php'; ?>" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   QUẢN LÝ KHÁCH HÀNG

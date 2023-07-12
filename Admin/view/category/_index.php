@@ -16,7 +16,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label> Tên Loại Sản Phẩm</label>
-                            <input type="text" name="name" class="form-control">
+                            <input type="text" name="name" class="form-control"onkeypress="validateInput(event)" required>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -44,7 +44,7 @@
                         <input type="hidden" name="id" id="id">
                         <div class="form-group">
                             <label>Tên Loại Sản Phẩm</label>
-                            <input type="text" name="name" id="name" class="form-control">
+                            <input type="text" name="name" id="name" class="form-control"onkeypress="validateInput(event)" required>
                         </div>
 
                     </div>
@@ -102,7 +102,7 @@
                                                     <td class="td"><?php echo $category['id']; ?></td>
                                                     <td class="td"><?php echo $category['name']; ?></td>
                                                     <td>
-                                                        <a class="btn btn-primary editbtn" data-toggle="modal" data-target="#editmodal">Edit</a>
+                                                        <a class="btn btn-warning editbtn" data-toggle="modal" data-target="#editmodal"><i class="fa-solid fa-pen-to-square"></i> Sửa</a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -125,5 +125,14 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+    <script>
+                    function validateInput(event) {
+                        var input = event.target.value;
+                        var regex = /^[a-zA-Z\s]*$/;
 
+                        if (!regex.test(input)) {
+                            event.preventDefault();
+                        }
+                    }
+                </script>
     <?php include_once '../view/inc/footerAdmin.php' ?>

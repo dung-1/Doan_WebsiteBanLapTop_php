@@ -30,7 +30,7 @@
                                             <tr class="text-center">
                                                 <th><input type="checkbox" id="select-all"> Chọn Tất Cả</th>
                                                 <th>ID Khách Hàng</th>
-                                                <th>Tên Khách Hàng/th>
+                                                <th>Tên Khách Hàng</th>
                                                 <th> Email</th>
                                                 <th>Giới Tính</th>
                                                 <th>Ngày Sinh</th>
@@ -53,7 +53,7 @@
                                                     <td class="td"><?php echo $customer['birthdate']; ?></td>
                                                     <td class="td"><?php echo $customer['phone']; ?></td>
                                                     <td class="td"><?php echo $customer['user_name']; ?></td>
-                                                    <td class="td"><?php echo $customer['password']; ?></td>
+                                                    <td class="td"><?php echo str_repeat('*', strlen($customer['password'])); ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>

@@ -31,7 +31,7 @@
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label>Tên Sản Phẩm</label>
-                                        <input type="text" name="name" id="name" class="form-control" placeholder="Nhập Tên Sản Phẩm">
+                                        <input type="text" name="name" id="name" class="form-control" placeholder="Nhập Tên Sản Phẩm" required >
                                     </div>
                                     <div class="form-group">
                                         <label for="category">Loại sản phẩm:</label>
@@ -80,19 +80,19 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Giá Sản Phẩm</label>
-                                        <input type="number" name="price" id="price" class="form-control" placeholder="Nhập giá Sản Phẩm">
+                                        <input type="number" name="price" id="price" class="form-control" placeholder="Nhập giá Sản Phẩm" onkeypress="validateNumberInput(event)" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Giá Sale</label>
-                                        <input type="number" name="discounted" id="discounted" class="form-control" placeholder="Nhập giá Sale">
+                                        <input type="number" name="discounted" id="discounted" class="form-control" placeholder="Nhập giá Sale" onkeypress="validateNumberInput(event)" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="image">Hình ảnh</label>
-                                        <input type="file" name="image" id="image" class="form-control">
+                                        <input type="file" name="image" id="image" class="form-control"  required>
                                     </div>
                                     <div class="form-group">
                                         <label for="image">Thông Tin Sản Phẩm</label>
-                                        <textarea id="compose-textarea" name="info" class="form-control">
+                                        <textarea id="compose-textarea" name="info" class="form-control" required>
 
                                              </textarea>
                                     </div>
@@ -118,5 +118,14 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+    <script>
+        function validateNumberInput(event) {
+            var input = event.target.value;
+            var regex = /^[0-9]*$/;
 
+            if (!regex.test(input)) {
+                event.preventDefault();
+            }
+        }
+    </script>
     <?php include_once 'C:/xampp/htdocs/Project-php-mysql/Admin/view/inc/footerAdmin.php' ?>

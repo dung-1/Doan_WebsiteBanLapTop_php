@@ -29,7 +29,7 @@
                                             <tr class="text-center">
                                                 <th><input type="checkbox" id="select-all"> Chọn Tất Cả</th>
                                                 <th>ID Nhân Viên</th>
-                                                <th>Tên Nhân Viên/th>
+                                                <th>Tên Nhân Viên</th>
                                                 <th> Email</th>
                                                 <th>Giới Tính</th>
                                                 <th>Ngày Sinh</th>
@@ -52,7 +52,7 @@
                                                     <td class="td"><?php echo $user['birthdate']; ?></td>
                                                     <td class="td"><?php echo $user['phone']; ?></td>
                                                     <td class="td"><?php echo $user['user_name']; ?></td>
-                                                    <td class="td"><?php echo $user['password']; ?></td>
+                                                    <td class="td"><?php echo str_repeat('*', strlen($user['password'])); ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>

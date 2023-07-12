@@ -8,6 +8,20 @@
   .member-column:last-child {
     border-right: none;
   }
+
+  #back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    cursor: pointer;
+    font-size: xx-large;
+    
+  }
+
+  #back-to-top.show {
+    display: block;
+  }
 </style>
 <footer class="main-footer">
   <div class="container">
@@ -30,6 +44,7 @@
     </div>
   </div>
 </footer>
+<a href="#" id="back-to-top" title="Back to top"> <i class="fa-sharp fa-solid fa-circle-up"></i> </a>
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
   <!-- Control sidebar content goes here -->
@@ -60,8 +75,26 @@
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
 <!-- Page specific script -->
+<script>
+  var backToTop = document.querySelector('#back-to-top');
+
+  window.addEventListener('scroll', function() {
+    if (window.pageYOffset > 100) {
+      backToTop.classList.add('show');
+    } else {
+      backToTop.classList.remove('show');
+    }
+  });
+
+  backToTop.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+</script>
 <script>
   $(document).ready(function() {
 

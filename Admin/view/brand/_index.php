@@ -12,27 +12,29 @@
                 </div>
 
                 <form action="../brand/insert_Brand.php" method="POST">
-
                     <div class="modal-body">
                         <div class="form-group">
                             <label> Hãng Sản Phẩm</label>
-                            <input type="text" name="name" class="form-control">
+                            <input type="text" name="name" class="form-control" onkeypress="validateInput(event)" required>
                         </div>
 
                         <div class="form-group">
                             <label> Nhập Quốc Gia</label>
-                            <input type="text" name="country" class="form-control">
+                            <input type="text" name="country" class="form-control" onkeypress="validateInput(event)" required>
                         </div>
+
                         <div class="form-group">
                             <label> Ngày Thành Lập</label>
-                            <input type="date" name="date" class="form-control">
+                            <input type="date" name="date" class="form-control" max="<?php echo date('Y-m-d'); ?>" required>
                         </div>
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                         <button type="submit" name="insertdata" class="btn btn-primary">Thêm Dữ Liệu</button>
                     </div>
                 </form>
+
 
             </div>
         </div>
@@ -53,15 +55,15 @@
                         <input type="hidden" name="id" id="id">
                         <div class="form-group">
                             <label>Hãng Sản Phẩm</label>
-                            <input type="text" name="name" id="name" class="form-control">
+                            <input type="text" name="name" id="name" class="form-control" onkeypress="validateInput(event)" required>
                         </div>
                         <div class="form-group">
                             <label>Nhập Quốc Gia</label>
-                            <input type="text" name="country" id="country" class="form-control">
+                            <input type="text" name="country" id="country" class="form-control" onkeypress="validateInput(event)" required>
                         </div>
                         <div class="form-group">
                             <label>Ngày Thành Lập</label>
-                            <input type="date" name="date" id="date" class="form-control">
+                            <input type="date" name="date" id="date" class="form-control" max="<?php echo date('Y-m-d'); ?>" required>
                         </div>
 
                     </div>
@@ -123,7 +125,7 @@
                                                     <td class="td"><?php echo $category['country']; ?></td>
                                                     <td class="td"><?php echo $category['date']; ?></td>
                                                     <td>
-                                                        <a class="btn btn-primary editbtn" data-toggle="modal" data-target="#editmodal">Edit</a>
+                                                        <a class="btn btn-warning editbtn" data-toggle="modal" data-target="#editmodal"> <i class="fa-solid fa-pen-to-square"></i> Sửa</a>
                                                     </td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -146,5 +148,14 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+    <script>
+        function validateInput(event) {
+            var input = event.target.value;
+            var regex = /^[a-zA-Z\s]*$/;
 
+            if (!regex.test(input)) {
+                event.preventDefault();
+            }
+        }
+    </script>
     <?php include_once '../view/inc/footerAdmin.php' ?>
