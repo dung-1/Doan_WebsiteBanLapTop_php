@@ -49,7 +49,7 @@
 
                         <div class="navbar-nav ms-auto">
 
-                            <a href="test-login.html" class="nav-item nav-link me-4" data-toggle="modal" data-target="#modalLoginForm">
+                            <a href="loginPage.php" class="nav-item nav-link me-4" data-toggle="modal" data-target="#modalLoginForm">
                                 <i class="bi bi-box-arrow-in-left"></i> Đăng nhập
                             </a>
 
