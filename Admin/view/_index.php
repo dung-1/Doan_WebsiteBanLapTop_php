@@ -218,27 +218,14 @@
                   QUẢN LÝ PHẢN HỒI
                 </p>
               </a>
-            </li>
-
+            </li>  
             <li class="nav-item">
-              <a href="#" class="nav-link">
-                <p>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <p>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
-                <p>
+              
+                <a href="../../doanPHP/View/logout.php" class="nav-link">
+                  <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
                   ĐĂNG XUẤT
-                </p>
-              </a>
+                </a>
+              
             </li>
           </ul>
         </nav>

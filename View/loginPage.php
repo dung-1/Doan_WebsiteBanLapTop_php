@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(isset($_SESSION['username'])){
+    header('Location:user.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +23,7 @@
 
 <body>
     <?php include 'header.php'; ?>
-    <div class="login-form">
+    <form action="xuLyLoginPage.php" method="POST">
         <section class="vh-80">
             <div class="container py-5 h-20">
                 <div class="row d-flex justify-content-center align-items-center h-80">
@@ -32,13 +38,13 @@
 
                                     <div class="form-outline form-white mb-4">
                                         <label class="form-label d-flex" for="typeEmailX">Tên tài khoản</label>
-                                        <input type="text" class="form-control form-control-xl" placeholder="Nhập tên tài khoản của bạn..." />
+                                        <input type="text" class="form-control form-control-xl" name="username" placeholder="Nhập tên tài khoản của bạn..." />
 
                                     </div>
 
                                     <div class="form-outline form-white mb-4">
                                         <label class="form-label d-flex " for="typePasswordX">Mật khẩu</label>
-                                        <input type="password" id="typePasswordX" class="form-control form-control-xl " placeholder="Nhập mật khẩu của bạn..." />
+                                        <input type="password" id="typePasswordX" class="form-control form-control-xl" name="password" placeholder="Nhập mật khẩu của bạn..." />
 
                                     </div>
                                     <!-- Checkbox -->
@@ -68,7 +74,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </form
     </div>
 
     <?php include 'footer.php'; ?>
