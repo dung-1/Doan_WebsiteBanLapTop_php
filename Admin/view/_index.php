@@ -1,3 +1,16 @@
+<?php
+session_start();
+if (isset($_SESSION['username'])) {
+  $_SESSION['username'];
+  if ($_SESSION['role'] == 'customer') {
+    header('location:../View/user.php');
+    exit();
+  }
+}
+else{
+  header('location:../View/loginPage.php');
+  exit();
+}  ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -218,14 +231,14 @@
                   QUẢN LÝ PHẢN HỒI
                 </p>
               </a>
-            </li>  
+            </li>
             <li class="nav-item">
-              
-                <a href="../../doanPHP/View/logout.php" class="nav-link">
-                  <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
-                  ĐĂNG XUẤT
-                </a>
-              
+
+              <a href="../../doanPHP/View/logout.php" class="nav-link">
+                <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
+                ĐĂNG XUẤT
+              </a>
+
             </li>
           </ul>
         </nav>

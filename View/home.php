@@ -1,7 +1,14 @@
 <?php
 session_start();
-if(isset($_SESSION['username'])){
-    header('Location:user.php');
+if (isset($_SESSION['username'])) {
+    // Kiểm tra vai trò của người dùng và điều hướng tới các trang phù hợp
+    if ($_SESSION['role'] == 'admin') {
+        header('location: ../Admin/index.php');
+        exit();
+    } else if ($_SESSION['role'] == 'customer') {
+        header('location: user.php');
+        exit();
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -27,7 +34,7 @@ if(isset($_SESSION['username'])){
     <!-- end-header -->
     <main>
         <?php require "spanner.php" ?>
-        
+
         <div class="products">
             <div class="product-item">
                 <div class="pro-head pt-2">
