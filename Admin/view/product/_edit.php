@@ -68,11 +68,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Giá Sale</label>
-                                        <input required onkeypress="validateNumberInput(event)" type="number" name="discounted" id="discounted" class="form-control" placeholder="Nhập giá Sale" value="<?php echo isset($product_list['discounted_price']) ? $product_list['discounted_price'] : ''; ?> ">
+                                        <input  onkeypress="validateNumberInput(event)" type="number" name="discounted" id="discounted" class="form-control" placeholder="Nhập giá Sale" value="<?php echo isset($product_list['discounted_price']) ? $product_list['discounted_price'] : ''; ?> ">
                                     </div>
                                     <div class="form-group">
                                         <label for="image">Hình ảnh</label>
-                                        <input type="file" name="image" id="image" class="form-control"required>
+                                        <input type="file" name="image" id="image" class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label for="image">Thông Tin Sản Phẩm</label>

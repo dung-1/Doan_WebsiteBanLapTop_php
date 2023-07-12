@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $image_name = basename($image['name']);
         $image_tmp = $image[    'tmp_name'];
         // Đường dẫn lưu trữ ảnh (thay đổi theo nhu cầu)
-        $image_path = '../../public/image/' . $image_name;
+        $image_path = '../../public/img/' . $image_name;
         // Di chuyển tệp tin ảnh vào thư mục lưu trữ
         move_uploaded_file($image_tmp, $image_path);
         $product_image = $image_name;
