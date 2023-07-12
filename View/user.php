@@ -8,6 +8,9 @@ if (isset($_SESSION['username'])) {
 <!DOCTYPE html>
 <html lang="en">
 
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -215,7 +218,7 @@ if (isset($_SESSION['username'])) {
                     <!-- end_container -->
                 </div>
                 <!-- end_pro_head -->
-                <div c ass="product__show container">
+                <div class="product__show container">
                     <div class="row">
                         <?php
                         $conn = get_pdo();
@@ -328,4 +331,4 @@ if (isset($_SESSION['username'])) {
     <!-- end-footer -->
 </body>
 
-</html>
+</html>s
