@@ -1,4 +1,16 @@
-
+<?php
+session_start();
+if (isset($_SESSION['username'])) {
+    // Kiểm tra vai trò của người dùng và điều hướng tới các trang phù hợp
+    if ($_SESSION['role'] == 'admin') {
+        header('location: ../Admin/index.php');
+        exit();
+    } else if ($_SESSION['role'] == 'customer') {
+        header('location: user.php');
+        exit();
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,7 +66,7 @@
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info text-secondary"><?php echo $row['product_info']; ?></p>
