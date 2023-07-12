@@ -173,7 +173,7 @@ else {
                 <div class="pro-head pt-2">
                     <div class="container">
                         <div class="product-title">
-                            <h3><a href="">HỌC TẬP - VĂN PHÒNG</a></h3>
+                            <h3><a href="">LAPTOP GAMING</a></h3>
                         </div>
                         <!-- end_title -->
                     </div>
@@ -231,7 +231,7 @@ else {
                 <div class="pro-head pt-2">
                     <div class="container">
                         <div class="product-title">
-                            <h3><a href="">HỌC TẬP - VĂN PHÒNG</a></h3>
+                            <h3><a href="">LAPTOP ĐỒ HỌA</a></h3>
                         </div>
                         <!-- end_title -->
                     </div>
@@ -289,7 +289,7 @@ else {
                 <div class="pro-head pt-2">
                     <div class="container">
                         <div class="product-title">
-                            <h3><a href="">HỌC TẬP - VĂN PHÒNG</a></h3>
+                            <h3><a href="">MỎNG NHẸ CAO CẤP</a></h3>
                         </div>
                         <!-- end_title -->
                     </div>
@@ -347,7 +347,7 @@ else {
                 <div class="pro-head pt-2">
                     <div class="container">
                         <div class="product-title">
-                            <h3><a href="">HỌC TẬP - VĂN PHÒNG</a></h3>
+                            <h3><a href="">LIKE NEW</a></h3>
                         </div>
                         <!-- end_title -->
                     </div>
