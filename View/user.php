@@ -2,11 +2,13 @@
 session_start();
 if (isset($_SESSION['username'])) {
     if ($_SESSION['role'] == 'admin') {
-        header('location: ../Admin/index.php');
+        header('location:../Admin/index.php');
         exit();
-    } else {
-        header('location:../View/loginPage.php');
     }
+}
+else {
+    header('location:../View/loginPage.php');
+    exit();
 } ?>
 <!DOCTYPE html>
 <html lang="en">
