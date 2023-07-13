@@ -54,7 +54,7 @@
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info text-secondary"><?php echo $row['product_info']; ?></p>
@@ -112,7 +112,7 @@
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>
@@ -170,7 +170,7 @@
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>
@@ -228,7 +228,7 @@
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>
@@ -286,7 +286,7 @@
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>
