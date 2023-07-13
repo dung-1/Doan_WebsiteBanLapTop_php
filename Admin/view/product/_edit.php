@@ -1,4 +1,4 @@
-    <?php include_once 'C:/xampp/htdocs/Project-php-mysql/Admin/view/inc/headerAdmin.php';
+    <?php include_once '../view/inc/headerAdmin.php';
 
     $product_id = $_GET['product_id'];
     $product_list = get_product($product_id);
@@ -109,4 +109,4 @@ function validateNumberInput(event) {
   }
 }
 </script>
-    <?php include_once 'C:/xampp/htdocs/Project-php-mysql/Admin/view/inc/footerAdmin.php' ?>
+    <?php include_once '../view/inc/footerAdmin.php' ?>
