@@ -17,9 +17,9 @@ else {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- Link_thuvien -->
-    <link rel="stylesheet" href="../plugins/css/bootstrap.min.css">
-    <script src="../plugins/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="../plugins/icons-1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../plugins/css/bootstrap.min.css">
+    <script src="../../plugins/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../../plugins/icons-1.10.5/font/bootstrap-icons.css">
 
     <!-- link_css -->
     <link rel="stylesheet" href="css/reponsive.css">
@@ -27,7 +27,7 @@ else {
 </head>
 
 <body>
-    <?php include  "../Core/Conecting.php" ?>
+    <?php include  "../../Core/Conecting.php" ?>
     <?php require "header.php" ?>
     <!-- end-header -->
     <main>
@@ -64,7 +64,7 @@ else {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info text-secondary"><?php echo $row['product_info']; ?></p>
@@ -122,7 +122,7 @@ else {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>
@@ -180,7 +180,7 @@ else {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>
@@ -238,7 +238,7 @@ else {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>
@@ -296,7 +296,7 @@ else {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>

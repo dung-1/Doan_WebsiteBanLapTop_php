@@ -3,10 +3,10 @@ session_start();
 if (isset($_SESSION['username'])) {
     // Kiểm tra vai trò của người dùng và điều hướng tới các trang phù hợp
     if ($_SESSION['role'] == 'admin') {
-        header('location: ../Admin/index.php');
+        header('location: ../../Admin/index.php');
         exit();
     } else if ($_SESSION['role'] == 'customer') {
-        header('location: user.php');
+        header('location:user.php');
         exit();
     }
 }
@@ -19,9 +19,9 @@ if (isset($_SESSION['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- Link_thuvien -->
-    <link rel="stylesheet" href="../plugins/css/bootstrap.min.css">
-    <script src="../plugins/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="../plugins/icons-1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../plugins/css/bootstrap.min.css">
+    <script src="../../plugins/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../../plugins/icons-1.10.5/font/bootstrap-icons.css">
 
     <!-- link_css -->
     <link rel="stylesheet" href="css/reponsive.css">
@@ -29,7 +29,7 @@ if (isset($_SESSION['username'])) {
 </head>
 
 <body>
-    <?php include  "../Core/Conecting.php" ?>
+    <?php include  "../../Core/Conecting.php" ?>
     <?php require "header.php" ?>
     <!-- end-header -->
     <main>
@@ -66,7 +66,7 @@ if (isset($_SESSION['username'])) {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info text-secondary"><?php echo $row['product_info']; ?></p>
@@ -124,7 +124,7 @@ if (isset($_SESSION['username'])) {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>
@@ -182,7 +182,7 @@ if (isset($_SESSION['username'])) {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>
@@ -240,7 +240,7 @@ if (isset($_SESSION['username'])) {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>
@@ -298,7 +298,7 @@ if (isset($_SESSION['username'])) {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>
