@@ -36,43 +36,21 @@ function get_all_order_detail()
     return $oder_detail_list;
 }
 
-// class order_detailModel
-// {
-//     public function deleteorder_details($ids)
-//     {
-//         try {
-//             $pdo = get_pdo();
-//             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-//             // Escape the IDs to prevent SQL injection
-//             $escapedIds = array_map(function ($id) use ($pdo) {
-//                 return $pdo->quote($id);
-//             }, $ids);
-
-//             // Create the comma-separated list of IDs
-//             $idList = implode(',', $escapedIds);
-
-//             // Delete the selected items
-//             $query = "DELETE FROM order_details WHERE order_detail_id IN ($idList)";
-//             $stmt = $pdo->prepare($query);
-//             $stmt->execute();
-
-//             // Check if any rows were affected
-//             $rowCount = $stmt->rowCount();
-
-//             return $rowCount > 0;
-//         } catch (PDOException $e) {
-//             return false;
-//         }
-//     }
-// }
 
 function delete_order_detail($ids)
 {
     global $pdo;
     $placeholders = implode(',', array_fill(0, count($ids), '?'));
     $sql = "DELETE FROM order_details WHERE order_detail_id IN ($placeholders)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($ids);
-    return $stmt->rowCount();
+    try {
+        $stmt = $pdo->prepare($sql);
+        if ($stmt) {
+            $stmt->execute($ids);
+            return $stmt->rowCount();
+        }
+        throw new Exception('Lỗi xóa chi tiết đơn hàng.'); // Ném ngoại lệ nếu có lỗi xảy ra
+    } catch (Exception $e) {
+        header('Location: ../view/inc/error_delete.php');
+        exit;
+    }
 }

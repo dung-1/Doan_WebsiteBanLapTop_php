@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../Core/Conecting.php";
+require_once "../../Core/Conecting.php";
 
 // Lấy dữ liệu từ biểu mẫu đăng nhập
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         // Kiểm tra vai trò của người dùng và điều hướng tới các trang phù hợp
         if ($_SESSION['role'] == 'admin') {
-            header('location: ../Admin/index.php');
+            header('location: ../../Admin/index.php');
             exit();
         } else if ($_SESSION['role'] == 'customer') {
             header('location: user.php');

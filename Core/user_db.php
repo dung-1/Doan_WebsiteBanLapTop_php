@@ -39,7 +39,15 @@ function delete_user($ids)
     global $pdo;
     $placeholders = implode(',', array_fill(0, count($ids), '?'));
     $sql = "DELETE FROM users WHERE user_id IN ($placeholders)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($ids);
-    return $stmt->rowCount();
+    try {
+        $stmt = $pdo->prepare($sql);
+        if ($stmt) {
+            $stmt->execute($ids);
+            return $stmt->rowCount();
+        }
+        throw new Exception('Lỗi xóa người dùng.'); // Throw an exception if there's an error
+    } catch (Exception $e) {
+        header('Location: ../view/inc/error_delete.php');
+        exit;
+    }
 }

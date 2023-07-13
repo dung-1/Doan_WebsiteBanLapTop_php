@@ -38,22 +38,32 @@ function get_all_products()
 }
 
 
-function insert_product($product_name, $category, $brand, $price, $discount_pice, $image, $info)
+function insert_product($product_name, $category, $brand, $price, $discount_price, $image, $info)
 {
     global $pdo;
-    $sql = "INSERT INTO products(product_name,category_id,brand_id ,price,discounted_price,product_image,product_info) VALUES(:name, :category,:brand,:price,:discounted,:image,:info)";
-    $stmt = $pdo->prepare($sql);
+    $sql = "INSERT INTO products(product_name, category_id, brand_id, price, discounted_price, product_image, product_info) VALUES(:name, :category, :brand, :price, :discounted, :image, :info)";
+    try {
+        $stmt = $pdo->prepare($sql);
 
-    $stmt->bindParam(':name', $product_name);
-    $stmt->bindParam(':category', $category);
-    $stmt->bindParam(':brand', $brand);
-    $stmt->bindParam(':price', $price);
-    $stmt->bindParam(':discounted', $discount_pice);
-    $stmt->bindParam(':image', $image);
-    $stmt->bindParam(':info', $info);
+        $stmt->bindParam(':name', $product_name);
+        $stmt->bindParam(':category', $category);
+        $stmt->bindParam(':brand', $brand);
+        $stmt->bindParam(':price', $price);
+        $stmt->bindParam(':discounted', $discount_price);
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':info', $info);
 
-    $stmt->execute();
+        $stmt->execute();
+
+        if ($stmt->rowCount() === 0) {
+            throw new Exception('Lỗi thêm sản phẩm.');
+        }
+    } catch (Exception $e) {
+        header('Location: ../view/inc/error_insert.php');
+        exit;
+    }
 }
+
 function get_product($product_id)
 {
     global $pdo;
@@ -92,19 +102,29 @@ function update_product($id, $product_name, $category, $brand, $price, $discount
 {
     global $pdo;
     $sql = "UPDATE products SET product_name=:product_name, category_id=:category, brand_id=:brand, price=:price, discounted_price=:discount_price, product_image=:product_image, product_info=:product_info WHERE product_id=:product_id";
-    $stmt = $pdo->prepare($sql);
+    try {
+        $stmt = $pdo->prepare($sql);
 
-    $stmt->bindParam(':product_name', $product_name);
-    $stmt->bindParam(':category', $category);
-    $stmt->bindParam(':brand', $brand);
-    $stmt->bindParam(':price', $price);
-    $stmt->bindParam(':discount_price', $discount_price);
-    $stmt->bindParam(':product_image', $image);
-    $stmt->bindParam(':product_info', $info);
-    $stmt->bindParam(':product_id', $id); 
+        $stmt->bindParam(':product_name', $product_name);
+        $stmt->bindParam(':category', $category);
+        $stmt->bindParam(':brand', $brand);
+        $stmt->bindParam(':price', $price);
+        $stmt->bindParam(':discount_price', $discount_price);
+        $stmt->bindParam(':product_image', $image);
+        $stmt->bindParam(':product_info', $info);
+        $stmt->bindParam(':product_id', $id); 
 
-    $stmt->execute();
+        $stmt->execute();
+
+        if ($stmt->rowCount() === 0) {
+            throw new Exception('Lỗi cập nhật sản phẩm.');
+        }
+    } catch (Exception $e) {
+        header('Location: ../view/inc/error_insert.php');
+        exit;
+    }
 }
+
 
 // Trong model.php
 
@@ -142,7 +162,15 @@ function delete_products($ids)
     global $pdo;
     $placeholders = implode(',', array_fill(0, count($ids), '?'));
     $sql = "DELETE FROM products WHERE product_id IN ($placeholders)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($ids);
-    return $stmt->rowCount();
+    try {
+        $stmt = $pdo->prepare($sql);
+        if ($stmt) {
+            $stmt->execute($ids);
+            return $stmt->rowCount();
+        }
+        throw new Exception('Lỗi xóa sản phẩm.'); // Ném ngoại lệ nếu có lỗi xảy ra
+    } catch (Exception $e) {
+        header('Location: ../view/inc/error_delete.php');
+        exit;
+    }
 }

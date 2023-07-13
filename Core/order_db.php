@@ -37,13 +37,20 @@ function get_all_orders()
 }
 
 
-
 function delete_orders($ids)
 {
     global $pdo;
     $placeholders = implode(',', array_fill(0, count($ids), '?'));
     $sql = "DELETE FROM orders WHERE order_id IN ($placeholders)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($ids);
-    return $stmt->rowCount();
+    try {
+        $stmt = $pdo->prepare($sql);
+        if ($stmt) {
+            $stmt->execute($ids);
+            return $stmt->rowCount();
+        }
+        throw new Exception('Lỗi xóa đơn hàng.'); // Ném ngoại lệ nếu có lỗi xảy ra
+    } catch (Exception $e) {
+        header('Location: ../view/inc/error_delete.php');
+        exit;
+    }
 }

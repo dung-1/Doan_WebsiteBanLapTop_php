@@ -7,13 +7,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = delete_customer($ids);
 
         if ($result > 0) {
-            echo 'Xóa thành công ' . $result . ' bản ghi.';
-        } else {
-            echo 'Không có bản ghi nào được xóa.';
+            echo 'window.location.href = "index.php";';
+
+            exit;
         }
-    } else {
-        echo 'Vui lòng chọn ít nhất một bản ghi để xóa.';
     }
 }
-?>
+
     

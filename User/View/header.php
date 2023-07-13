@@ -3,7 +3,7 @@
     <div class="container">
         <div class="navbar align-items-center justify-content-between ">
             <div class=" navbar__logo">
-                <a href="home.php"><img alt="laptopaz.com chuyên laptop cũ, bán laptop cũ uy tín Hà Nội và toàn quốc" src="../public/img/icons/icon.png" class="img-fluid"></a>
+                <a href="home.php"><img alt="laptopaz.com chuyên laptop cũ, bán laptop cũ uy tín Hà Nội và toàn quốc" src="../../public/img/icons/icon.png" class="img-fluid"></a>
             </div>
             <div class="navbar__cart align-items-center  flex-column ">
                 <i class="bi bi-cart3"></i>

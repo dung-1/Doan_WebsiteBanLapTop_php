@@ -16,7 +16,7 @@
     display: none;
     cursor: pointer;
     font-size: xx-large;
-    
+
   }
 
   #back-to-top.show {
@@ -95,79 +95,8 @@
     });
   });
 </script>
-<script>
-  $(document).ready(function() {
-
-    $('.editbtn1').on('click', function() {
-
-      $('#editmodal').modal('show');
-
-      $tr = $(this).closest('tr');
-
-      var data = $tr.find(".td").map(function() {
-        return $(this).text();
-      }).get();
-
-      console.log(data);
-      $('#update_id').val(data[0]);
-      $('#hname').val(data[1]);
-      $('#hloaisp').val(data[2]);
-      $('#hhangsp').val(data[3]);
-      $('#hgia').val(data[4]);
-      $('#hgiasale').val(data[5]);
-      $('#image').val(data[6]);
 
 
-    });
-  });
-</script>
-<script>
-  $(document).ready(function() {
-
-    $('.hahaha').on('click', function() {
-
-      $('#editmodal').modal('show');
-
-      $tr = $(this).closest('tr');
-
-      var data = $tr.find(".td").map(function() {
-        return $(this).text();
-      }).get();
-
-      console.log(data);
-      $('#update_id').val(data[0]);
-      $('#nameacount').val(data[1]);
-      $('#pass').val(data[2]);
-      $('#username').val(data[3]);
-      $('#phone').val(data[4]);
-      $('#email').val(data[5]);
-      $('#date').val(data[6]);
-      $('#address').val(data[7]);
-
-
-    });
-  });
-</script>
-<script>
-  $(document).ready(function() {
-
-    $('.deletebtn').on('click', function() {
-
-      $('#deletemodal').modal('show');
-
-      $tr = $(this).closest('tr');
-
-      var data = $tr.find(".td").map(function() {
-        return $(this).text();
-      }).get();
-
-      console.log(data);
-
-      $('#delete_id').val(data[0]);
-
-    });
-  });
-</script>
 
 <script>
   $(document).ready(function() {
@@ -216,25 +145,38 @@
     });
   });
 </script>
+<script>
+  document.getElementById('delete-selected').addEventListener('click', function(event) {
+    var checkboxes = document.querySelectorAll('.checkbox');
+    var checkedCount = 0;
+    checkboxes.forEach(function(checkbox) {
+      if (checkbox.checked) {
+        checkedCount++;
+      }
+    });
 
-<script>
-  function updateInput(selectElement) {
-    var selectedOption = selectElement.options[selectElement.selectedIndex];
-    var selectedText = selectedOption.text;
-    var selectedValue = selectedOption.value;
-    document.getElementById("hhangsp").value = selectedText;
-    document.getElementById("hang_id").value = selectedValue;
-  }
+    if (checkedCount === 0) {
+      event.preventDefault(); // Ngăn chặn hành động submit form
+      alert('Hãy chọn ít nhất một checkbox.');
+    } else {
+      var confirmation = confirm('Bạn chắc chắn muốn xóa không?');
+      if (!confirmation) {
+        event.preventDefault(); // Ngăn chặn hành động submit form
+        checkboxes.forEach(function(checkbox) {
+          checkbox.checked = false; // Đặt lại trạng thái checkbox về không chọn
+        });
+      }
+    }
+  });
+  document.getElementById('select-all').addEventListener('click', function(event) {
+    var checkboxes = document.querySelectorAll('.checkbox');
+    var selectAllCheckbox = event.target;
+    checkboxes.forEach(function(checkbox) {
+      checkbox.checked = selectAllCheckbox.checked; // Đặt trạng thái checkbox theo trạng thái của checkbox "Chọn Tất Cả"
+    });
+  });
 </script>
-<script>
-  function updateInput1(selectElement) {
-    var selectedOption = selectElement.options[selectElement.selectedIndex];
-    var selectedText = selectedOption.text;
-    var selectedValue = selectedOption.value;
-    document.getElementById("hloaisp").value = selectedText;
-    document.getElementById("loai_id").value = selectedValue;
-  }
-</script>
+
 <script>
   $(function() {
     //Add text editor

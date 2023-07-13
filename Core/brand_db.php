@@ -34,14 +34,24 @@ function get_all_brands()
 function insert_brand($name, $date, $country)
 {
     global $pdo;
-    $sql = "INSERT INTO brands(brand_name, brand_country,brand_nsx) VALUES(:name, :country,:date)";
-    $stmt = $pdo->prepare($sql);
+    $sql = "INSERT INTO brands(brand_name, brand_country, brand_nsx) VALUES(:name, :country, :date)";
+    try {
+        $stmt = $pdo->prepare($sql);
 
-    $stmt->bindParam(':name', $name);
-    $stmt->bindParam(':country', $country);
-    $stmt->bindParam(':date', $date);
-    $stmt->execute();
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':country', $country);
+        $stmt->bindParam(':date', $date);
+        $stmt->execute();
+
+        if ($stmt->rowCount() === 0) {
+            throw new Exception('Lỗi thêm hãng.');
+        }
+    } catch (Exception $e) {
+        header('Location: ../view/inc/error_insert.php');
+        exit;
+    }
 }
+
 
 function get_brand($brand_id)
 {
@@ -72,14 +82,25 @@ function get_brand($brand_id)
 function update_brand($id, $name, $date, $country)
 {
     global $pdo;
-    $sql = "UPDATE brands SET brand_name=:name, brand_country=:country  ,brand_nsx=:date WHERE brand_id=:id";
-    $stmt = $pdo->prepare($sql);
+    $sql = "UPDATE brands SET brand_name=:name, brand_country=:country, brand_nsx=:date WHERE brand_id=:id";
+    try {
+        $stmt = $pdo->prepare($sql);
 
-    $stmt->bindParam(':name', $name);
-    $stmt->bindParam(':country', $country);
-    $stmt->bindParam(':date', $date);
-    $stmt->bindParam(':id', $id);
-    $stmt->execute();
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':country', $country);
+        $stmt->bindParam(':date', $date);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        echo '<script>';
+        echo 'alert("Cập nhật thành công");';
+        echo '</script>';
+        if ($stmt->rowCount() === 0) {
+            throw new Exception('Lỗi cập nhật hãng.');
+        }
+    } catch (Exception $e) {
+        header('Location: ../view/inc/error_insert.php');
+        exit;
+    }
 }
 
 
@@ -89,15 +110,16 @@ function delete_brands($ids)
     global $pdo;
     $placeholders = implode(',', array_fill(0, count($ids), '?'));
     $sql = "DELETE FROM brands WHERE brand_id IN ($placeholders)";
-    $stmt = $pdo->prepare($sql);
-    if ($stmt) {
-        if ($stmt->execute($ids)) {
-            return $stmt->rowCount();
+    try {
+        $stmt = $pdo->prepare($sql);
+        if ($stmt) {
+            if ($stmt->execute($ids)) {
+                return $stmt->rowCount();
+            }
         }
+        throw new Exception('Lỗi xóa hãng.'); // Ném ngoại lệ nếu có lỗi xảy ra
+    } catch (Exception $e) {
         header('Location: ../view/inc/error_delete.php');
-
-    } else {
-        header('Location: ../view/inc/error_delete.php');
-        // Chắc chắn kết thúc chương trình sau khi chuyển hướng
+        exit;
     }
 }

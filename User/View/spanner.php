@@ -10,13 +10,13 @@
                             </div>
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="../public/img/carousels/carousel_1.jpg" class="d-block w-100" alt="Wild Landscape" />
+                                    <img src="../../public/img/carousels/carousel_1.jpg" class="d-block w-100" alt="Wild Landscape" />
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="../public/img/carousels/carousel_2.jpg" class="d-block w-100" alt="Camera" />
+                                    <img src="../../public/img/carousels/carousel_2.jpg" class="d-block w-100" alt="Camera" />
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="../public/img/carousels/carousel_3.jpg" class="d-block w-100" alt="Exotic Fruits" />
+                                    <img src="../../public/img/carousels/carousel_3.jpg" class="d-block w-100" alt="Exotic Fruits" />
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleCrossfade" data-mdb-slide="prev">
@@ -32,10 +32,10 @@
                     <div class="col-xl-4">
                         <div class="row">
                             <div class="col-xl-12">
-                                <img src="../public/img/banner/span1.jpg" alt="" class="img__span hide-tablet hide-mobile">
+                                <img src="../../public/img/banner/span1.jpg" alt="" class="img__span hide-tablet hide-mobile">
                             </div>
                             <div class="col-xl-12 mt-3">
-                                <img src="../public/img/banner/span2.jpg" alt="" class="img__span hide-tablet hide-mobile">
+                                <img src="../../public/img/banner/span2.jpg" alt="" class="img__span hide-tablet hide-mobile">
                             </div>
                         </div>
                     </div>
@@ -46,10 +46,10 @@
             <div class="container spanner2">
                 <div class="row d-flex">
                     <div class="col-xl-6">
-                        <img src="../public/img/banner/span3.jpg" alt="" class="hide-tablet hide-mobile">
+                        <img src="../../public/img/banner/span3.jpg" alt="" class="hide-tablet hide-mobile">
                     </div>
                     <div class="col-xl-6">
-                        <img src="../public/img/banner/span4.jpg" alt="" class="hide-tablet hide-mobile">
+                        <img src="../../public/img/banner/span4.jpg" alt="" class="hide-tablet hide-mobile">
                     </div>
                 </div>
             </div>

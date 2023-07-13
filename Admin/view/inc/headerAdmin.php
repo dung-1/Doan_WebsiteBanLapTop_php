@@ -116,7 +116,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="<?php echo BASE_URL . '/Admin/index.php'; ?>" class="brand-link">
-                <img src="../../public/image/logo_laptopaz.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 0.8" />
+                <img src="../../public/img/products/logo_laptopaz.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 0.8" />
                 <span class="brand-text font-weight-light">LapTopAZ</span>
             </a>
             <!-- Sidebar -->
@@ -127,7 +127,7 @@
                         <img src="../../dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="<?php echo BASE_URL . '/Admin/index.php'; ?>" class="d-block">ADMIN</a>
+                        <a href="<?php echo BASE_URL . '/Admin/index.php'; ?>" class="d-block">ADMIN Dụng</a>
                     </div>
                 </div>
                 <!-- SidebarSearch Form -->

@@ -8,19 +8,22 @@ body {
     background-color: #f5f5f5;
 }
 
+
 /* header */
+
 .img-fluid {
     max-width: 100%;
     height: auto;
-
 }
 
 header .navbar {
     display: flex;
 }
-header{
+
+header {
     background-color: #fff;
 }
+
 header .navbar__search-form {
     border: none;
     border-radius: 4px;
@@ -31,8 +34,6 @@ header .navbar__search-form {
     margin: 25px 0;
     z-index: 999;
 }
-
-
 
 header .navbar__logo {
     width: 200px;
@@ -48,7 +49,6 @@ header .navbar__hotline {
     margin-top: 20px;
     font-weight: bold;
     font-size: 18px;
-
 }
 
 header .navbar__cart a {
@@ -98,10 +98,11 @@ header .menu .menu__toggler {
 .img__span {
     max-width: 100%;
     height: auto;
-
 }
 
+
 /* main */
+
 .main {
     display: block;
 }
@@ -109,7 +110,10 @@ header .menu .menu__toggler {
 .spanner2 img {
     width: 100%;
 }
+
+
 /* product_deal */
+
 .box-home-deal {
     width: 100%;
     float: left;
@@ -118,12 +122,14 @@ header .menu .menu__toggler {
     border-radius: 10px;
     overflow: hidden;
 }
+
 .box-home-deal .title {
     width: 100%;
     float: left;
     padding: 5px 15px;
     background: #ec3237;
 }
+
 .box-home-deal .title .txt {
     float: left;
     height: 40px;
@@ -138,6 +144,7 @@ header .menu .menu__toggler {
     background-position: left center;
     text-decoration: none;
 }
+
 .box-home-deal .title .vm-deal {
     float: right;
     font-size: 14px;
@@ -146,15 +153,11 @@ header .menu .menu__toggler {
     font-weight: 300;
 }
 
-
 .products .pro-head {
     margin-bottom: 10px;
     background: #2b80dd;
     margin-top: 30px;
-
-
 }
-
 
 .products .product-title a {
     margin-bottom: 0;
@@ -164,46 +167,50 @@ header .menu .menu__toggler {
     text-decoration: none;
     color: #fff;
 }
+
 .product-item .product__show .card .card-body .product_price {
     font-size: 16px;
-    color:#a29c9cd7;
+    color: #a29c9cd7;
     margin-left: 10px;
     text-decoration: line-through;
     padding-top: 5px;
     font-style: normal;
 }
+
 .product-item .product__show .card .card-body .product_discount-price {
     font-size: 20px;
     color: red;
     font-weight: 600;
 }
+
 .product-item .product__show .card img {
     max-width: 270px;
     max-height: auto;
     display: flex;
     justify-content: center;
-    align-items: center ;
+    align-items: center;
 }
-.product-item .product__show .card .card-title{
+
+.product-item .product__show .card .card-title {
     font-size: 18px;
     font-weight: 800;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-.product-item .product__show .card .card-info{
-    font-size: 16px;
 
-    font-family:'Times New Roman', Times, serif;
+.product-item .product__show .card .card-info {
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 
 /* footer */
+
 .tintuc-footer .container {
     background-color: white;
     margin-bottom: 40px;
 }
 
 .tintuc-footer .main-title {
-
     color: #2b80dd;
     font-size: 20px;
     border-bottom: 2px solid;
@@ -276,7 +283,6 @@ i.bi.bi-tiktok {
     border-radius: 50%;
     width: 45px;
     text-align: center;
-
 }
 
 i.bi.bi-facebook {
@@ -325,6 +331,7 @@ i.bi.bi-facebook {
 
 
 /* form_login */
+
 .divider:after,
 .divider:before {
     content: "";
@@ -336,5 +343,3 @@ i.bi.bi-facebook {
 .h-custom {
     height: calc(100% - 73px);
 }
-
-

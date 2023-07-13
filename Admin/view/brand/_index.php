@@ -11,20 +11,20 @@
                     </button>
                 </div>
 
-                <form action="../brand/insert_Brand.php" method="POST">
+                <form action="../brand/insert_Brand.php" method="POST" onsubmit="return validateForm()">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label> Hãng Sản Phẩm</label>
-                            <input type="text" name="name" class="form-control" onkeypress="validateInput(event)" required>
+                            <label>Hãng Sản Phẩm</label>
+                            <input type="text" name="name" class="form-control" required>
                         </div>
 
                         <div class="form-group">
-                            <label> Nhập Quốc Gia</label>
-                            <input type="text" name="country" class="form-control" onkeypress="validateInput(event)" required>
+                            <label>Nhập Quốc Gia</label>
+                            <input type="text" name="country" class="form-control" required>
                         </div>
 
                         <div class="form-group">
-                            <label> Ngày Thành Lập</label>
+                            <label>Ngày Thành Lập</label>
                             <input type="date" name="date" class="form-control" max="<?php echo date('Y-m-d'); ?>" required>
                         </div>
                     </div>
@@ -34,6 +34,7 @@
                         <button type="submit" name="insertdata" class="btn btn-primary">Thêm Dữ Liệu</button>
                     </div>
                 </form>
+
 
 
             </div>
@@ -116,7 +117,6 @@
                                         </thead>
 
                                         <tbody>
-                                            <?php $index = 0; ?>
                                             <?php foreach ($brand_list as $category) : ?>
                                                 <tr class="text-center">
                                                     <td><input type="checkbox" class="checkbox " name="delete[]" value="<?php echo $category['id']; ?>"></td>
@@ -148,6 +148,12 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+   
+
+
+
+
+    </script>
     <script>
         function validateInput(event) {
             var input = event.target.value;

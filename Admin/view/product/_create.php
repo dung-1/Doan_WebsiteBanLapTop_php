@@ -1,4 +1,4 @@
-    <?php include_once 'C:/xampp/htdocs/Project-php-mysql/Admin/view/inc/headerAdmin.php' ?>
+    <?php include_once '../view/inc/headerAdmin.php' ?>
 
 
     <!-- Content Wrapper. Contains page content -->

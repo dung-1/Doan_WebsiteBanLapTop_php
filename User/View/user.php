@@ -2,12 +2,12 @@
 session_start();
 if (isset($_SESSION['username'])) {
     if ($_SESSION['role'] == 'admin') {
-        header('location:../Admin/index.php');
+        header('location:../../Admin/index.php');
         exit();
     }
 }
 else {
-    header('location:../View/loginPage.php');
+    header('location:../../View/loginPage.php');
     exit();
 } ?>
 <!DOCTYPE html>
@@ -21,25 +21,25 @@ else {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- Link_thuvien -->
-    <link rel="stylesheet" href="../plugins/css/bootstrap.min.css">
-    <script src="../plugins/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="../plugins/icons-1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../plugins/css/bootstrap.min.css">
+    <script src="../../plugins/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../../plugins/icons-1.10.5/font/bootstrap-icons.css">
 
     <!-- link_css -->
-    <link rel="stylesheet" href="css/reponsive.css">
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="../View/css/reponsive.css">
+    <link rel="stylesheet" href="../View/css/home.css">
     <!-- link_js -->
-    <script src="js/cart.js"></script>
+    <script src="../View/js/cart.js"></script>
 </head>
 
 <body>
-    <?php include  "../Core/Conecting.php" ?>
+    <?php include  "../../Core/Conecting.php" ?>
 
     <header>
         <div class="container">
             <div class="navbar align-items-center justify-content-between ">
                 <div class=" navbar__logo">
-                    <a href="home.php"><img alt="laptopaz.com chuyên laptop cũ, bán laptop cũ uy tín Hà Nội và toàn quốc" src="../public/img/icons/icon.png" class="img-fluid"></a>
+                    <a href="home.php"><img alt="laptopaz.com chuyên laptop cũ, bán laptop cũ uy tín Hà Nội và toàn quốc" src="../../public/img/icons/icon.png" class="img-fluid"></a>
                 </div>
                 <div class="navbar__cart align-items-center  flex-column ">
                     <i class="bi bi-cart3"></i>
@@ -141,7 +141,7 @@ else {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info text-secondary"><?php echo $row['product_info']; ?></p>
@@ -199,7 +199,7 @@ else {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>
@@ -257,7 +257,7 @@ else {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>
@@ -315,7 +315,7 @@ else {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>
@@ -373,7 +373,7 @@ else {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
-                                            <img src="../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+                                            <img src="<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>

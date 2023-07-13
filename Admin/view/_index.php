@@ -1,14 +1,4 @@
-<?php
 
-if (isset($_SESSION['username'])) {
-  if ($_SESSION['role'] == 'customer') {
-    header('location:../View/user.php');
-    exit();
-  }
-} else {
-  header('location:../View/loginPage.php');
-  exit();
-}  ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -131,8 +121,8 @@ if (isset($_SESSION['username'])) {
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="<?php echo BASE_URL . '/Admin/index.php'; ?>" class="brand-link">
-        <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <img src="../public/img/products/logo_laptopaz.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">LapTopAZ</span>
       </a>
 
       <!-- Sidebar -->
@@ -251,6 +241,13 @@ if (isset($_SESSION['username'])) {
                 <p>
                   QUẢN LÝ PHẢN HỒI
                 </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+              </a>
+            </li>    <li class="nav-item">
+              <a href="#" class="nav-link">
               </a>
             </li>
             <li class="nav-item">
@@ -718,7 +715,6 @@ if (isset($_SESSION['username'])) {
   <script src="../plugins/chart.js/Chart.min.js"></script>
 
   <!-- AdminLTE for demo purposes -->
-  <script src="../dist/js/demo.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="../dist/js/pages/dashboard2.js"></script>
 </body>

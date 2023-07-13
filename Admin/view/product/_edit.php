@@ -68,7 +68,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Giá Sale</label>
-                                        <input  onkeypress="validateNumberInput(event)" type="number" name="discounted" id="discounted" class="form-control" placeholder="Nhập giá Sale" value="<?php echo isset($product_list['discounted_price']) ? $product_list['discounted_price'] : ''; ?> ">
+                                        <input type="number" required onkeypress="validateNumberInput(event)" name="discounted" id="discounted" class="form-control" placeholder="Nhập giá Sản Phẩm" value="<?php echo isset($product_list['discounted_price']) ? $product_list['discounted_price'] : ''; ?>">
                                     </div>
                                     <div class="form-group">
                                         <label for="image">Hình ảnh</label>
@@ -80,7 +80,6 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary">Làm Mới</button>
                                     <button type="submit" class="btn btn-primary">Cập Nhật</button>
                                 </div>
                             </form>
