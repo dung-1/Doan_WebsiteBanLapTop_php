@@ -1,16 +1,4 @@
-<?php
-session_start();
-if (isset($_SESSION['username'])) {
-    // Kiểm tra vai trò của người dùng và điều hướng tới các trang phù hợp
-    if ($_SESSION['role'] == 'admin') {
-        header('location: ../Admin/index.php');
-        exit();
-    } else if ($_SESSION['role'] == 'customer') {
-        header('location: user.php');
-        exit();
-    }
-}
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,17 +7,17 @@ if (isset($_SESSION['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- Link_thuvien -->
-    <link rel="stylesheet" href="../plugins/css/bootstrap.min.css">
-    <script src="../plugins/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="../plugins/icons-1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../plugins/css/bootstrap.min.css">
+    <script src="../../plugins/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../../plugins/icons-1.10.5/font/bootstrap-icons.css">
 
     <!-- link_css -->
-    <link rel="stylesheet" href="css/reponsive.css">
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="../view/css/reponsive.css">
+    <link rel="stylesheet" href="../view/css/home.css">
 </head>
 
 <body>
-    <?php include  "../Core/Conecting.php" ?>
+    <?php include  "../../Core/Conecting.php" ?>
     <?php require "header.php" ?>
     <!-- end-header -->
     <main>

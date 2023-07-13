@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-define('BASE_URL', 'http://localhost/doanPHP');
+define('BASE_URL', 'http://localhost/Doan_WebsiteBanLapTop_php');
 
 require_once 'brand_db.php';
 require_once 'product_db.php';
