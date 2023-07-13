@@ -75,4 +75,4 @@
     </div>
     <!-- /.content-wrapper -->
 
-    <?php include_once 'C:/xampp/htdocs/Project-php-mysql/Admin/view/inc/footerAdmin.php' ?>
+    <?php include_once '../view/inc/footerAdmin.php' ?>
