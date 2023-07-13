@@ -6,11 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ids = $_POST['delete'];
         $result = delete_user($ids);
         if ($result > 0) {
-            echo 'window.location.href = "index.php";';
-
-            exit;
+            header('Location: index.php');
         }
     }
 }
-
-    

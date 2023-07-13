@@ -7,10 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = delete_categories($ids);
 
         if ($result > 0) {
-            echo 'window.location.href = "index.php";';
-
-            exit;
+            header('Location: index.php');
         }
     }
 }
-
