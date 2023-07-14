@@ -17,7 +17,7 @@ if (isset($_SESSION['username'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>User Page</title>
     <link rel="stylesheet" href="../../plugins/css/bootstrap.min.css">
     <script src="../../plugins/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../../plugins/icons-1.10.5/font/bootstrap-icons.css">
@@ -27,7 +27,7 @@ if (isset($_SESSION['username'])) {
 
 <body>
     <?php include "../../Core/Conecting.php" ?>
-    <?php require "header.php" ?>
+    <?php include "header.php" ?>
 
     <main>
         <?php require "spanner.php" ?>
@@ -45,6 +45,9 @@ if (isset($_SESSION['username'])) {
             $conn = get_pdo();
 
             if ($conn) {
+                // Lấy giá trị của cookie giỏ hàng
+                $cart_data = isset($_COOKIE['shopping_cart']) ? json_decode(stripslashes($_COOKIE['shopping_cart']), true) : array();
+
                 foreach ($categories as $category_id => $category_name) {
                     $sql = "SELECT product_id, product_name, price, discounted_price, product_image, product_info FROM products WHERE category_id = $category_id";
                     $result = $conn->query($sql);
@@ -85,7 +88,13 @@ if (isset($_SESSION['username'])) {
                             }
                             echo '<p class="product_price">' . number_format($price, 0, ',', '.') . '</p>
                                             </div>
-                                            <a href="#" class="btn btn-primary">Mua ngay</a>
+                                            <form method="post" action="cart.php">
+                                                <input type="hidden" name="hidden_id" value="' . $product_id . '">
+                                                <input type="hidden" name="hidden_name" value="' . $product_name . '">
+                                                <input type="hidden" name="hidden_price" value="' . $price . '">
+                                                <input type="hidden" name="quantity" value="1">
+                                                ' . (in_array($product_id, array_column($cart_data, 'item_id')) ? '<button type="button" class="btn btn-success btn-added-to-cart">Đã thêm</button>' : '<button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart">Mua ngay</button>') . '
+                                            </form>
                                         </div>
                                     </div>
                                 </div>';
@@ -109,3 +118,24 @@ if (isset($_SESSION['username'])) {
 </body>
 
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var countElement = document.getElementById('count_shopping_cart_store');
+        var countValue = parseInt(countElement.innerText);
+
+        function updateCartCounter() {
+            countValue += 1;
+            countElement.innerText = countValue;
+        }
+
+        var addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
+        addToCartButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                updateCartCounter();
+                alert("Thêm vào giỏ hàng thành công!!");
+            });
+        });
+    });
+
+</script>
+

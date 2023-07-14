@@ -11,8 +11,9 @@ if (isset($_SESSION['username'])) {
 } else {
     $_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];
 }
-?>
 
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -87,9 +88,21 @@ if (isset($_SESSION['username'])) {
                                 echo '<p class="product_discount-price">' . number_format($discounted_price, 0, ',', '.') . '</p>';
                             }
                             echo '<p class="product_price">' . number_format($price, 0, ',', '.') . '</p>
-                                            </div>
-                                            <a href="#" class="btn btn-primary">Mua ngay</a>
-                                        </div>
+                                            </div>';
+
+                            if (isset($_SESSION['username'])) {
+                                echo '<form method="post" action="cart.php">
+                                            <input type="hidden" name="hidden_id" value="' . $product_id . '">
+                                            <input type="hidden" name="hidden_name" value="' . $product_name . '">
+                                            <input type="hidden" name="hidden_price" value="' . $price . '">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart">Mua ngay</button>
+                                        </form>';
+                            } else {
+                                echo '<a href="loginPage.php?login_required=1" class="btn btn-primary" onclick="showBtnBuyAlert()">Mua ngay</a>';
+                            }
+
+                            echo '</div>
                                     </div>
                                 </div>';
                         }
@@ -109,6 +122,62 @@ if (isset($_SESSION['username'])) {
         </div>
     </main>
     <?php require "footer.php" ?>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var countElement = document.getElementById('count_shopping_cart_store');
+            countElement.innerText = '0';
+            var countValue = 0;
+
+
+            function updateCartCounter() {
+                countValue += 1;
+                countElement.innerText = countValue;
+            }
+
+            var addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
+            addToCartButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    updateCartCounter();
+                    Swal.fire(
+                        'Thêm vào giỏ hàng thành công!',
+                        'success'
+                    )
+                });
+            });
+        });
+
+        function resetCart() {
+            // Xóa giỏ hàng bằng cách xóa cookie shopping_cart
+            document.cookie = "shopping_cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        }
+    </script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var countElement = document.getElementById('count_shopping_cart_store');
+            var countValue = parseInt(countElement.innerText);
+
+            function updateCartCounter() {
+                countValue += 1;
+                countElement.innerText = countValue;
+            }
+
+            var addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
+            addToCartButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    updateCartCounter();
+                    alert('Thêm vào giỏ hàng thành công!!');
+                });
+            });
+        });
+
+        function resetCart() {
+            // Xóa giỏ hàng bằng cách xóa cookie shopping_cart
+            document.cookie = "shopping_cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        }
+
+        
+    </script>
 </body>
 
 </html>

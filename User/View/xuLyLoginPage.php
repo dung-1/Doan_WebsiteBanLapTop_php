@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $_SESSION['username'] = $row['username'];
         $_SESSION['role'] = $row['role'];
+        $_SESSION['user_id'] = $row['user_id']; // Thêm dòng này để lưu user_id vào session
         
         // Kiểm tra vai trò của người dùng và điều hướng tới các trang phù hợp
         if ($_SESSION['role'] == 'admin') {
@@ -25,10 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header('location: user.php');
             exit();
         }
-    } else {
-        // Sai tên đăng nhập hoặc mật khẩu
-        header('location: loginPage.php');
-        exit();
     }
+    
 }
-?>
