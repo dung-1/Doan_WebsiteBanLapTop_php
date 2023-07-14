@@ -1,0 +1,31 @@
+.title-tab {
+    border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 15px;
+}
+
+.title-tab h3 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 18px;
+    padding: 10px 15px;
+    display: inline-block;
+    border-bottom: 2px solid #2b80dd;
+    margin-bottom: -1px;
+}
+
+.pro-parameter .prodetail-spec-full {
+    padding: 0 10px 15px;
+    margin-bottom: 20px;
+}
+
+.view-full {
+    display: block;
+    text-align: center;
+    border-radius: 3px;
+    border: 1px solid #0084cb;
+    color: #0084cb;
+    line-height: 40px;
+    cursor: pointer;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
