@@ -6,7 +6,7 @@ if (isset($_SESSION['username'])) {
         exit();
     }
 } else {
-    header('location:../../View/loginPage.php');
+    header('location:../View/sign_login.php');
     exit();
 }  ?>
 <!DOCTYPE html>
@@ -60,8 +60,7 @@ if (isset($_SESSION['username'])) {
 
                             // Check if there are any products
                             if ($result->rowCount() > 0) {
-                                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                        ?>
+                                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
                                             <img src="<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
