@@ -5,331 +5,107 @@ if (isset($_SESSION['username'])) {
         header('location:../../Admin/index.php');
         exit();
     }
-}
-else {
-    header('location:../../View/loginPage.php');
+} else {
+    header('location:../View/loginPage.php');
     exit();
-} ?>
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- Link_thuvien -->
     <link rel="stylesheet" href="../../plugins/css/bootstrap.min.css">
     <script src="../../plugins/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../../plugins/icons-1.10.5/font/bootstrap-icons.css">
-
-    <!-- link_css -->
     <link rel="stylesheet" href="css/reponsive.css">
     <link rel="stylesheet" href="css/home.css">
 </head>
 
 <body>
-    <?php include  "../../Core/Conecting.php" ?>
+    <?php include "../../Core/Conecting.php" ?>
     <?php require "header.php" ?>
-    <!-- end-header -->
+
     <main>
         <?php require "spanner.php" ?>
 
         <div class="products">
-            <div class="product-item">
-                <div class="pro-head pt-2">
-                    <div class="container">
-                        <div class="product-title">
-                            <h3><a href="">HỌC TẬP - VĂN PHÒNG</a></h3>
-                        </div>
-                        <!-- end_title -->
-                    </div>
-                    <!-- end_container -->
-                </div>
-                <!-- end_pro_head -->
-                <div class="product__show container">
-                    <div class="row">
-                        <?php
-                        $conn = get_pdo();
+            <?php
+            $categories = [
+                5 => "LAPTOP GAMING",
+                2 => "LAPTOP GAMING",
+                3 => "LAPTOP ĐỒ HỌA",
+                4 => "MỎNG NHẸ CAO CẤP",
+                1 => "LIKE NEW"
+            ];
 
-                        // Check if the connection is successful
-                        if ($conn) {
-                            // SQL query to fetch products based on category_id
-                            $sql = "SELECT product_name, price, discounted_price, product_image, product_info FROM products WHERE category_id = 1";
+            $conn = get_pdo();
 
-                            // Execute the query
-                            $result = $conn->query($sql);
+            if ($conn) {
+                foreach ($categories as $category_id => $category_name) {
+                    $sql = "SELECT product_id, product_name, price, discounted_price, product_image, product_info FROM products WHERE category_id = $category_id";
+                    $result = $conn->query($sql);
 
-                            // Check if there are any products
-                            if ($result->rowCount() > 0) {
-                                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                        ?>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="card mb-3">
-                                            <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
-                                            <div class="card-body">
-                                                <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
-                                                <p class="card-info text-secondary"><?php echo $row['product_info']; ?></p>
-                                                <div class="d-flex">
-                                                    <?php if ($row['discounted_price']) { ?>
-                                                        <p class="product_discount-price"><?php echo number_format($row['discounted_price'], 0, ',', '.'); ?></p>
-                                                    <?php } ?>
-                                                    <p class="product_price"><?php echo number_format($row['price'], 0, ',', '.'); ?></p>
-                                                </div>
-                                                <a href="#" class="btn btn-primary">Mua ngay</a>
+                    if ($result->rowCount() > 0) {
+                        echo '
+                        <div class="product-item">
+                            <div class="pro-head pt-2">
+                                <div class="container">
+                                    <div class="product-title">
+                                        <h3><a href="">' . $category_name . '</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product__show container">
+                                <div class="row">';
+
+                        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                            $product_id = $row['product_id'];
+                            $product_image = $row['product_image'];
+                            $product_name = $row['product_name'];
+                            $product_info = $row['product_info'];
+                            $price = $row['price'];
+                            $discounted_price = $row['discounted_price'];
+
+                            echo '
+                                <div class="col-md-6 col-lg-3">
+                                    <div class="card mb-3">
+                                        <a href="product_detail.php?id=' . $product_id . '">
+                                            <img src="../../public/img/products/' . $product_image . '" class="card-img-top" alt="Hình ảnh sản phẩm">
+                                        </a>
+                                        <div class="card-body">
+                                            <h5 class="card-title">' . $product_name . '</h5>
+                                            <p class="card-info">' . $product_info . '</p>
+                                            <div class="d-flex">';
+                            if ($discounted_price) {
+                                echo '<p class="product_discount-price">' . number_format($discounted_price, 0, ',', '.') . '</p>';
+                            }
+                            echo '<p class="product_price">' . number_format($price, 0, ',', '.') . '</p>
                                             </div>
+                                            <a href="#" class="btn btn-primary">Mua ngay</a>
                                         </div>
                                     </div>
-                        <?php
-                                }
-                            } else {
-                                echo "Không có sản phẩm.";
-                            }
-                        } else {
-                            echo "Kết nối không thành công.";
+                                </div>';
                         }
-                        ?>
-                    </div>
-                </div>
-                <!-- end_product_show-->
-            </div>
-            <!-- end_product_item1 -->
-            <div class="product-item">
-                <div class="pro-head pt-2">
-                    <div class="container">
-                        <div class="product-title">
-                            <h3><a href="">LAPTOP GAMING</a></h3>
-                        </div>
-                        <!-- end_title -->
-                    </div>
-                    <!-- end_container -->
-                </div>
-                <!-- end_pro_head -->
-                <div class="product__show container">
-                    <div class="row">
-                        <?php
-                        $conn = get_pdo();
 
-                        // Check if the connection is successful
-                        if ($conn) {
-                            // SQL query to fetch products based on category_id
-                            $sql = "SELECT product_name, price, discounted_price, product_image, product_info FROM products WHERE category_id =2";
-
-                            // Execute the query
-                            $result = $conn->query($sql);
-
-                            // Check if there are any products
-                            if ($result->rowCount() > 0) {
-                                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                        ?>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="card mb-3">
-                                            <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
-                                            <div class="card-body">
-                                                <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
-                                                <p class="card-info"><?php echo $row['product_info']; ?></p>
-                                                <div class="d-flex">
-                                                    <?php if ($row['discounted_price']) { ?>
-                                                        <p class="product_discount-price"><?php echo number_format($row['discounted_price'], 0, ',', '.'); ?></p>
-                                                    <?php } ?>
-                                                    <p class="product_price"><?php echo number_format($row['price'], 0, ',', '.'); ?></p>
-                                                </div>
-                                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                        <?php
-                                }
-                            } else {
-                                echo "Không có sản phẩm.";
-                            }
-                        } else {
-                            echo "Kết nối không thành công.";
-                        }
-                        ?>
-                    </div>
-                </div>
-                <!-- end_product_show-->
-            </div>
-            <!-- end_product_item2 -->
-            <div class="product-item">
-                <div class="pro-head pt-2">
-                    <div class="container">
-                        <div class="product-title">
-                            <h3><a href="">LAPTOP ĐỒ HỌA</a></h3>
-                        </div>
-                        <!-- end_title -->
-                    </div>
-                    <!-- end_container -->
-                </div>
-                <!-- end_pro_head -->
-                <div class="product__show container">
-                    <div class="row">
-                        <?php
-                        $conn = get_pdo();
-
-                        // Check if the connection is successful
-                        if ($conn) {
-                            // SQL query to fetch products based on category_id
-                            $sql = "SELECT product_name, price, discounted_price, product_image, product_info FROM products WHERE category_id = 3";
-
-                            // Execute the query
-                            $result = $conn->query($sql);
-
-                            // Check if there are any products
-                            if ($result->rowCount() > 0) {
-                                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                        ?>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="card mb-3">
-                                            <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
-                                            <div class="card-body">
-                                                <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
-                                                <p class="card-info"><?php echo $row['product_info']; ?></p>
-                                                <div class="d-flex">
-                                                    <?php if ($row['discounted_price']) { ?>
-                                                        <p class="product_discount-price"><?php echo number_format($row['discounted_price'], 0, ',', '.'); ?></p>
-                                                    <?php } ?>
-                                                    <p class="product_price"><?php echo number_format($row['price'], 0, ',', '.'); ?></p>
-                                                </div>
-                                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                        <?php
-                                }
-                            } else {
-                                echo "Không có sản phẩm.";
-                            }
-                        } else {
-                            echo "Kết nối không thành công.";
-                        }
-                        ?>
-                    </div>
-                </div>
-                <!-- end_product_show-->
-            </div>
-            <!-- end_product_item3 -->
-            <div class="product-item">
-                <div class="pro-head pt-2">
-                    <div class="container">
-                        <div class="product-title">
-                            <h3><a href="">MỎNG NHẸ CAO CẤP</a></h3>
-                        </div>
-                        <!-- end_title -->
-                    </div>
-                    <!-- end_container -->
-                </div>
-                <!-- end_pro_head -->
-                <div class="product__show container">
-                    <div class="row">
-                        <?php
-                        $conn = get_pdo();
-
-                        // Check if the connection is successful
-                        if ($conn) {
-                            // SQL query to fetch products based on category_id
-                            $sql = "SELECT product_name, price, discounted_price, product_image, product_info FROM products WHERE category_id = 4";
-
-                            // Execute the query
-                            $result = $conn->query($sql);
-
-                            // Check if there are any products
-                            if ($result->rowCount() > 0) {
-                                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                        ?>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="card mb-3">
-                                            <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
-                                            <div class="card-body">
-                                                <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
-                                                <p class="card-info"><?php echo $row['product_info']; ?></p>
-                                                <div class="d-flex">
-                                                    <?php if ($row['discounted_price']) { ?>
-                                                        <p class="product_discount-price"><?php echo number_format($row['discounted_price'], 0, ',', '.'); ?></p>
-                                                    <?php } ?>
-                                                    <p class="product_price"><?php echo number_format($row['price'], 0, ',', '.'); ?></p>
-                                                </div>
-                                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                        <?php
-                                }
-                            } else {
-                                echo "Không có sản phẩm.";
-                            }
-                        } else {
-                            echo "Kết nối không thành công.";
-                        }
-                        ?>
-                    </div>
-                </div>
-                <!-- end_product_show-->
-            </div>
-            <!-- end_product_item4 -->
-            <div class="product-item">
-                <div class="pro-head pt-2">
-                    <div class="container">
-                        <div class="product-title">
-                            <h3><a href="">LIKE NEW</a></h3>
-                        </div>
-                        <!-- end_title -->
-                    </div>
-                    <!-- end_container -->
-                </div>
-                <!-- end_pro_head -->
-                <div class="product__show container">
-                    <div class="row">
-                        <?php
-                        $conn = get_pdo();
-
-                        // Check if the connection is successful
-                        if ($conn) {
-                            // SQL query to fetch products based on category_id
-                            $sql = "SELECT product_name, price, discounted_price, product_image, product_info FROM products WHERE category_id = 5";
-
-                            // Execute the query
-                            $result = $conn->query($sql);
-
-                            // Check if there are any products
-                            if ($result->rowCount() > 0) {
-                                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                        ?>
-                                    <div class="col-md-6 col-lg-3">
-                                        <div class="card mb-3">
-                                            <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
-                                            <div class="card-body">
-                                                <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
-                                                <p class="card-info"><?php echo $row['product_info']; ?></p>
-                                                <div class="d-flex">
-                                                    <?php if ($row['discounted_price']) { ?>
-                                                        <p class="product_discount-price"><?php echo number_format($row['discounted_price'], 0, ',', '.'); ?></p>
-                                                    <?php } ?>
-                                                    <p class="product_price"><?php echo number_format($row['price'], 0, ',', '.'); ?></p>
-                                                </div>
-                                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                        <?php
-                                }
-                            } else {
-                                echo "Không có sản phẩm.";
-                            }
-                        } else {
-                            echo "Kết nối không thành công.";
-                        }
-                        ?>
-                    </div>
-                </div>
-                <!-- end_product_show-->
-            </div>
-            <!-- end_product_item5-->
+                        echo '
+                                </div>
+                            </div>
+                        </div>';
+                    } else {
+                        echo '<p>Không có sản phẩm.</p>';
+                    }
+                }
+            } else {
+                echo '<p>Kết nối không thành công.</p>';
+            }
+            ?>
         </div>
-        <!-- end_products -->
     </main>
-    <!-- end-main -->
     <?php require "footer.php" ?>
-    <!-- end-footer -->
 </body>
 
 </html>

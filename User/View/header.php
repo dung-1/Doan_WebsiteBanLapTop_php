@@ -6,7 +6,7 @@
                 <a href="home.php"><img alt="laptopaz.com chuyên laptop cũ, bán laptop cũ uy tín Hà Nội và toàn quốc" src="../../public/img/icons/icon.png" class="img-fluid"></a>
             </div>
             <div class="navbar__cart align-items-center  flex-column ">
-                <i class="bi bi-cart3"></i>
+            <i class="bi bi-cart-fill"></i>
                 <a href="">Giỏ hàng</a>
                 <span class="cart-quantity-counter" id="count_shopping_cart_store">0</span>
             </div>

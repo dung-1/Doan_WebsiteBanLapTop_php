@@ -3,6 +3,9 @@
     .hide-mobile {
         display: none;
     }
+    .product-item .product__show .card  {
+        max-width: 60%;
+    }
     
 }
 
