@@ -1,5 +1,15 @@
+<?php
 
-
+if (isset($_SESSION['username'])) {
+    if ($_SESSION['role'] == 'customer') {
+        header('location:../../View/user.php');
+        exit();
+    }
+} else {
+    header('location:../View/loginPage.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
