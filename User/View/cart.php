@@ -65,21 +65,7 @@ if (isset($_GET["id"])) {
     }
 }
 
-// Xử lý gửi hóa đơn qua email và reset giỏ hàng
-if (isset($_POST["sendInvoiceButton"])) {
-    // Kiểm tra địa chỉ email
-    if (isset($_POST["email"]) && !empty($_POST["email"])) {
-        $email = $_POST["email"];
-        // Gửi hóa đơn qua email ở đây
-        // Code gửi email của bạn sẽ được viết ở đây
-        // ...
-        // Sau khi gửi email thành công, thực hiện reset giỏ hàng
-        setcookie('shopping_cart', '', time() - 3600);
-        echo 'success';     
-    } else {
-        echo 'error';
-    }
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -249,25 +235,25 @@ if (isset($_POST["sendInvoiceButton"])) {
             cartTotalElement.innerText = formatCurrency(total);
         }
 
+        var cartData = <?php echo isset($cart_data) ? json_encode($cart_data) : '[]'; ?>;
+
         var sendInvoiceButton = document.getElementById('sendInvoiceButton');
         sendInvoiceButton.addEventListener('click', function() {
             var emailInput = document.getElementById('emailInput');
             var email = emailInput.value.trim();
             if (email !== '') {
                 var data = new FormData();
-                data.append('email', email);
-                data.append('sendInvoiceButton', true);
+                data.append('mail', email);
+                data.append('subject', 'Hóa đơn mua hàng');
+                data.append('cart_data', JSON.stringify(cartData));
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'cart.php', true);
+                xhr.open('POST', 'sendmail.php', true);
                 xhr.onload = function() {
                     if (xhr.status === 200) {
-                        var response = xhr.responseText;
-                        if (response === 'success') {
-                            alert('Hóa đơn đã được gửi thành công');
-                            resetCart();
-                        } else {
-                            alert('Đã xảy ra lỗi khi gửi hóa đơn');
-                        }
+                        alert('Hóa đơn đã được gửi thành công');
+                        location.reload(); // Tải lại trang để reset giỏ hàng
+                    } else {
+                        alert('Đã xảy ra lỗi khi gửi hóa đơn');
                     }
                 };
                 xhr.send(data);
@@ -276,9 +262,9 @@ if (isset($_POST["sendInvoiceButton"])) {
             }
         });
 
+
         function resetCart() {
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'cart_reset.php', true);
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     var response = xhr.responseText;

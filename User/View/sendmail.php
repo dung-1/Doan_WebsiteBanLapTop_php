@@ -8,8 +8,6 @@ require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 require 'PHPMailer/src/Exception.php';
 
-$sendMailSuccess = false;
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $mail = new PHPMailer(true);
     
@@ -26,10 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
         // Thiết lập thông tin người gửi và người nhận
         $mail->setFrom('nguyenvandung01052002@gmail.com');
-        $mail->addAddress($_POST['email']);
+        $mail->addAddress($_POST['mail']);
     
         // Thiết lập tiêu đề email
-        $subject = '=?UTF-8?B?' . base64_encode('Hóa đơn mua hàng') . '?=';
+        $subject = '=?UTF-8?B?' . base64_encode($_POST['subject']) . '?=';
         $mail->Subject = $subject;
     
         // Tạo nội dung email từ thông tin giỏ hàng
@@ -86,10 +84,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
         // Gửi email
         $mail->send();
-        $sendMailSuccess = true;
+        echo 'Message has been sent';
+
+        // Xóa cookie giỏ hàng
+        setcookie('shopping_cart', '', time() - 3600);
     } catch (Exception $e) {
-        $sendMailSuccess = false;
+        echo 'Mailer Error: ' . $mail->ErrorInfo;
     }
 } else {
-    $sendMailSuccess = false;
+    echo 'Invalid request';
 }
