@@ -90,7 +90,14 @@ if (isset($_SESSION['username'])) {
 
     <?php include 'footer.php'; ?>
 </body>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var countElement = document.getElementById('count_shopping_cart_store');
+            countElement.innerText = '0';
+            var countValue = 0;        
+       });
 
+    </script>
 </html>
 <style>
     .bg {
