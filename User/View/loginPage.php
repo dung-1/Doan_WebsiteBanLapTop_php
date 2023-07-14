@@ -1,16 +1,4 @@
-<?php
-session_start();
-if (isset($_SESSION['username'])) {
-    // Kiểm tra vai trò của người dùng và điều hướng tới các trang phù hợp
-    if ($_SESSION['role'] == 'admin') {
-        header('location: ../../Admin/index.php');
-        exit();
-    } else if ($_SESSION['role'] == 'customer') {
-        header('location: user.php');
-        exit();
-    }
-}
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 

@@ -1,19 +1,5 @@
-<?php
-session_start();
-if (isset($_SESSION['username'])) {
-    if ($_SESSION['role'] == 'admin') {
-        header('location: ../../Admin/index.php');
-        exit();
-    } else if ($_SESSION['role'] == 'customer') {
-        header('location:user.php');
-        exit();
-    }
-} else {
-    $_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];
-}
 
 
-?>
 
 <!DOCTYPE html>
 <html lang="en">

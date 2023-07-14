@@ -4,13 +4,43 @@
             <div class="navbar__logo">
                 <a href="home.php"><img alt="laptopaz.com chuyên laptop cũ, bán laptop cũ uy tín Hà Nội và toàn quốc" src="../../public/img/icons/icon.png" class="img-fluid"></a>
             </div>
-            <div class="navbar__cart align-items-center  flex-column ">
-                <i class="bi bi-cart3"></i>
-                <a href="">Giỏ hàng</a>
-                <span class="cart-quantity-counter" id="count_shopping_cart_store">0</span>
-            </div>
-            <div class=" navbar__search-form ">
-                <div class="input-group ">
+            <?php
+            // Kiểm tra nếu người dùng đã đăng nhập
+            $cart_count = 0;
+            if (isset($_SESSION['username'])) {
+                // Lấy số lượng sản phẩm trong giỏ hàng từ cookie
+                if (isset($_COOKIE["shopping_cart"])) {
+                    $cookie_data = stripslashes($_COOKIE['shopping_cart']);
+                    $cart_data = json_decode($cookie_data, true);
+                    $cart_count = count($cart_data);
+                }
+            ?>
+            
+                <div class="navbar__cart align-items-center  flex-column ">
+                    <a href="cart.php"><i class="bi bi-cart-fill"></i></a>
+                    <a href="cart.php">Giỏ hàng</a>
+                    <span class="cart-quantity-counter" id="count_shopping_cart_store"><?php echo $cart_count; ?></span>
+                </div>
+            <?php
+            } else {
+            ?>
+                <div class="navbar__cart align-items-center  flex-column ">
+                    <?php if (isset($_SESSION['username'])) : ?>
+                        <a href="cart.php"><i class="bi bi-cart-fill"></i></a>
+                        <a href="cart.php">Giỏ hàng</a>
+                        <span class="cart-quantity-counter" id="count_shopping_cart_store"><?php echo $cart_count; ?></span>
+                    <?php else : ?>
+                        <a href="javascript:void(0)" onclick="showLoginAlert()"><i class="bi bi-cart-fill"></i></a>
+                        <a href="javascript:void(0)" onclick="showLoginAlert()">Giỏ hàng</a>
+                        <span class="cart-quantity-counter" id="count_shopping_cart_store"><?php echo $cart_count; ?></span>
+                    <?php endif; ?>
+                </div>
+
+            <?php
+            }
+            ?>
+            <div class="navbar__search-form">
+                <div class="input-group">
                     <input type="search" class="form-control rounded" placeholder="Bạn muốn tìm kiếm gì..." aria-label="Search" aria-describedby="search-addon" />
                     <button type="button" class="btn"><i class="bi bi-search"></i></button>
                 </div>
