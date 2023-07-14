@@ -1,4 +1,16 @@
+<?php
+session_start();
 
+if (isset($_SESSION['username'])) {
+  $_SESSION['username'];
+  if ($_SESSION['role'] == 'customer') {
+    header('location:../User/View/user.php');
+    exit();
+  }
+} else {
+  header('location:../User/View/loginPage.php');
+  exit();
+}  ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -66,35 +78,35 @@
 
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="fa-solid fa-gear"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right  ">
-                       <a href="#" class="dropdown-item ">
-                            <!-- Message Start -->
-                            
-                            <div class="media " >
-                                <div class="media-body fs-1 text-dark">
-                                <i class="fa-solid fa-unlock-keyhole text-info"></i>   Đổi mật Khẩu
-                                </div>
-                            </div>
-                            <!-- Message End -->  
-                        </a>
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="fa-solid fa-gear"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right  ">
+            <a href="#" class="dropdown-item ">
+              <!-- Message Start -->
 
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            
-                            <div class="media">
-                                <div class="media-body">
-                                <i class="fa-solid fa-right-from-bracket text-info"></i>    Đăng Xuất
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
+              <div class="media ">
+                <div class="media-body fs-1 text-dark">
+                  <i class="fa-solid fa-unlock-keyhole text-info"></i> Đổi mật Khẩu
+                </div>
+              </div>
+              <!-- Message End -->
+            </a>
+
+            <a href="#" class="dropdown-item">
+              <!-- Message Start -->
+
+              <div class="media">
+                <div class="media-body">
+                  <i class="fa-solid fa-right-from-bracket text-info"></i> Đăng Xuất
+                </div>
+              </div>
+              <!-- Message End -->
+            </a>
 
 
-                    </div>
-                </li>
+          </div>
+        </li>
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
@@ -246,13 +258,14 @@
             <li class="nav-item">
               <a href="#" class="nav-link">
               </a>
-            </li>    <li class="nav-item">
+            </li>
+            <li class="nav-item">
               <a href="#" class="nav-link">
               </a>
             </li>
             <li class="nav-item">
 
-              <a href="../../doanPHP/View/logout.php" class="nav-link">
+              <a href="../../doanPHP/User/View/logout.php" class="nav-link">
                 <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
                 ĐĂNG XUẤT
               </a>

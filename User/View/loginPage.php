@@ -1,4 +1,16 @@
-
+<?php
+session_start();
+if (isset($_SESSION['username'])) {
+    // Kiểm tra vai trò của người dùng và điều hướng tới các trang phù hợp
+    if ($_SESSION['role'] == 'admin') {
+        header('location: ../../Admin/index.php');
+        exit();
+    } else if ($_SESSION['role'] == 'customer') {
+        header('location: user.php');
+        exit();
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,7 +85,14 @@
 
     <?php include 'footer.php'; ?>
 </body>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var countElement = document.getElementById('count_shopping_cart_store');
+            countElement.innerText = '0';
+            var countValue = 0;        
+       });
 
+    </script>
 </html>
 <style>
     .bg {

@@ -112,47 +112,6 @@ header .menu .menu__toggler {
 }
 
 
-/* product_deal */
-
-.box-home-deal {
-    width: 100%;
-    float: left;
-    margin-bottom: 20px;
-    border: solid 1px #ec3237;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.box-home-deal .title {
-    width: 100%;
-    float: left;
-    padding: 5px 15px;
-    background: #ec3237;
-}
-
-.box-home-deal .title .txt {
-    float: left;
-    height: 40px;
-    padding-left: 40px;
-    font-size: 24px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #ffffff;
-    line-height: 40px;
-    background: url(../../public/img/icons/icon_fire_white.png) no-repeat;
-    background-size: auto 40px;
-    background-position: left center;
-    text-decoration: none;
-}
-
-.box-home-deal .title .vm-deal {
-    float: right;
-    font-size: 14px;
-    color: #ffffff;
-    line-height: 40px;
-    font-weight: 300;
-}
-
 .products .pro-head {
     margin-bottom: 10px;
     background: #2b80dd;
@@ -183,8 +142,8 @@ header .menu .menu__toggler {
     font-weight: 600;
 }
 
-.product-item .product__show .card img {
-    max-width: 270px;
+.product-item .product__show .card .card-img-top {
+    max-width: 300px;
     max-height: auto;
     display: flex;
     justify-content: center;

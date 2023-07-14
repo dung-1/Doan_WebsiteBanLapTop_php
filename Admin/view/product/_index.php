@@ -56,7 +56,7 @@
                                                 <td class="td"><?php echo $product['brand']; ?></td>
                                                 <td class="td"><?php echo $product['price']; ?></td>
                                                 <td class="td"><?php echo $product['discounted']; ?></td>
-                                                <td><img src="<?php echo $product['image']; ?>" width="60" height="60" /></td>
+                                                <td><img src="../../../public/img/products/<?php echo $product['image']; ?>" width="60" height="60" /></td>
                                                 <td class="td"><?php echo $product['info']; ?></td>
                                                 <td>
                                                     <a class="btn btn-warning" href="edit_Product.php?product_id=<?php echo $product['id']; ?>"><i class="fa-solid fa-pen-to-square"></i> Sửa</a>

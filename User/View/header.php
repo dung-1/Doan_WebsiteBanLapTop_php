@@ -1,22 +1,21 @@
-
 <header>
     <div class="container">
-        <div class="navbar align-items-center justify-content-between ">
-            <div class=" navbar__logo">
+        <div class="navbar align-items-center justify-content-between">
+            <div class="navbar__logo">
                 <a href="home.php"><img alt="laptopaz.com chuyên laptop cũ, bán laptop cũ uy tín Hà Nội và toàn quốc" src="../../public/img/icons/icon.png" class="img-fluid"></a>
             </div>
             <div class="navbar__cart align-items-center  flex-column ">
-                <i class="bi bi-cart3 "></i>
+                <i class="bi bi-cart3"></i>
                 <a href="">Giỏ hàng</a>
                 <span class="cart-quantity-counter" id="count_shopping_cart_store">0</span>
             </div>
             <div class=" navbar__search-form ">
                 <div class="input-group ">
                     <input type="search" class="form-control rounded" placeholder="Bạn muốn tìm kiếm gì..." aria-label="Search" aria-describedby="search-addon" />
-                    <button type="button" class="btn "><i class="bi bi-search"></i></button>
+                    <button type="button" class="btn"><i class="bi bi-search"></i></button>
                 </div>
             </div>
-            <div class=" navbar__hotline align-items-center  flex-column hide-mobile hide-tablet ">
+            <div class="navbar__hotline align-items-center  flex-column hide-mobile hide-tablet">
                 <p class="m-0 text-danger text-center">HOTLINE</p>
                 <p>0825 233 233</p>
             </div>
@@ -51,18 +50,21 @@
                     <div class="navbar-nav ms-auto">
                         <?php
                         if (isset($_SESSION['username'])) {
-                            // Nếu có session username thì hiển thị nút Logout
-                            echo '<a href="logout.php" class="nav-item nav-link me-4"><i class="bi bi-door-closed-fill"></i>Đăng xuất</a>';
+                            // Lấy user_id từ session
+                            $user_id = $_SESSION['user_id'];
+                            // Hiển thị "Chào 'username'" và nút Đăng xuất
+                            echo '<span class="nav-item nav-link me-4 text-light">Chào ' . $_SESSION['username'] . '</span>';
+                            echo '<a href="logout.php" class="nav-item nav-link me-4" onclick="resetCart()"><i class="bi bi-door-closed-fill"></i> Đăng xuất</a>';
                         } else {
                             // Ngược lại hiển thị nút Đăng nhập và Đăng ký
                             echo '<a href="loginPage.php" class="nav-item nav-link me-4" data-toggle="modal" data-target="#modalLoginForm">
-                                    <i class="bi bi-box-arrow-in-left"></i> Đăng nhập
-                                </a>
-
-                                <a href="registerPage.php" class="nav-item nav-link me-4"><i class="bi bi-box-arrow-right"></i> Đăng ký</a>';
+                <i class="bi bi-box-arrow-in-left"></i> Đăng nhập
+            </a>
+            <a href="registerPage.php" class="nav-item nav-link me-4"><i class="bi bi-box-arrow-right"></i> Đăng ký</a>';
                         }
                         ?>
                     </div>
+
                 </div>
 
             </div>
@@ -70,4 +72,13 @@
         </nav>
     </div>
     <!-- end_menu -->
+    <script>
+        function showLoginAlert() {
+            alert('Bạn cần đăng nhập để xem giỏ hàng!!');
+        }
+
+        function showBtnBuyAlert() {
+            alert('Bạn cần đăng nhập để mua hàng!!');
+        }
+    </script>
 </header>
