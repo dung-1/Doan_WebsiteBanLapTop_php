@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 session_start();
 if (isset($_SESSION['username'])) {
@@ -12,6 +13,9 @@ if (isset($_SESSION['username'])) {
 }
 
 ?>
+=======
+
+>>>>>>> 67fcafc0a1c5d93b6a530c568a72bfff5aca8e78
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +35,7 @@ if (isset($_SESSION['username'])) {
 
 <body>
     <?php include 'header.php'; ?>
-    <form action="xuLyLoginPage.php" method="POST">
+    <form action="../View/xuLyLoginPage.php" method="POST">
         <section class="vh-80">
             <div class="container py-5 h-20">
                 <div class="row d-flex justify-content-center align-items-center h-80">

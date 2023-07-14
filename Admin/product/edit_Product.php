@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         $image = $_FILES['image'];
         $image_name = basename($image['name']);
-        $image_tmp = $image[    'tmp_name'];
+        $image_tmp = $image['tmp_name'];
         // Đường dẫn lưu trữ ảnh (thay đổi theo nhu cầu)
         $image_path = '../../public/img/products/' . $image_name;
         // Di chuyển tệp tin ảnh vào thư mục lưu trữ

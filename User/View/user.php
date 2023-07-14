@@ -1,17 +1,17 @@
 <?php
-session_start();
+
 if (isset($_SESSION['username'])) {
-    if ($_SESSION['role'] == 'admin') {
-        header('location:../../Admin/index.php');
+    if ($_SESSION['role'] == 'customer') {
+        header('location:../../View/user.php');
         exit();
     }
-}
-else {
-    header('location:../../View/loginPage.php');
+} else {
+    header('location:../View/sign_login.php');
     exit();
-} ?>
+}  ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,8 +22,8 @@ else {
     <link rel="stylesheet" href="../../plugins/icons-1.10.5/font/bootstrap-icons.css">
 
     <!-- link_css -->
-    <link rel="stylesheet" href="css/reponsive.css">
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="../view/css/reponsive.css">
+    <link rel="stylesheet" href="../view/css/home.css">
 </head>
 
 <body>
@@ -60,8 +60,7 @@ else {
 
                             // Check if there are any products
                             if ($result->rowCount() > 0) {
-                                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                        ?>
+                                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
                                             <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
@@ -122,7 +121,11 @@ else {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
+<<<<<<< HEAD
                                             <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+=======
+                                            <img src="<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+>>>>>>> 67fcafc0a1c5d93b6a530c568a72bfff5aca8e78
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>
@@ -180,7 +183,11 @@ else {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
+<<<<<<< HEAD
                                             <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+=======
+                                            <img src="<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+>>>>>>> 67fcafc0a1c5d93b6a530c568a72bfff5aca8e78
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>
@@ -238,7 +245,11 @@ else {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
+<<<<<<< HEAD
                                             <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+=======
+                                            <img src="<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+>>>>>>> 67fcafc0a1c5d93b6a530c568a72bfff5aca8e78
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>
@@ -296,7 +307,11 @@ else {
                         ?>
                                     <div class="col-md-6 col-lg-3">
                                         <div class="card mb-3">
+<<<<<<< HEAD
                                             <img src="../../public/img/products/<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+=======
+                                            <img src="<?php echo $row['product_image']; ?>" class="card-img-top" alt="Product Image">
+>>>>>>> 67fcafc0a1c5d93b6a530c568a72bfff5aca8e78
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $row['product_name']; ?></h5>
                                                 <p class="card-info"><?php echo $row['product_info']; ?></p>

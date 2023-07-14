@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         // Sai tên đăng nhập hoặc mật khẩu
-        header('location: loginPage.php');
+        header('location: sign_login.php');
         exit();
     }
 }

@@ -7,8 +7,8 @@
             <!-- end_main_title -->
             <div class="list-tintuc">
                 <div class="row">
-                    <div class="item-tintuc col-xl-3 col-md-6">
-                        <a href="">
+                    <div class="item-tintuc col-xl-3 col-md-6 hvr-grow-shadow">
+                        <a href="" >
                             <img class="" src="../../public/img/footer/footer-tintuc-1.jpg" alt="">
                         </a>
                         <div class="media-body">
@@ -24,7 +24,7 @@
                             <!-- end_title_tintuc -->
                         </div>
                     </div>
-                    <div class="item-tintuc col-xl-3 col-md-6">
+                    <div class="item-tintuc col-xl-3 col-md-6 hvr-grow-shadow">
                         <a href="">
                             <img class="" src="../../public/img/footer/footer-tintuc-2.jpg" alt="">
                         </a>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <!-- end_col_lg_3 -->
-                    <div class="item-tintuc col-xl-3 col-md-6">
+                    <div class="item-tintuc col-xl-3 col-md-6 hvr-grow-shadow">
                         <a href="">
                             <img class="" src="../../public/img/footer/footer-tintuc-3.jpg" alt="">
                         </a>
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <!-- end_col_lg_3 -->
-                    <div class="item-tintuc col-xl-3 col-md-6">
+                    <div class="item-tintuc col-xl-3 col-md-6 hvr-grow-shadow">
                         <a href="">
                             <img class="" src="../../public/img/footer/footer-tintuc-4.jpg" alt="">
                         </a>
@@ -99,7 +99,7 @@
                         <li>Hotline: 0825 233 233</li>
                         <li>Email: hotrolaptopaz@gmail.com</li>
                         <li class="share mt-2">
-                            <a href="https://www.facebook.com/laptopaz.vn" target="_blank"><i class="bi bi-facebook"></i></a>
+                            <a href="https://www.facebook.com/laptopaz.vn" target="_blank" ><i class="bi bi-facebook"></i></a>
                             <a href="https://www.youtube.com/c/LAPTOPAZREVIEW" target="_blank"><i class="bi bi-youtube"></i></a>
                             <a href="https://www.tiktok.com/@laptopaz" target="_blank"><i class="bi bi-tiktok"></i></a>
                         </li>
