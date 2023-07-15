@@ -107,7 +107,7 @@ $result = $conn->query($sql);
                             <div class="row g-0">
                                 <div class="col-md-4">
                                     <a href="product_detail.php?id=<?php echo $product_id; ?>">
-                                        <img class="w-100" style="max-width:250px;" src="../../public/img/products/<?php echo $product_image; ?>" class="card-img-top" alt="Product Image">
+                                        <img class="w-100" style="max-width:250px;" src="<?php echo $product_image; ?>" class="card-img-top" alt="Product Image">
                                     </a>
                                 </div>
                                 <div class="col-md-8">

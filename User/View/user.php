@@ -26,11 +26,7 @@
         <div class="products">
             <?php
             $categories = [
-<<<<<<< HEAD
-                1 => "LAPTOP GAMING",
-=======
-                5 => "VĂN PHÒNG - HỌC TẬP",
->>>>>>> 7f0e685e4ff6c7beefdd449638d401244e7d8bc1
+                1 => "VĂN PHÒNG - HỌC TẬP",
                 2 => "LAPTOP GAMING",
                 3 => "LAPTOP ĐỒ HỌA",
                 4 => "MỎNG NHẸ CAO CẤP",

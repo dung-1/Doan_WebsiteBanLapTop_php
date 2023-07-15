@@ -12,13 +12,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Mã xác nhận đúng, lưu thông tin khách hàng vào cơ sở dữ liệu
             save_customer_info();
             unset($_SESSION['confirmation_code']); // Xóa mã xác nhận khỏi session
-            header('Location: ../view/home.php'); // Chuyển hướng đến trang thành công
+            echo "<script>alert('Bạn đã đăng ký tài khoản thành công !!!); window.location.href='../view/loginPage.php';</script>";
             exit;
         } else {
-            // Mã xác nhận sai, chuyển hướng người dùng về trang nhập lại
-            header('Location: ../view/check_mail_vaildate.php'); // Chuyển hướng đến trang nhập lại
+            // Mã xác nhận sai, hiển thị thông báo lỗi và chuyển hướng người dùng về trang nhập lại
+            echo "<script>alert('Mã xác nhận không đúng. Vui lòng thử lại.'); window.location.href='../view/check_mail_vaildate.php';</script>";
             exit;
-        }
+        }        
     }
 }
 
