@@ -10,13 +10,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $full_name = $_POST['full_name'];
 
     if (check_username_exist($username)) {
-        // Username đã tồn tại, thông báo cho người dùng
-        header('Location: ../../Admin/view/inc/error_insert.php');
+        // Username đã tồn tại, hiển thị câu thông báo alert
+        echo "<script>
+                alert('Username đã tồn tại');
+                window.location.href = '../View/sign_login.php';
+              </script>";
         exit;
     }
 
     insert_customer($username, $password, $email, $phone, $full_name);
-    header('Location: ../View/sign_login.php');
+                echo "<script>
+                alert('BẠN ĐÃ ĐĂNG KÝ TÀI KHOẢN THÀNH CÔNG');
+                window.location.href = '../View/sign_login.php';
+                    </script>";
 }
 
 function check_username_exist($username)
@@ -59,4 +65,3 @@ function insert_customer($username, $password, $email, $phone, $full_name)
         exit;
     }
 }
-?>

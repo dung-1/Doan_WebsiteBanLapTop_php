@@ -1,50 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+session_start();
+include "../../Core/Conecting.php";
+$pdo = get_pdo();
+// Kiểm tra xem mã xác nhận có được nhập hay không
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['confirmation_code'])) {
+        $confirmationCode = $_POST['confirmation_code'];
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        // Kiểm tra mã xác nhận nhập vào
+        if ($confirmationCode === $_SESSION['confirmation_code']) {
+            // Mã xác nhận đúng, lưu thông tin khách hàng vào cơ sở dữ liệu
+            save_customer_info();
+            unset($_SESSION['confirmation_code']); // Xóa mã xác nhận khỏi session
+            header('Location: ../view/home.php'); // Chuyển hướng đến trang thành công
+            exit;
+        } else {
+            // Mã xác nhận sai, chuyển hướng người dùng về trang nhập lại
+            header('Location: ../view/check_mail_vaildate.php'); // Chuyển hướng đến trang nhập lại
+            exit;
+        }
+    }
+}
 
-    <!--=============== REMIXICONS ===============-->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
+// Hàm để lưu thông tin khách hàng vào cơ sở dữ liệu
+function save_customer_info()
+{
+    global $pdo;
+    
+    // Lấy thông tin khách hàng từ session
+    $customer = $_SESSION['customer'];
+    $username = $customer['username'];
+    $password = $customer['password'];
+    $email = $customer['email'];
+    $phone = $customer['phone'];
+    $full_name = $customer['full_name'];
 
-    <!--=============== CSS ===============-->
-    <link rel="stylesheet" href="../View/css/sign_login.css" />
-
-    <title>Form Đăng Ký - Đăng Nhập </title>
-</head>
-
-<body>
-    <div class="container">
-        <div class="login__content">
-            <img src="../../public/img/icons/hinh-nen-4k-cho-laptop-phong-vu-4.jpg" alt="login image" class="login__img" />
-            <form action="../model/sendmail.php" class="login__form" id="login-in" method="POST">
-                <div>
-                    <h4 class="login__title">
-                        <span>  LẤY MÃ KIỂM TRA  </span>
-                    </h4>
-                </div>
-                <div>
-                    <div class="login__inputs">
-                        <div>
-                            <label for="" class="login__label">Email</label>
-                            <input type="mail" name="mail" placeholder="Nhập Email của bạn" required class="login__input" />
-                        </div>
-                    </div>
-                </div>
-                <?php $forgotPasswordPage = "sign_login.php";
-                ?>
-                <div>
-                    <div class="login__buttons">
-                        <button type="submit" class="login__button" id="sign-up">Gửi</button>
-                        <button class="login__button login__button-ghost"> <a style="text-decoration: none;" href="<?php echo $forgotPasswordPage; ?>">Đăng nhập</a></button>
-            </form>
-
-        </div>
-    </div>
-
-    <!--=============== MAIN JS ===============-->
-    <script src="js/sign_login.js"></script>
-</body>
-
-</html>
+    // Thực hiện truy vấn để lưu thông tin khách hàng vào cơ sở dữ liệu
+    $sql = "INSERT INTO users (username, password, email, phone, full_name, role) VALUES (:username, :password, :email, :phone, :full_name, 'customer')";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':username', $username);
+    $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':phone', $phone);
+    $stmt->bindParam(':full_name', $full_name);
+    
+    try {
+        $stmt->execute();
+        
+        if ($stmt->rowCount() === 0) {
+            throw new Exception('Lỗi lưu thông tin khách hàng.');
+        }
+        
+        // Xóa thông tin khách hàng khỏi session
+        unset($_SESSION['customer']);
+    } catch (Exception $e) {
+        header('Location: ../../Admin/view/inc/error_insert.php');
+        exit;
+    }
+}
+?>

@@ -13,7 +13,7 @@
     --second-color: hsl(249, 64%, 47%);
     --title-color: hsl(244, 12%, 12%);
     --text-color: hsl(244, 4%, 36%);
-    --body-color: hsl(208, 61%, 63%);
+    --body-color: #2b80dd;
     /*========== Font and typography ==========*/
     /*.5rem = 8px | 1rem = 16px ...*/
     --body-font: "Poppins", sans-serif;

@@ -1,6 +1,4 @@
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,6 +11,9 @@
     <link rel="stylesheet" href="../../plugins/icons-1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/reponsive.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/hover.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
 </head>
 
 <body>
@@ -26,7 +27,7 @@
             <?php
             $categories = [
                 5 => "LAPTOP GAMING",
-                2 => "LAPTOP GAMING",
+                2 => "LAPTOP MỎNG VÀ NHẸ",
                 3 => "LAPTOP ĐỒ HỌA",
                 4 => "MỎNG NHẸ CAO CẤP",
                 1 => "LIKE NEW"
@@ -61,10 +62,10 @@
                             $discounted_price = $row['discounted_price'];
 
                             echo '
-                                <div class="col-md-6 col-lg-3">
+                                <div class="col-md-6 col-lg-3 hvr-float">
                                     <div class="card mb-3">
                                         <a href="product_detail.php?id=' . $product_id . '">
-                                            <img src="../../public/img/products/' . $product_image . '" class="card-img-top" alt="Hình ảnh sản phẩm">
+                                            <img src="' . $product_image . '" class="card-img-top" alt="Hình ảnh sản phẩm">
                                         </a>
                                         <div class="card-body">
                                             <h5 class="card-title">' . $product_name . '</h5>
@@ -82,7 +83,7 @@
                                             <input type="hidden" name="hidden_name" value="' . $product_name . '">
                                             <input type="hidden" name="hidden_price" value="' . $price . '">
                                             <input type="hidden" name="quantity" value="1">
-                                            <button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart">Mua ngay</button>
+                                            <button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart "> Mua ngay</button>
                                         </form>';
                             } else {
                                 echo '<a href="loginPage.php?login_required=1" class="btn btn-primary" onclick="showBtnBuyAlert()">Mua ngay</a>';
@@ -161,8 +162,6 @@
             // Xóa giỏ hàng bằng cách xóa cookie shopping_cart
             document.cookie = "shopping_cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         }
-
-        
     </script>
 </body>
 

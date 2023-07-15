@@ -1,23 +1,4 @@
-<?php
-session_start();
 
-// Kiểm tra xem người dùng đã gửi yêu cầu kiểm tra hay chưa
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Lấy mật khẩu ngẫu nhiên đã lưu trữ trong phiên làm việc
-    $randomPassword = $_SESSION['randomPassword'];
-
-    // Kiểm tra xem người dùng đã nhập mật khẩu đúng hay chưa
-    if ($_POST['password'] === $randomPassword) {
-        // Mật khẩu đúng
-        header("Location: ../View/change_password.php");
-        exit();
-            } else {
-        // Mã Kiểm Tra sai
-        header("Location: ../View/check_mail_vaildate.php");
-        exit();
-            }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="container">
         <div class="login__content">
             <img src="../../public/img/icons/hinh-nen-4k-cho-laptop-phong-vu-4.jpg" alt="login image" class="login__img" />
-            <form action="check_mail_vaildate.php" class="login__form" id="login-in" method="POST">
+            <form action="../View/send_mail_check.php" class="login__form" id="login-in" method="POST">
                 <div>
                 <h1 class="login__title">
                         <span>Kiểm Tra Tài Khoản </span>
@@ -48,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <div class="login__inputs">
                         <div>
                             <label for="" class="login__label">Mã Kiểm Tra</label>
-                            <input type="text" name="password" placeholder="Nhập mã kiểm tra của bạn" required class="login__input" />
+                            <input type="text" name="confirmation_code" placeholder="Nhập mã kiểm tra của bạn" required class="login__input" />
                         </div>
                     </div>
                 </div>

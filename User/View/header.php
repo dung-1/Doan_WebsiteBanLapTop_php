@@ -1,7 +1,7 @@
 <header>
     <div class="container">
         <div class="navbar align-items-center justify-content-between">
-            <div class="navbar__logo">
+            <div class="navbar__logo hvr-buzz">
                 <a href="home.php"><img alt="laptopaz.com chuyên laptop cũ, bán laptop cũ uy tín Hà Nội và toàn quốc" src="../../public/img/icons/icon.png" class="img-fluid"></a>
             </div>
             <?php

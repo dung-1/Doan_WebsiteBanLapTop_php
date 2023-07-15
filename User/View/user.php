@@ -1,15 +1,4 @@
-<?php
 
-if (isset($_SESSION['username'])) {
-    if ($_SESSION['role'] == 'customer') {
-        header('location:../../View/user.php');
-        exit();
-    }
-} else {
-    header('location:../View/loginPage.php');
-    exit();
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,11 +24,11 @@ if (isset($_SESSION['username'])) {
         <div class="products">
             <?php
             $categories = [
-                5 => "LAPTOP GAMING",
+                1 => "LAPTOP GAMING",
                 2 => "LAPTOP GAMING",
                 3 => "LAPTOP ĐỒ HỌA",
                 4 => "MỎNG NHẸ CAO CẤP",
-                1 => "LIKE NEW"
+                5 => "LIKE NEW"
             ];
 
             $conn = get_pdo();
@@ -77,7 +66,7 @@ if (isset($_SESSION['username'])) {
                                 <div class="col-md-6 col-lg-3">
                                     <div class="card mb-3">
                                         <a href="product_detail.php?id=' . $product_id . '">
-                                            <img src="../../public/img/products/' . $product_image . '" class="card-img-top" alt="Hình ảnh sản phẩm">
+                                            <img src="' . $product_image . '" class="card-img-top" alt="Hình ảnh sản phẩm">
                                         </a>
                                         <div class="card-body">
                                             <h5 class="card-title">' . $product_name . '</h5>
