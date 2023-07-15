@@ -34,10 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['error'] = 'Mật khẩu không đúng!';
             header('location: loginPage.php');
             exit();
-        }  } else {
-
-            $_SESSION['error'] = 'Tài khoản không tồn tại!';
-            header('location: loginPage.php');
-            exit();
         }
+    } else {
+
+        $_SESSION['error'] = 'Tài khoản không tồn tại!';
+        header('location: loginPage.php');
+        exit();
     }
+}
