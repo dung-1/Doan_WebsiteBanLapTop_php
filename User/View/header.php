@@ -1,3 +1,8 @@
+<?php
+// Khởi tạo giá trị mặc định cho biến $cart_count
+$cart_count = 0;
+?>
+
 <header>
     <div class="container">
         <div class="navbar align-items-center justify-content-between">
@@ -48,11 +53,18 @@
             }
             ?>
             <div class="navbar__search-form">
+<<<<<<< HEAD
                 <div class="input-group">
 >>>>>>> 86819313a6c5449046e06b881fac22213c1a9b4b
                     <input type="search" class="form-control rounded" placeholder="Bạn muốn tìm kiếm gì..." aria-label="Search" aria-describedby="search-addon" />
                     <button type="button" class="btn"><i class="bi bi-search"></i></button>
                 </div>
+=======
+                <form class="input-group" action="resultSearch.php" method="GET">
+                    <input type="search" class="form-control rounded" name="search" placeholder="Bạn muốn tìm kiếm gì..." aria-label="Search" aria-describedby="search-addon" />
+                    <button type="submit" class="btn"><i class="bi bi-search"></i></button>
+                </form>
+>>>>>>> 7f0e685e4ff6c7beefdd449638d401244e7d8bc1
             </div>
             <div class="navbar__hotline align-items-center  flex-column hide-mobile hide-tablet">
                 <p class="m-0 text-danger text-center">HOTLINE</p>
@@ -92,7 +104,7 @@
                             // Lấy user_id từ session
                             $user_id = $_SESSION['user_id'];
                             // Hiển thị "Chào 'username'" và nút Đăng xuất
-                            echo '<span class="nav-item nav-link me-4 text-light">Chào ' . $_SESSION['username'] . '</span>';
+                            echo '<span class="nav-item nav-link me-4 text-light">Chào ' . $_SESSION['username'] . ' <i class="bi bi-person-circle"></i></span>';
                             echo '<a href="logout.php" class="nav-item nav-link me-4" onclick="resetCart()"><i class="bi bi-door-closed-fill"></i> Đăng xuất</a>';
                         } else {
                             // Ngược lại hiển thị nút Đăng nhập và Đăng ký

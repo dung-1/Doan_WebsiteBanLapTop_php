@@ -24,6 +24,7 @@ if (isset($_SESSION['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- Link_thuvien -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="../../plugins/css/bootstrap.min.css">
     <script src="../../plugins/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../../plugins/icons-1.10.5/font/bootstrap-icons.css">
@@ -35,7 +36,11 @@ if (isset($_SESSION['username'])) {
 
 <body>
     <?php include 'header.php'; ?>
+<<<<<<< HEAD
     <form action="../View/xuLyLoginPage.php" method="POST">
+=======
+    <form action="xuLyLoginPage.php" method="POST" onsubmit="return validateForm()">
+>>>>>>> 7f0e685e4ff6c7beefdd449638d401244e7d8bc1
         <section class="vh-80">
             <div class="container py-5 h-20">
                 <div class="row d-flex justify-content-center align-items-center h-80">
@@ -47,16 +52,35 @@ if (isset($_SESSION['username'])) {
 
                                     <h2 class="fw-bold mb-2 text-uppercase">ĐĂNG NHẬP</h2>
                                     <p class="text-white-30 mb-5">Xin hãy nhập tài khoản và mật khẩu !</p>
-
+                                    <?php if (isset($_SESSION['error'])) : ?>
+                                        <script>
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: '',
+                                                text: '<?php echo $_SESSION['error']; ?>',
+                                            });
+                                        </script>
+                                        <?php unset($_SESSION['error']); ?>
+                                    <?php endif; ?>
+                                    <?php if (isset($_SESSION['success'])) : ?>
+                                        <script>
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: '',
+                                                text: '<?php echo $_SESSION['success']; ?>',
+                                            });
+                                        </script>
+                                        <?php unset($_SESSION['success']); ?>
+                                    <?php endif; ?>
                                     <div class="form-outline form-white mb-4">
                                         <label class="form-label d-flex" for="typeEmailX">Tên tài khoản</label>
-                                        <input type="text" class="form-control form-control-xl" name="username" placeholder="Nhập tên tài khoản của bạn..." />
+                                        <input type="text" class="form-control form-control-xl" name="username" id="username" placeholder="Nhập tên tài khoản của bạn..." />
 
                                     </div>
 
                                     <div class="form-outline form-white mb-4">
                                         <label class="form-label d-flex " for="typePasswordX">Mật khẩu</label>
-                                        <input type="password" id="typePasswordX" class="form-control form-control-xl" name="password" placeholder="Nhập mật khẩu của bạn..." />
+                                        <input type="password" id="password" class="form-control form-control-xl" name="password" id="password" placeholder="Nhập mật khẩu của bạn..." />
 
                                     </div>
                                     <!-- Checkbox -->
@@ -86,27 +110,39 @@ if (isset($_SESSION['username'])) {
                     </div>
                 </div>
             </div>
-    </form </div>
+        </section>
+    </form>
 
     <?php include 'footer.php'; ?>
 </body>
 <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var countElement = document.getElementById('count_shopping_cart_store');
-            countElement.innerText = '0';
-            var countValue = 0;        
-       });
+    document.addEventListener('DOMContentLoaded', function() {
+        var countElement = document.getElementById('count_shopping_cart_store');
+        countElement.innerText = '0';
+        var countValue = 0;
+    });
 
-    </script>
+    function validateForm() {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+
+        if (username.trim() === '' || password.trim() === '') {
+            Swal.fire({
+                icon: 'warning',
+                title: '',
+                text: 'Vui lòng nhập đầy đủ thông tin!',
+            });
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
 </html>
+
 <style>
     .bg {
         background-color: #2b80dd;
-    }
-
-    .login-form {
-        background-repeat: no-repeat;
-        border-bottom: #2b80dd 0.px solid;
-        background-image: url("../../public/img/background/bg7.jpg");
     }
 </style>
