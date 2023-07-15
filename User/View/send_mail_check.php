@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Mã xác nhận đúng, lưu thông tin khách hàng vào cơ sở dữ liệu
             save_customer_info();
             unset($_SESSION['confirmation_code']); // Xóa mã xác nhận khỏi session
-            echo "<script>alert('Bạn đã đăng ký tài khoản thành công !!!); window.location.href='../view/loginPage.php';</script>";
+            echo "<script>alert('Bạn đã đăng ký tài khoản thành công !!!'); window.location.href='../view/loginPage.php';</script>";
             exit;
         } else {
             // Mã xác nhận sai, hiển thị thông báo lỗi và chuyển hướng người dùng về trang nhập lại
@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }        
     }
 }
+
 
 // Hàm để lưu thông tin khách hàng vào cơ sở dữ liệu
 function save_customer_info()

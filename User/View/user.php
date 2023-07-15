@@ -1,4 +1,15 @@
-
+<?php
+session_start();
+if (isset($_SESSION['username'])) {
+    if ($_SESSION['role'] == 'admin') {
+        header('location:../../Admin/index.php');
+        exit();
+    }
+} else {
+    header('location:../View/loginPage.php');
+    exit();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,11 +37,11 @@
         <div class="products">
             <?php
             $categories = [
-                1 => "VĂN PHÒNG - HỌC TẬP",
+                5 => "VĂN PHÒNG - HỌC TẬP",
                 2 => "LAPTOP GAMING",
                 3 => "LAPTOP ĐỒ HỌA",
                 4 => "MỎNG NHẸ CAO CẤP",
-                5 => "LIKE NEW"
+                1 => "LIKE NEW"
             ];
 
             $conn = get_pdo();
@@ -129,4 +140,3 @@
     });
 
 </script>
-

@@ -9,6 +9,9 @@ $cart_count = 0;
             <div class="navbar__logo hvr-buzz">
                 <a href="home.php"><img alt="laptopaz.com chuyên laptop cũ, bán laptop cũ uy tín Hà Nội và toàn quốc" src="../../public/img/icons/icon.png" class="img-fluid"></a>
             </div>
+
+            
+
             <?php
             // Kiểm tra nếu người dùng đã đăng nhập
             $cart_count = 0;
