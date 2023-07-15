@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="../../plugins/icons-1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/reponsive.css">
     <link rel="stylesheet" href="css/home.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -24,7 +26,11 @@
         <div class="products">
             <?php
             $categories = [
+<<<<<<< HEAD
                 1 => "LAPTOP GAMING",
+=======
+                5 => "VĂN PHÒNG - HỌC TẬP",
+>>>>>>> 7f0e685e4ff6c7beefdd449638d401244e7d8bc1
                 2 => "LAPTOP GAMING",
                 3 => "LAPTOP ĐỒ HỌA",
                 4 => "MỎNG NHẸ CAO CẤP",
@@ -82,7 +88,7 @@
                                                 <input type="hidden" name="hidden_name" value="' . $product_name . '">
                                                 <input type="hidden" name="hidden_price" value="' . $price . '">
                                                 <input type="hidden" name="quantity" value="1">
-                                                ' . (in_array($product_id, array_column($cart_data, 'item_id')) ? '<button type="button" class="btn btn-success btn-added-to-cart">Đã thêm</button>' : '<button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart">Mua ngay</button>') . '
+                                                ' . (in_array($product_id, array_column($cart_data, 'item_id')) ? '<button type="button" class="btn btn-success btn-added-to-cart"><i class="bi bi-bag-check-fill"></i>Đã thêm</button>' : '<button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart"><i class="bi bi-bag-plus-fill"></i>Mua ngay</button>') . '
                                             </form>
                                         </div>
                                     </div>
