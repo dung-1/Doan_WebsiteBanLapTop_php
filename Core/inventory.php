@@ -105,9 +105,6 @@ function update_inventory($id, $product_id, $date_add, $quantity)
         exit;
     }
 }
-
-
-
 function delete_inventories($ids)
 {
     global $pdo;
