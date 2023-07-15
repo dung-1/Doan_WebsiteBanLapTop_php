@@ -65,6 +65,25 @@ if (isset($_GET["id"])) {
     }
 }
 
+// Xử lý cập nhật số lượng sản phẩm trong giỏ hàng
+if (isset($_POST["update_cart"])) {
+    $new_cart_data = array();
+    if (isset($_COOKIE["shopping_cart"])) {
+        $cookie_data = stripslashes($_COOKIE['shopping_cart']);
+        $cart_data = json_decode($cookie_data, true);
+        foreach ($cart_data as $keys => $values) {
+            $item_id = $values['item_id'];
+            if (isset($_POST['item_quantity_' . $item_id])) {
+                $item_quantity = $_POST['item_quantity_' . $item_id];
+                $values['item_quantity'] = $item_quantity;
+            }
+            $new_cart_data[] = $values;
+        }
+        $item_data = json_encode($new_cart_data);
+        setcookie('shopping_cart', $item_data, time() + (86400 * 30));
+        header("location:cart.php");
+    }
+}
 
 ?>
 
@@ -87,19 +106,9 @@ if (isset($_GET["id"])) {
 
     <main>
         <div class="container mt-4">
-            <h2>Giỏ hàng</h2>
-
+            <h2><i class="bi bi-basket2 fs-3"></i>Giỏ hàng </h2>
+            <hr>
             <?php
-            if (isset($_GET["success"])) {
-                $message = '
-                <div class="alert alert-success alert-dismissible">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    Sản phẩm đã được thêm vào giỏ hàng
-                </div>
-                ';
-                echo $message;
-            }
-
             // Hiển thị sản phẩm trong giỏ hàng
             if (isset($_COOKIE["shopping_cart"])) {
                 $total = 0;
@@ -107,48 +116,55 @@ if (isset($_GET["id"])) {
                 $cart_data = json_decode($cookie_data, true);
                 if (!empty($cart_data)) {
             ?>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th width="5%">STT</th>
-                                <th width="45%">Sản phẩm</th>
-                                <th width="6%">Số lượng</th>
-                                <th width="15%">Giá</th>
-                                <th width="15%">Tổng</th>
-                                <th width="5%"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $stt = 1;
-                            foreach ($cart_data as $keys => $values) {
-                                $item_name = $values["item_name"];
-                                $item_quantity = $values["item_quantity"];
-                                $item_price = $values["item_price"];
-                                $item_total = $item_quantity * $item_price;
-                                $total += $item_total;
-                            ?>
+                    <form method="post">
+                        <table class="table table-bordered cart-table">
+                            <thead>
                                 <tr>
-                                    <td><?php echo $stt++; ?></td>
-                                    <td><?php echo $item_name; ?></td>
-                                    <td>
-                                        <input type="number" class="form-control item-quantity" data-item-id="<?php echo $values["item_id"]; ?>" value="<?php echo $item_quantity; ?>" min="1">
-                                    </td>
-                                    <td class="item-price"><?php echo number_format($item_price, 2); ?></td>
-                                    <td class="item-total"><?php echo number_format($item_total, 2); ?></td>
-                                    <td>
-                                        <a href="#" class="btn btn-danger btn-remove-item" data-item-id="<?php echo $values["item_id"]; ?>">Xóa</a>
-                                    </td>
+                                    <th width="5%">STT</th>
+                                    <th width="45%">Sản phẩm</th>
+                                    <th width="10%">Số lượng</th>
+                                    <th width="20%">Giá</th>
+                                    <th width="15%">Tổng</th>
+                                    <th width="5%"></th>
                                 </tr>
-                            <?php
-                            }
-                            ?>
-                            <tr>
-                                <td class="fs-4" colspan="4" align="right"><strong>Tổng cộng</strong></td>
-                                <td class="fs-4 text-danger fw-bold" id="cart-total" colspan="2"><?php echo number_format($total, 2); ?></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $stt = 1;
+                                foreach ($cart_data as $keys => $values) {
+                                    $item_name = $values["item_name"];
+                                    $item_quantity = $values["item_quantity"];
+                                    $item_price = $values["item_price"];
+                                    $item_total = $item_quantity * $item_price;
+                                    $total += $item_total;
+                                ?>
+                                    <tr>
+                                        <td><?php echo $stt++; ?></td>
+                                        <td><?php echo $item_name; ?></td>
+                                        <td>
+                                            <input type="number" class="form-control item-quantity" name="item_quantity_<?php echo $values["item_id"]; ?>" value="<?php echo $item_quantity; ?>" min="1">
+                                        </td>
+                                        <td class="item-price"><?php echo number_format($item_price, 0); ?>đ</td>
+                                        <td class="item-total"><?php echo number_format($item_total, 0); ?>đ</td>
+
+                                        <td>
+                                            <a href="#" class="btn-outline-danger btn btn-remove-item p-1" data-item-id="<?php echo $values["item_id"]; ?>"><i class="bi bi-trash3-fill"></i></a>
+                                        </td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                                <tr>
+                                    <td class="fs-4" colspan="4" align="right"><strong>Tổng cộng</strong></td>
+                                    <td class="fs-4 text-danger fw-bold" id="cart-total" colspan="2"><?php echo number_format($total, 0); ?> đ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary" name="update_cart"><i class="bi bi-cart4"></i>Cập nhật giỏ hàng</button>
+                        </div>
+                    </form>
             <?php
                 } else {
                     echo '<p>Không có sản phẩm trong giỏ hàng</p>';
@@ -159,26 +175,28 @@ if (isset($_GET["id"])) {
             ?>
 
             <div class="text-center mt-4">
-                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#emailModal">In hóa đơn qua email</button>
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#emailModal"><i class="bi bi-receipt"></i>In hóa đơn qua email</button>
             </div>
 
             <!-- Modal -->
             <div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="emailModalLabel">Nhập địa chỉ email</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label for="emailInput" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="emailInput" placeholder="Nhập địa chỉ email">
                             </div>
+
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <button type="button" class="btn btn-primary" id="sendInvoiceButton">Gửi hóa đơn</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+                            <button type="button" class="btn btn-success" id="sendInvoiceButton">Gửi hóa đơn</button>
                         </div>
                     </div>
                 </div>
@@ -224,6 +242,15 @@ if (isset($_GET["id"])) {
             });
         });
 
+        // Kiểm tra xem thông báo thành công có tồn tại hay không
+        var successMessage = document.getElementById('successMessage');
+        if (successMessage) {
+            // Đặt một độ trễ để loại bỏ thông báo thành công sau 3 giây
+            setTimeout(function() {
+                successMessage.remove();
+            }, 3000);
+        }
+        // cập nhật giỏ hàng
         function updateCartTotal() {
             var itemTotals = document.querySelectorAll('.item-total');
             var total = 0;
@@ -262,7 +289,6 @@ if (isset($_GET["id"])) {
             }
         });
 
-
         function resetCart() {
             var xhr = new XMLHttpRequest();
             xhr.onload = function() {
@@ -275,7 +301,6 @@ if (isset($_GET["id"])) {
             };
             xhr.send();
         }
-
     });
 </script>
 

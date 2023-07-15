@@ -99,7 +99,7 @@ if (isset($_SESSION['username'])) {
                                             <button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart">Mua ngay</button>
                                         </form>';
                             } else {
-                                echo '<a href="loginPage.php?login_required=1" class="btn btn-primary" onclick="showBtnBuyAlert()">Mua ngay</a>';
+                                echo '<a href="loginPage.php?login_required=1" class="btn btn-primary" onclick="showBtnBuyAlert()"><i class="bi bi-bag-plus-fill"></i>Mua ngay</a>';
                             }
 
                             echo '</div>
