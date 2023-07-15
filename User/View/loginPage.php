@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <?php
 session_start();
 if (isset($_SESSION['username'])) {
@@ -13,9 +13,7 @@ if (isset($_SESSION['username'])) {
 }
 
 ?>
-=======
 
->>>>>>> 67fcafc0a1c5d93b6a530c568a72bfff5aca8e78
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,11 +34,13 @@ if (isset($_SESSION['username'])) {
 
 <body>
     <?php include 'header.php'; ?>
-<<<<<<< HEAD
+
+    <form action="../View/xuLyLoginPage.php" method="POST" onsubmit="return validateForm()">
+
     <form action="../View/xuLyLoginPage.php" method="POST">
-=======
+
     <form action="xuLyLoginPage.php" method="POST" onsubmit="return validateForm()">
->>>>>>> 7f0e685e4ff6c7beefdd449638d401244e7d8bc1
+
         <section class="vh-80">
             <div class="container py-5 h-20">
                 <div class="row d-flex justify-content-center align-items-center h-80">
@@ -101,7 +101,8 @@ if (isset($_SESSION['username'])) {
                                 </div>
 
                                 <div>
-                                    <p class="mb-0">Don't have an account? <a href="#!" class="text-white-50 fw-bold">Sign Up</a>
+                                    <?php $signup="registerPage.php";   ?>
+                                    <p class="mb-0">Don't have an account? <a href="<?php echo $signup; ?>" class="text-white-50 fw-bold">Sign Up</a>
                                     </p>
                                 </div>
 

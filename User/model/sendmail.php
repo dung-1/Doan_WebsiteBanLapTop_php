@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     send_confirmation_email($email);
 
     // Chuyển hướng người dùng đến trang nhập mã xác nhận
-    header('Location: ../View/confirm_code.php');
+    header('Location: ../View/check_mail_vaildate.php');
     exit;
 }
 

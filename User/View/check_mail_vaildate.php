@@ -1,70 +1,72 @@
-<?php
-session_start();
-
-// Kiểm tra xem người dùng đã gửi yêu cầu kiểm tra hay chưa
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Lấy mật khẩu ngẫu nhiên đã lưu trữ trong phiên làm việc
-    $randomPassword = $_SESSION['randomPassword'];
-
-    // Kiểm tra xem người dùng đã nhập mật khẩu đúng hay chưa
-    if ($_POST['password'] === $randomPassword) {
-        // Mật khẩu đúng
-        header("Location: ../View/change_password.php");
-        exit();
-            } else {
-        // Mã Kiểm Tra sai
-        header("Location: ../View/check_mail_vaildate.php");
-        exit();
-            }
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Link_thuvien -->
+    <link rel="stylesheet" href="../../plugins/css/bootstrap.min.css">
+    <script src="../../plugins/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../../plugins/icons-1.10.5/font/bootstrap-icons.css">
 
-    <!--=============== REMIXICONS ===============-->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
-
-    <!--=============== CSS ===============-->
-    <link rel="stylesheet" href="../View/css/sign_login.css" />
-
-    <title>Form Đăng Ký - Đăng Nhập </title>
+    <!-- link_css -->
+    <link rel="stylesheet" href="../View/css/reponsive.css">
+    <link rel="stylesheet" href="../View/css/home.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="login__content">
-            <img src="../../public/img/icons/hinh-nen-4k-cho-laptop-phong-vu-4.jpg" alt="login image" class="login__img" />
-            <form action="check_mail_vaildate.php" class="login__form" id="login-in" method="POST">
-                <div>
-                <h1 class="login__title">
-                        <span>Kiểm Tra Tài Khoản </span>
-                    </h1>
-                </div>
-                <div>
-                    <div class="login__inputs">
-                        <div>
-                            <label for="" class="login__label">Mã Kiểm Tra</label>
-                            <input type="text" name="password" placeholder="Nhập mã kiểm tra của bạn" required class="login__input" />
+    <?php include 'header.php'; ?>
+    <div class="login-form">
+    <form action="../View/send_mail_check.php" method="post" >
+        <section class="vh-80">
+            <div class="container py-5 h-20">
+                <div class="row d-flex justify-content-center align-items-center h-80">
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                        <div class="card bg text-white" style="border-radius: 0.5rem;">
+                            <div class="card-body p-5 text-center">
+
+                                <div class="pb-5">
+
+                                    <h2 class="fw-bold mb-2 text-uppercase">Kiểm Tra Tài Khoản</h2>
+                                    <p class="text-white-30 mb-5">Vui nhập mã xác minh</p>
+                                    
+                                    <div class="form-outline form-white mb-4">
+                                        <label class="form-label d-flex" for="typeEmailX">Mã xác minh</label>
+                                        <input type="text" class="form-control form-control-xl"  name="confirmation_code" id="username" placeholder="Nhập mã xác minh của bạn..." />
+                                    </div>
+                                   
+                                    <!-- Checkbox -->
+                                   
+
+                                    <button class="btn btn-outline-light btn-lg px-5 mb-3" type="submit">Xác Nhận</button>
+
+                                    <div class="d-flex justify-content-center text-center">
+                                        <a href="#!" class="text-white"><i class="bi bi-facebook"></i></a>
+                                        <a href="#!" class="text-white"><i class="bi bi-youtube"></i></a>
+                                        <a href="#!" class="text-white"><i class="bi bi-tiktok"></i></a>
+                                    </div>
+
+                                </div>
+
+                              
+
+                            </div>
                         </div>
                     </div>
                 </div>
-                <?php $forgotPasswordPage = "sign_login.php";
-                ?>
-                <div>
-                    <div class="login__buttons">
-                        <button type="submit" class="login__button">Gửi</button>
-                        <button class="login__button login__button-ghost"> <a style="text-decoration:none;" href="<?php echo $forgotPasswordPage; ?> "   >Đăng nhập</a></button>
-            </form>
+            </div>
+        </section>
+    </form>
 
-        </div>
     </div>
-
-    <!--=============== MAIN JS ===============-->
-    <script src="js/sign_login.js"></script>
+    <?php include 'footer.php'; ?>
 </body>
+<style>
+    .bg {
+        background-color: #2b80dd;
+    }
+</style>
+
 
 </html>

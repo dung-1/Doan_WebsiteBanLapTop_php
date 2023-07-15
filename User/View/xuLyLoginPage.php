@@ -34,21 +34,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['error'] = 'Mật khẩu không đúng!';
             header('location: loginPage.php');
             exit();
+        }  } else {
+
+            $_SESSION['error'] = 'Tài khoản không tồn tại!';
+            header('location: loginPage.php');
+            exit();
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-    } else {
-        // Sai tên đăng nhập hoặc mật khẩu
-        header('location: sign_login.php');
-        exit();
-=======
->>>>>>> 86819313a6c5449046e06b881fac22213c1a9b4b
-=======
-    } else {
-        $_SESSION['error'] = 'Tài khoản không tồn tại!';
-        header('location: loginPage.php');
-        exit();
->>>>>>> 7f0e685e4ff6c7beefdd449638d401244e7d8bc1
     }
-}
-?>
