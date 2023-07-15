@@ -6,17 +6,11 @@ if (isset($_SESSION['username'])) {
         exit();
     }
 } else {
-<<<<<<< HEAD
-    header('location:../View/sign_login.php');
-    exit();
-}  ?>
-=======
     header('location:../View/loginPage.php');
     exit();
 }
 ?>
 
->>>>>>> 86819313a6c5449046e06b881fac22213c1a9b4b
 <!DOCTYPE html>
 <html lang="en">
 
