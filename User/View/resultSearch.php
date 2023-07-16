@@ -17,7 +17,7 @@ $result = $conn->query($sql);
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tìm Kiếm</title>
     <link rel="stylesheet" href="../../plugins/css/bootstrap.min.css">
@@ -26,8 +26,10 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="css/reponsive.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/hover.css">
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery.elevatezoom.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+
     <style>
         .card {
             border: none;
@@ -110,7 +112,7 @@ $result = $conn->query($sql);
                             <div class="row g-0">
                                 <div class="col-md-4 hvr-buzz">
                                     <a href="product_detail.php?id=<?php echo $product_id; ?>">
-                                        <img class="w-100" style="max-width:250px;" src="../../public/img/products/<?php echo $product_image; ?>" class="card-img-top" alt="Product Image">
+                                        <img class="w-100" style="max-width:250px;" src="<?php echo $product_image; ?>" class="card-img-top" alt="Product Image">
                                     </a>
                                 </div>
                                 <div class="col-md-8">
