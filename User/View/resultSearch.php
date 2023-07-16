@@ -17,14 +17,17 @@ $result = $conn->query($sql);
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results</title>
+    <title>Tìm Kiếm</title>
     <link rel="stylesheet" href="../../plugins/css/bootstrap.min.css">
     <script src="../../plugins/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../../plugins/icons-1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/reponsive.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/hover.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <style>
         .card {
             border: none;
@@ -105,7 +108,7 @@ $result = $conn->query($sql);
                 ?>
                         <div class="card mb-3">
                             <div class="row g-0">
-                                <div class="col-md-4">
+                                <div class="col-md-4 hvr-buzz">
                                     <a href="product_detail.php?id=<?php echo $product_id; ?>">
                                         <img class="w-100" style="max-width:250px;" src="<?php echo $product_image; ?>" class="card-img-top" alt="Product Image">
                                     </a>

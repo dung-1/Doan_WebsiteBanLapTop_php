@@ -50,9 +50,11 @@
                     <!-- link_css -->
                     <link rel="stylesheet" href="css/reponsive.css">
                     <link rel="stylesheet" href="css/home.css">
+                    <link rel="stylesheet" href="css/hover.css">
                     <link rel="stylesheet" href="css/trangchitiet.css">
                     <link rel="stylesheet" href="css/product_detail.css">
-
+                    <script src="js/jquery-1.8.3.min.js"></script>
+                    <script src="js/jquery.elevatezoom.js"></script>
 
                 </head>
 
@@ -62,8 +64,8 @@
                     <section class="py-5">
                         <div class="container px-4 px-lg-5 my-5">
                             <div class="row gx-4 gx-lg-5 align-items-center">
-                                <div class="col-md-6 col-sm-12">
-                                    <img class="card-img-detail mb-5 mb-md-0" src="<?php echo $product_image; ?>" alt="Hình ảnh sản phẩm">
+                                <div class="col-md-6 col-sm-12  ">
+                                    <img id="zoom_01"class="card-img-detail mb-5 mb-md-0 zoom" src="<?php echo $product_image; ?>" alt="Hình ảnh sản phẩm"  data-zoom-image="<?php echo $product_image; ?>"/>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <h1 class="display-6 fw-bolder"><?php echo $product_name; ?></h1>
@@ -195,6 +197,7 @@
                             alert('Bạn cần đăng nhập để mua hàng!!');
                         }
                     </script>
+
                 </body>
 
                 </html>
@@ -223,3 +226,19 @@
             min-width: 400px;
         }
     </style>
+  <script>
+
+window.addEventListener('load', function() {
+
+    $("#zoom_01").elevateZoom({
+
+        zoomType: "lens",
+
+        lensShape: "round",
+
+        lensSize: 250
+
+    });
+
+})
+</script>

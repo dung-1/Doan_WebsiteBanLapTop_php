@@ -13,20 +13,19 @@ if (isset($_SESSION['username'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Page</title>
+    <title>Document</title>
     <link rel="stylesheet" href="../../plugins/css/bootstrap.min.css">
     <script src="../../plugins/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../../plugins/icons-1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/reponsive.css">
     <link rel="stylesheet" href="css/home.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <link rel="stylesheet" href="css/hover.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
 </head>
-
 <body>
     <?php include "../../Core/Conecting.php" ?>
     <?php include "header.php" ?>
@@ -76,7 +75,7 @@ if (isset($_SESSION['username'])) {
                             $discounted_price = $row['discounted_price'];
 
                             echo '
-                                <div class="col-md-6 col-lg-3">
+                                <div class="col-md-6 col-lg-3 hvr-float">
                                     <div class="card mb-3">
                                         <a href="product_detail.php?id=' . $product_id . '">
                                             <img src="' . $product_image . '" class="card-img-top" alt="Hình ảnh sản phẩm">
