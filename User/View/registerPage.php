@@ -24,7 +24,7 @@
 <body>
     <?php include 'header.php'; ?>
     <div class="login-form">
-        <form action="../model/xuLyRegisterPage.php" method="post" onsubmit="return validateForm()">
+        <form action="../model/xuLyRegisterPage.php" method="post" onsubmit="return validateForm() && validateUsername() && checkUsernameExist()">
             <section class="vh-80">
                 <div class="container py-5 h-20">
                     <div class="row d-flex justify-content-center align-items-center h-80">
@@ -135,14 +135,21 @@
                         var response = JSON.parse(xhr.responseText);
                         if (response.exists) {
                             // Username đã tồn tại, hiển thị thông báo lỗi
-                            usernameError.textContent = "Tên tài khoản đã tồn tại.";
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: 'Tên tài khoản đã tồn tại !!!',
+                                confirmButtonText: 'Đóng'
+                            });
                             usernameError.classList.add("invalid-feedback");
                             document.getElementById("username").classList.add("is-invalid");
+                            isUsernameValid = false; // Đặt lại giá trị của biến isUsernameValid thành false
                         } else {
                             // Username không tồn tại, xóa thông báo lỗi
                             usernameError.textContent = "";
                             usernameError.classList.remove("invalid-feedback");
                             document.getElementById("username").classList.remove("is-invalid");
+                            isUsernameValid = true; // Đặt lại giá trị của biến isUsernameValid thành true
                         }
                     } else {
                         console.error("Error:", xhr.status);
@@ -153,6 +160,7 @@
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.send("username=" + encodeURIComponent(username));
         }
+
 
         function validateField(fieldName) {
             isFieldBlurred[fieldName] = true;
