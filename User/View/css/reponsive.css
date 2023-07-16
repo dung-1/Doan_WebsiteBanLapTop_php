@@ -3,10 +3,7 @@
     .hide-mobile {
         display: none;
     }
-    .product-item .product__show .card  {
-        max-width: 60%;
-    }
-  
+   
 }
 
 /* Tablet: width >= 740px and width < 1024px */

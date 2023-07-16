@@ -34,10 +34,7 @@ if (isset($_SESSION['username'])) {
 
 <body>
     <?php include 'header.php'; ?>
-
-    <form action="../View/xuLyLoginPage.php" method="POST" onsubmit="return validateForm()">
-
-    <form action="../View/xuLyLoginPage.php" method="POST">
+ 
 
     <form action="xuLyLoginPage.php" method="POST" onsubmit="return validateForm()">
 

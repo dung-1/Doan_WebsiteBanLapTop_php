@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <?php
 session_start();
 
@@ -20,11 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = $_POST['phone'];
     $full_name = $_POST['full_name'];
 
-    if (check_username_exist($username)) {
-        // Username đã tồn tại, thông báo cho người dùng
-        header('Location: ../../Admin/view/inc/error_insert.php');
-        exit;
-    }
 
     // Lưu thông tin khách hàng trong session
     $_SESSION['customer'] = [
