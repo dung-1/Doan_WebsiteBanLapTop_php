@@ -22,7 +22,7 @@ function get_all_inventories()
     // Lặp kết quả
     foreach ($result as $row) {
         $inventory_list[] = array(
-            'id' => $row['id'],
+            'id' => $row['inventory_id'],
             'product_name' => $row['product_name'],
             'date_add' => $row['date_add'],
             'quantity' => $row['quantity'],
@@ -46,7 +46,7 @@ function insert_inventory($product_id, $date_add, $quantity)
         $stmt->execute();
 
         if ($stmt->rowCount() === 0) {
-            throw new Exception('Lỗi thêm hãng.');
+            throw new Exception('Lỗi thêm kho.');
         }
     } catch (Exception $e) {
         header('Location: ../view/inc/error_insert.php');
@@ -85,13 +85,13 @@ function get_inventory($inventory_id)
 function update_inventory($id, $product_id, $date_add, $quantity)
 {
     global $pdo;
-    $sql = "UPDATE inventories SET inventory_name=:name, inventory_country=:country, inventory_nsx=:date WHERE inventory_id=:id";
+    $sql = "UPDATE inventories SET product_id=:product_id, date_add=:date_add, quantity=:quantity WHERE inventory_id=:id";
     try {
         $stmt = $pdo->prepare($sql);
 
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':country', $country);
-        $stmt->bindParam(':date', $date);
+        $stmt->bindParam(':product_id', $product_id);
+        $stmt->bindParam(':date_add', $date_add);
+        $stmt->bindParam(':quantity', $quantity);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         echo '<script>';
@@ -117,7 +117,7 @@ function delete_inventories($ids)
                 return $stmt->rowCount();
             }
         }
-        throw new Exception('Lỗi xóa hãng.'); // Ném ngoại lệ nếu có lỗi xảy ra
+        throw new Exception('Lỗi xóa kho.'); // Ném ngoại lệ nếu có lỗi xảy ra
     } catch (Exception $e) {
         header('Location: ../view/inc/error_delete.php');
         exit;

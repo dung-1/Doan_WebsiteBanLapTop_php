@@ -218,9 +218,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="<?php echo BASE_URL . '/Admin/inventory/index.php'; ?>" class="nav-link">
                                 <i class="nav-icon fas fa-comment"></i>
-                                <p>QUẢN LÝ PHẢN HỒI</p>
+                                <p>QUẢN LÝ KHO</p>
                             </a>
                         </li>
 
