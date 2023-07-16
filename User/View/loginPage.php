@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 if (isset($_SESSION['username'])) {
@@ -28,13 +27,15 @@ if (isset($_SESSION['username'])) {
     <link rel="stylesheet" href="../../plugins/icons-1.10.5/font/bootstrap-icons.css">
 
     <!-- link_css -->
+    <link rel="stylesheet" href="css/hover.css">
+
     <link rel="stylesheet" href="../View/css/reponsive.css">
     <link rel="stylesheet" href="../View/css/home.css">
 </head>
 
 <body>
     <?php include 'header.php'; ?>
- 
+
 
     <form action="xuLyLoginPage.php" method="POST" onsubmit="return validateForm()">
 
@@ -76,15 +77,15 @@ if (isset($_SESSION['username'])) {
                                     </div>
 
                                     <div class="form-outline form-white mb-4">
-                                        <label class="form-label d-flex " for="typePasswordX">Mật khẩu</label>
-                                        <input type="password" id="password" class="form-control form-control-xl" name="password" id="password" placeholder="Nhập mật khẩu của bạn..." />
-
+                                        <label class="form-label d-flex" for="typePasswordX">Mật khẩu</label>
+                                        <input type="password" id="password" class="form-control form-control-xl" name="password" placeholder="Nhập mật khẩu của bạn..." />
                                     </div>
                                     <!-- Checkbox -->
                                     <div class="form-check d-flex justify-content-start mb-4">
-                                        <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
-                                        <label class="form-check-label px-2" for="form1Example3">Lưu mật khẩu </label>
+                                        <input class="form-check-input" type="checkbox" value="" id="showPasswordCheckbox" />
+                                        <label class="form-check-label px-2" class="form-control form-control-xl" for="showPasswordCheckbox">Hiện Thị mật khẩu</label>
                                     </div>
+
                                     <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Quên mật khẩu ?</a></p>
 
                                     <button class="btn btn-outline-light btn-lg px-5 mb-3" type="submit">ĐĂNG NHẬP</button>
@@ -98,7 +99,7 @@ if (isset($_SESSION['username'])) {
                                 </div>
 
                                 <div>
-                                    <?php $signup="registerPage.php";   ?>
+                                    <?php $signup = "registerPage.php";   ?>
                                     <p class="mb-0">Don't have an account? <a href="<?php echo $signup; ?>" class="text-white-50 fw-bold">Sign Up</a>
                                     </p>
                                 </div>
@@ -135,6 +136,22 @@ if (isset($_SESSION['username'])) {
 
         return true;
     }
+</script>
+<script>
+    // Lấy reference đến các elements cần thao tác
+    const passwordInput = document.getElementById('password');
+    const showPasswordCheckbox = document.getElementById('showPasswordCheckbox');
+
+    // Xử lý sự kiện khi checkbox thay đổi trạng thái
+    showPasswordCheckbox.addEventListener('change', function() {
+        // Nếu checkbox được chọn, hiển thị mật khẩu bằng cách thay đổi thuộc tính "type" sang "text"
+        if (this.checked) {
+            passwordInput.type = 'text';
+        } else {
+            // Nếu checkbox không được chọn, ẩn mật khẩu bằng cách đổi lại thuộc tính "type" về "password"
+            passwordInput.type = 'password';
+        }
+    });
 </script>
 
 </html>

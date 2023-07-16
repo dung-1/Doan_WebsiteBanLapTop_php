@@ -1,3 +1,17 @@
+<?php
+session_start();
+if (isset($_SESSION['username'])) {
+    // Kiểm tra vai trò của người dùng và điều hướng tới các trang phù hợp
+    if ($_SESSION['role'] == 'admin') {
+        header('location: ../../Admin/index.php');
+        exit();
+    } else if ($_SESSION['role'] == 'customer') {
+        header('location: user.php');
+        exit();
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +25,7 @@
     <link rel="stylesheet" href="../../plugins/icons-1.10.5/font/bootstrap-icons.css">
 
     <!-- link_css -->
+    <link rel="stylesheet" href="css/hover.css">
     <link rel="stylesheet" href="../View/css/reponsive.css">
     <link rel="stylesheet" href="../View/css/home.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
