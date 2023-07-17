@@ -278,6 +278,7 @@ if (isset($_SESSION['username'])) {
             return emailRegex.test(email);
         }
     </script>
+    
 </body>
 
 </html>
