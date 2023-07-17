@@ -231,7 +231,7 @@ if (isset($_SESSION['username'])) {
                 button.addEventListener('click', function() {
                     updateCartCounter();
                     Swal.fire(
-                        'Thêm vào giỏ hàng thành công!',
+                        'bạn tiến hàng đăng nhập để mua hàng',
                         'success'
                     )
                 });
@@ -257,7 +257,8 @@ if (isset($_SESSION['username'])) {
             addToCartButtons.forEach(function(button) {
                 button.addEventListener('click', function() {
                     updateCartCounter();
-                    alert('Thêm vào giỏ hàng thành công!!');
+                    alert('bạn tiến hàng đăng nhập để mua hàng',
+);
                 });
             });
         });

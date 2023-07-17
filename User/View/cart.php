@@ -37,7 +37,7 @@ if (isset($_POST["add_to_cart"])) {
         $item_array = array(
             'item_id' => $_POST["hidden_id"],
             'item_name' => $_POST["hidden_name"],
-            'item_price' => $_POST["hidden_price_discount"],
+            'item_price' => $_POST["hidden_price"],
             'item_quantity' => $_POST["quantity"]
         );
         $cart_data[] = $item_array;
@@ -116,7 +116,8 @@ if (isset($_POST["update_cart"])) {
     <link rel="stylesheet" href="../../plugins/icons-1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/reponsive.css">
     <link rel="stylesheet" href="css/home.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -124,7 +125,7 @@ if (isset($_POST["update_cart"])) {
 
     <main>
         <div class="container mt-4">
-            <h2><i class="bi bi-basket2 fs-3"></i>Giỏ hàng</h2>
+            <h2><i class="bi bi-basket2 fs-3"></i>Giỏ hàng </h2>
             <hr>
             <?php
             // Hiển thị sản phẩm trong giỏ hàng
@@ -134,7 +135,7 @@ if (isset($_POST["update_cart"])) {
                 $cart_data = json_decode($cookie_data, true);
                 if (!empty($cart_data)) {
             ?>
-                    <form method="post" id="checkout-form">
+                    <form method="post">
                         <table class="table table-bordered cart-table">
                             <thead>
                                 <tr>
@@ -193,7 +194,7 @@ if (isset($_POST["update_cart"])) {
             ?>
 
             <div class="text-center mt-4">
-                <button class="btn btn-success" id="checkoutButton"><i class="bi bi-receipt"></i>Thanh Toán</button>
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#emailModal"><i class="bi bi-receipt"></i>Thanh Toán</button>
             </div>
 
             <!-- Modal -->
@@ -246,282 +247,124 @@ if (isset($_POST["update_cart"])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Đoạn script Ajax -->
     <script>
-        // Hàm kiểm tra số lượng tồn kho của sản phẩm
-        function checkInventoryAndSendInvoice() {
-            // Kiểm tra số lượng tồn kho của từng sản phẩm trong giỏ hàng
-            var cartItems = document.getElementsByClassName('cart-item');
-            for (var i = 0; i < cartItems.length; i++) {
-                var cartItem = cartItems[i];
-                var itemId = cartItem.dataset.itemId;
-                var itemQuantityInput = cartItem.querySelector('.item-quantity');
-                var itemQuantity = parseInt(itemQuantityInput.value);
+       function checkInventoryAndSendInvoice() {
+    // Kiểm tra số lượng tồn kho của từng sản phẩm trong giỏ hàng
+    var cartItems = document.getElementsByClassName('cart-item');
+    var shouldProceedWithOrder = true; // Biến này để kiểm tra xem có nên tiếp tục với việc gửi hóa đơn và lưu đơn hàng hay không
 
-                // Kiểm tra số lượng tồn kho từ trường "data-quantity" trong HTML
-                var availableQuantity = parseInt(cartItem.dataset.quantity);
-                if (itemQuantity > availableQuantity) {
-                    Swal.fire({
-                        title: "Sản phẩm không đủ số lượng trong kho!",
-                        text: "Sản phẩm " + itemId + " chỉ còn " + availableQuantity + " sản phẩm trong kho.",
-                        icon: "error",
-                        confirmButtonText: "OK"
-                    });
-                    return; // Dừng xử lý nếu có ít nhất một sản phẩm không đủ số lượng
-                }
-            }
+    for (var i = 0; i < cartItems.length; i++) {
+        var cartItem = cartItems[i];
+        var itemId = cartItem.dataset.itemId;
+        var itemQuantityInput = cartItem.querySelector('.item-quantity');
+        var itemQuantity = parseInt(itemQuantityInput.value);
 
-            // Nếu số lượng sản phẩm đều đủ trong kho, thực hiện gửi hóa đơn và lưu đơn hàng
-            sendInvoiceAndSaveOrder();
+        // Kiểm tra số lượng tồn kho từ trường "data-quantity" trong HTML
+        var availableQuantity = parseInt(cartItem.dataset.quantity);
+        if (itemQuantity > availableQuantity) {
+            Swal.fire({
+                title: "Sản phẩm không đủ số lượng trong kho!",
+                text: "Sản phẩm " + itemId + " chỉ còn " + availableQuantity + " sản phẩm trong kho.",
+                icon: "error",
+                confirmButtonText: "OK"
+            });
+            shouldProceedWithOrder = false; // Đặt biến này thành false nếu có ít nhất một sản phẩm không đủ số lượng
+            break; // Dừng vòng lặp ngay khi gặp sản phẩm không đủ số lượng
+        }
+    }
+
+    // Nếu số lượng sản phẩm đều đủ trong kho và các thông tin nhập hợp lệ, thực hiện gửi hóa đơn và lưu đơn hàng
+    if (shouldProceedWithOrder) {
+        // Kiểm tra thông tin thanh toán
+        var nameInput = document.getElementById('nameInput');
+        var emailInput = document.getElementById('emailInput');
+        var phoneInput = document.getElementById('phoneInput');
+        var addressInput = document.getElementById('addressInput');
+        var paymentMethodInput = document.getElementById('paymentMethodInput');
+
+        var name = nameInput.value.trim();
+        var email = emailInput.value.trim();
+        var phone = phoneInput.value.trim();
+        var address = addressInput.value.trim();
+        var paymentMethod = paymentMethodInput.value.trim();
+
+        // Kiểm tra giỏ hàng có rỗng không
+        if (isEmptyCart()) {
+            Swal.fire("Lỗi", "Giỏ hàng rỗng", "error");
+            return;
         }
 
-        // Hàm xử lý gửi hóa đơn và lưu đơn hàng
-        function sendInvoiceAndSaveOrder() {
-            // Thực hiện gửi Ajax để lưu thông tin đơn hàng
-            $.ajax({
-                url: "save_invoice.php", // Đường dẫn đến tệp xử lý lưu đơn hàng
-                type: "POST",
-                data: {}, // Bạn có thể truyền dữ liệu từ trang này qua Ajax nếu cần thiết
-                success: function(response) {
-                    // Xử lý phản hồi từ tệp xử lý lưu đơn hàng (nếu cần)
-                    console.log(response);
+        // Kiểm tra thông tin thanh toán
+        if (!validatePaymentInfo(name, email, phone, address, paymentMethod)) {
+            return;
+        }
 
-                    // Kiểm tra phản hồi từ server
-                    var responseData = JSON.parse(response);
-                    if (responseData.status === "success") {
-                        // Thông báo mua hàng thành công
-                        Swal.fire({
-                            title: "Thành công!",
-                            text: "Bạn đã mua hàng thành công!",
-                            icon: "success",
-                            confirmButtonText: "OK"
-                        });
+        // Gửi hóa đơn và lưu đơn hàng
+        sendInvoiceAndSaveOrder(name, email, phone, address, paymentMethod);
+    }
+}
 
-                        // Tiến hành gửi email hóa đơn
-                        var cartData = <?php echo isset($cart_data) ? json_encode($cart_data) : '[]'; ?>;
-                        var emailInput = document.getElementById('emailInput');
-                        var email = emailInput.value.trim();
-                        if (email !== '') {
-                            var data = new FormData();
-                            data.append('mail', email);
-                            data.append('subject', 'Hóa đơn mua hàng');
-                            data.append('cart_data', JSON.stringify(cartData));
-                            var xhr = new XMLHttpRequest();
-                            xhr.open('POST', 'sendmail.php', true);
-                            xhr.onload = function() {
-                                if (xhr.status === 200) {
-                                    alert('Hóa đơn đã được gửi thành công');
-                                    location.reload(); // Tải lại trang để reset giỏ hàng
-                                } else {
-                                    alert('Đã xảy ra lỗi khi gửi hóa đơn');
-                                }
-                            };
-                            xhr.send(data);
-                        } else {
-                            alert('Vui lòng nhập địa chỉ email');
-                        }
-                    } else if (responseData.status === "out_of_stock") {
-                        // Hiển thị thông báo lỗi về sản phẩm không đủ số lượng trong kho
-                        var errorMessage = responseData.errors.join('\n');
-                        Swal.fire({
-                            title: "Sản phẩm đã hết hàng!",
-                            text: errorMessage,
-                            icon: "error",
-                            confirmButtonText: "OK"
-                        });
-                    } else if (responseData.status === "empty_cart") {
-                        // Thông báo giỏ hàng trống
-                        Swal.fire({
-                            title: "Giỏ hàng trống!",
-                            text: "Không có sản phẩm nào trong giỏ hàng.",
-                            icon: "warning",
-                            confirmButtonText: "OK"
-                        });
-                    } else {
-                        // Xử lý lỗi (nếu có)
-                        Swal.fire({
-                            title: "Lỗi!",
-                            text: "Đã xảy ra lỗi khi xử lý đơn hàng.",
-                            icon: "error",
-                            confirmButtonText: "OK"
-                        });
-                    }
-                },
-                error: function(xhr, status, error) {
-                    // Xử lý lỗi (nếu có)
-                    console.error(error);
-                    Swal.fire({
-                        title: "Lỗi!",
-                        text: "Đã xảy ra lỗi khi xử lý đơn hàng.",
-                        icon: "error",
-                        confirmButtonText: "OK"
-                    });
-                }
-            });
+// Hàm kiểm tra giỏ hàng có rỗng không
+function isEmptyCart() {
+    var cartItems = document.getElementsByClassName('cart-item');
+    return cartItems.length === 0;
+}
 
-            function formatCurrency(amount) {
-                return amount.toLocaleString('en-US', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
-            }
+// Hàm kiểm tra thông tin thanh toán hợp lệ
+function validatePaymentInfo(name, email, phone, address, paymentMethod) {
+    if (!name || !email || !phone || !address || !paymentMethod) {
+        Swal.fire("Lỗi", "Vui lòng điền đầy đủ thông tin thanh toán", "error");
+        return false;
+    }
+    return true;
+}
 
-            var removeItemButtons = document.querySelectorAll('.btn-remove-item');
-            removeItemButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?')) {
-                        var itemId = button.getAttribute('data-item-id');
-                        window.location.href = 'cart.php?id=' + itemId;
-                    }
-                });
-            });
+// Hàm gửi hóa đơn và lưu đơn hàng
+function sendInvoiceAndSaveOrder(name, email, phone, address, paymentMethod) {
+    // Thực hiện gửi Ajax để lưu thông tin đơn hàng
+    $.ajax({
+        url: "save_invoice.php", // Đường dẫn đến tệp xử lý lưu đơn hàng
+        type: "POST",
+        data: {}, // Bạn có thể truyền dữ liệu từ trang này qua Ajax nếu cần thiết
+        success: function(response) {
+            // Xử lý phản hồi từ tệp xử lý lưu đơn hàng (nếu cần)
+            console.log(response);
 
-            // Kiểm tra xem thông báo thành công có tồn tại hay không
-            var successMessage = document.getElementById('successMessage');
-            if (successMessage) {
-                // Đặt một độ trễ để loại bỏ thông báo thành công sau 3 giây
-                setTimeout(function() {
-                    successMessage.remove();
-                }, 3000);
-            }
+            // Gửi hóa đơn qua email
+            if (email !== '') {
+                var cartData = <?php echo isset($cart_data) ? json_encode($cart_data) : '[]'; ?>;
+                var data = new FormData();
+                data.append('mail', email);
+                data.append('subject', 'Hóa đơn mua hàng');
+                data.append('cart_data', JSON.stringify(cartData));
 
-            // cập nhật giỏ hàng
-            function updateCartTotal() {
-                var itemTotals = document.querySelectorAll('.item-total');
-                var total = 0;
-                itemTotals.forEach(function(itemTotal) {
-                    var itemTotalValue = parseFloat(itemTotal.innerText.replace(/,/g, ''));
-                    total += itemTotalValue;
-                });
-                var cartTotalElement = document.getElementById('cart-total');
-                cartTotalElement.innerText = formatCurrency(total);
-            }
-
-            var cartData = <?php echo isset($cart_data) ? json_encode($cart_data) : '[]'; ?>;
-
-            var checkoutButton = document.getElementById('checkoutButton');
-            checkoutButton.addEventListener('click', function() {
-                // Kiểm tra giỏ hàng có rỗng không
-                if (isEmptyCart()) {
-                    swal("Lỗi", "Giỏ hàng rỗng", "error");
-                    return;
-                }
-
-                // Hiển thị modal
-                var emailModal = new bootstrap.Modal(document.getElementById('emailModal'));
-                emailModal.show();
-            });
-
-
-
-
-
-
-
-
-
-
-
-
-            var cartData = <?php echo isset($cart_data) ? json_encode($cart_data) : '[]'; ?>;
-
-            var sendInvoiceButton = document.getElementById('sendInvoiceButton');
-            sendInvoiceButton.addEventListener('click', function() {
-                var nameInput = document.getElementById('nameInput');
-                var emailInput = document.getElementById('emailInput');
-                var phoneInput = document.getElementById('phoneInput');
-                var addressInput = document.getElementById('addressInput');
-                var paymentMethodInput = document.getElementById('paymentMethodInput');
-
-                var name = nameInput.value.trim();
-                var email = emailInput.value.trim();
-                var phone = phoneInput.value.trim();
-                var address = addressInput.value.trim();
-                var paymentMethod = paymentMethodInput.value.trim();
-                // Kiểm tra giỏ hàng có rỗng không
-                if (isEmptyCart()) {
-                    swal("Lỗi", "Giỏ hàng rỗng", "error");
-                    return;
-                }
-
-                // Kiểm tra thông tin thanh toán
-                if (!validatePaymentInfo(name, email, phone, address, paymentMethod)) {
-                    return;
-                }
-                if (email !== '') {
-                    var data = new FormData();
-                    data.append('mail', email);
-                    data.append('subject', 'Hóa đơn mua hàng');
-                    data.append('cart_data', JSON.stringify(cartData));
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('POST', 'sendmail.php', true);
-                    xhr.onload = function() {
-                        if (xhr.status === 200) {
-                            swal("Thành công", "Hóa đơn đã được gửi thành công!", "success").then(function(){
-                            location.reload(); // Tải lại trang để reset giỏ hàn
-                            });
-                        } else {
-                            swal("Lỗi", "Đã xảy ra lỗi khi gửi hóa đơn", "error");
-                        }
-                    };
-                    xhr.send(data);
-                } else {
-                    swal("Lỗi", "Vui lòng nhập địa chỉ email", "error");
-                }
-            });
-
-            function resetCart() {
                 var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'sendmail.php', true);
                 xhr.onload = function() {
                     if (xhr.status === 200) {
-                        var response = xhr.responseText;
-                        if (response === 'success') {
+                        Swal.fire("Thành công", "Hóa đơn đã được gửi thành công!", "success").then(function() {
                             location.reload(); // Tải lại trang để reset giỏ hàng
-                        }
+                        });
+                    } else {
+                        Swal.fire("Lỗi", "Đã xảy ra lỗi khi gửi hóa đơn", "error");
                     }
                 };
-                xhr.send();
+                xhr.send(data);
+            } else {
+                Swal.fire("Lỗi", "Vui lòng nhập địa chỉ email", "error");
             }
+        },
+        error: function(xhr, status, error) {
+            // Xử lý lỗi (nếu có)
+            console.error(error);
+            Swal.fire("Lỗi", "Đã xảy ra lỗi khi xử lý đơn hàng.", "error");
+        }
+    });
+}
 
+// Xử lý sự kiện khi click vào nút "Đồng ý mua và gửi hóa đơn"
+var sendInvoiceButton = document.getElementById('sendInvoiceButton');
+sendInvoiceButton.addEventListener('click', checkInventoryAndSendInvoice);
 
-
-
-
-
-
-
-
-
-
-            // Kiểm tra giỏ hàng có sản phẩm hay không
-            function isEmptyCart() {
-                var cartData = <?php echo isset($cart_data) ? json_encode($cart_data) : '[]'; ?>;
-                return cartData.length === 0;
-            }
-
-            // Validate thông tin thanh toán
-            function validatePaymentInfo(name, email, phone, address, paymentMethod) {
-                if (name === '') {
-                    swal("Lỗi", "Vui lòng nhập Họ và Tên Người Nhận", "error");
-                    return false;
-                }
-                if (email === '') {
-                    swal("Lỗi", "Vui lòng nhập Email", "error");
-                    return false;
-                }
-                if (phone === '') {
-                    swal("Lỗi", "Vui lòng nhập Số Điện Thoại", "error");
-                    return false;
-                }
-                if (address === '') {
-                    swal("Lỗi", "Vui lòng nhập Địa chỉ", "error");
-                    return false;
-                }
-                if (paymentMethod === '') {
-                    swal("Lỗi", "Vui lòng chọn Phương Thức Thanh Toán", "error");
-                    return false;
-                }
-                return true;
-            }
-        });
     </script>
     <!-- Kết thúc đoạn script Ajax -->
 
@@ -600,6 +443,50 @@ if (isset($_POST["update_cart"])) {
             });
             var cartTotalElement = document.getElementById('cart-total');
             cartTotalElement.innerText = formatCurrency(total);
+        }
+
+        function resetCart() {
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var response = xhr.responseText;
+                    if (response === 'success') {
+                        location.reload(); // Tải lại trang để reset giỏ hàng
+                    }
+                }
+            };
+            xhr.send();
+        }
+
+        // Kiểm tra giỏ hàng có sản phẩm hay không
+        function isEmptyCart() {
+            var cartData = <?php echo isset($cart_data) ? json_encode($cart_data) : '[]'; ?>;
+            return cartData.length === 0;
+        }
+
+        // Validate thông tin thanh toán
+        function validatePaymentInfo(name, email, phone, address, paymentMethod) {
+            if (name === '') {
+                swal("Lỗi", "Vui lòng nhập Họ và Tên Người Nhận", "error");
+                return false;
+            }
+            if (email === '') {
+                swal("Lỗi", "Vui lòng nhập Email", "error");
+                return false;
+            }
+            if (phone === '') {
+                swal("Lỗi", "Vui lòng nhập Số Điện Thoại", "error");
+                return false;
+            }
+            if (address === '') {
+                swal("Lỗi", "Vui lòng nhập Địa chỉ", "error");
+                return false;
+            }
+            if (paymentMethod === '') {
+                swal("Lỗi", "Vui lòng chọn Phương Thức Thanh Toán", "error");
+                return false;
+            }
+            return true;
         }
     });
 </script>
