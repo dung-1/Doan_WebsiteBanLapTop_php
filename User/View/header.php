@@ -112,11 +112,11 @@ $cart_count = 0;
     <!-- end_menu -->
     <script>
         function showLoginAlert() {
-            alert('Bạn cần đăng nhập để xem giỏ hàng!!');
+            swal("Lỗi", "Bạn cần đăng nhập để xem giỏ hàng", "error");
         }
 
         function showBtnBuyAlert() {
-            alert('Bạn cần đăng nhập để mua hàng!!');
+            alert("Bạn cần đăng nhập để xem giỏ hàng !"); 
         }
     </script>
 </header>
