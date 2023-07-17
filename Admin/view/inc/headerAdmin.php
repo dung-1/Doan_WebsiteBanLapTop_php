@@ -1,3 +1,15 @@
+<?php
+
+if (isset($_SESSION['username'])) {
+  $_SESSION['username'];
+  if ($_SESSION['role'] == 'customer') {
+    header('location:../../User/View/user.php');
+    exit();
+  }
+} else {
+  header('location:../../User/View/loginPage.php');
+  exit();
+}  ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,23 +79,22 @@
                         <i class="fa-solid fa-gear"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right  ">
-                       <a href="#" class="dropdown-item ">
+                        <a href="#" class="dropdown-item ">
                             <!-- Message Start -->
-                            
-                            <div class="media " >
+
+                            <div class="media ">
                                 <div class="media-body fs-1 text-dark">
-                                <i class="fa-solid fa-unlock-keyhole text-info"></i>   Đổi mật Khẩu
+                                    <i class="fa-solid fa-unlock-keyhole text-info"></i> Đổi mật Khẩu
                                 </div>
                             </div>
                             <!-- Message End -->
                         </a>
-
-                        <a href="#" class="dropdown-item">
+                        <a href="../../User/View/logout.php" class="dropdown-item">
                             <!-- Message Start -->
-                            
+
                             <div class="media">
                                 <div class="media-body">
-                                <i class="fa-solid fa-right-from-bracket text-info"></i>    Đăng Xuất
+                                    <i class="fa-solid fa-right-from-bracket text-info"></i> Đăng Xuất
                                 </div>
                             </div>
                             <!-- Message End -->
@@ -127,8 +138,15 @@
                         <img src="../../dist/img/AdminLTELogo.png" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
-                        <a href="<?php echo BASE_URL . '/Admin/index.php'; ?>" class="d-block">ADMIN Dụng</a>
-                    </div>
+                        <?php
+                        if (isset($_SESSION['username'])) {
+                            // Lấy user_id từ session
+                            $user_id = $_SESSION['user_id'];
+                            // Hiển thị "Chào 'username'" và nút Đăng xuất
+                            echo '<span class="nav-item nav-link me-4 text-light text-uppercase">Chào ' . $_SESSION['username'] . ' <i class="bi bi-person-circle"></i></span>';
+                        }
+
+                        ?> </div>
                 </div>
                 <!-- SidebarSearch Form -->
                 <div class="form-inline">
@@ -219,23 +237,22 @@
                         </li>
                         <li class="nav-item">
                             <a href="<?php echo BASE_URL . '/Admin/inventory/index.php'; ?>" class="nav-link">
-                                <i class="nav-icon fas fa-comment"></i>
+                                <i class=" nav-icon fa-solid fa-warehouse"></i>
                                 <p>QUẢN LÝ KHO</p>
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <p></p>
-                            </a>
+                        <li>
+
+                            <p></p>
+                        </li>
+                        <li>
+
+                            <p></p>
+
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <p></p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="../../User/View/logout.php" class="nav-link">
                                 <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
                                 <p>ĐĂNG XUẤT</p>
                             </a>

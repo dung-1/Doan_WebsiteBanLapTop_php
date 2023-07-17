@@ -93,7 +93,7 @@ if (isset($_SESSION['username'])) {
               <!-- Message End -->
             </a>
 
-            <a href="#" class="dropdown-item">
+            <a href="../User/View/logout.php" class="dropdown-item">
               <!-- Message Start -->
 
               <div class="media">
@@ -145,7 +145,15 @@ if (isset($_SESSION['username'])) {
             <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="<?php echo BASE_URL . '/Admin/index.php'; ?>" class="d-block">ADMIN DỤNG</a>
+            <?php
+            if (isset($_SESSION['username'])) {
+              // Lấy user_id từ session
+              $user_id = $_SESSION['user_id'];
+              // Hiển thị "Chào 'username'" và nút Đăng xuất
+              echo '<span class="nav-item nav-link me-4 text-light text-uppercase">Chào ' . $_SESSION['username'] . ' <i class="bi bi-person-circle"></i></span>';
+            }
+
+            ?>
           </div>
         </div>
 
@@ -249,23 +257,21 @@ if (isset($_SESSION['username'])) {
             </li>
             <li class="nav-item">
               <a href="<?php echo BASE_URL . '/Admin/inventory/index.php'; ?>" class="nav-link">
-                <i class="nav-icon fas fa-comment"></i>
+                <i class=" nav-icon fa-solid fa-warehouse"></i>
                 <p>
                   QUẢN LÝ KHO
                 </p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-              </a>
+            <li>
+              <p></p>
             </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-              </a>
+            <li>
+              <p></p>
             </li>
             <li class="nav-item">
 
-              <a href="../../doanPHP/User/View/logout.php" class="nav-link">
+              <a href="../User/View/logout.php" class="nav-link">
                 <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
                 ĐĂNG XUẤT
               </a>

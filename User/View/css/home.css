@@ -111,7 +111,6 @@ header .menu .menu__toggler {
     width: 100%;
 }
 
-
 .products .pro-head {
     margin-bottom: 10px;
     background: #2b80dd;
@@ -301,4 +300,23 @@ i.bi.bi-facebook {
 
 .h-custom {
     height: calc(100% - 73px);
+}
+
+
+/* cho nút ẩn hiện thêm sản phẩm */
+
+.product__show {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product-item .btn-show-more {
+    margin: 20px auto;
+}
+
+@media (max-width: 768px) {
+    .product-item .btn-show-more {
+        margin: 10px auto;
+    }
 }
