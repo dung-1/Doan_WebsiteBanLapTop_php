@@ -29,7 +29,8 @@ if (isset($_POST["add_to_cart"])) {
     if (in_array($_POST["hidden_id"], $item_id_list)) {
         foreach ($cart_data as $keys => $values) {
             if ($cart_data[$keys]["item_id"] == $_POST["hidden_id"]) {
-                $cart_data[$keys]["item_quantity"] = $cart_data[$keys]["item_quantity"] + $_POST["quantity"];
+                $item_quantity = $cart_data[$keys]["item_quantity"] + $_POST["quantity"];
+                $cart_data[$keys]["item_quantity"] = $item_quantity;
             }
         }
     } else {
@@ -44,10 +45,6 @@ if (isset($_POST["add_to_cart"])) {
 
     $item_data = json_encode($cart_data);
     setcookie('shopping_cart', $item_data, time() + (86400 * 30));
-<<<<<<< HEAD
-    echo json_encode(array('success' => true, 'message' => 'Sản phẩm đã được thêm vào giỏ hàng.'));
-    exit();
-=======
     if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
         $username = $_SESSION['username'];
 
@@ -63,7 +60,6 @@ if (isset($_POST["add_to_cart"])) {
         header("Location: login.php");
         exit; // Chắc chắn dừng thực hiện mã sau khi chuyển hướng
     }
->>>>>>> 42411b443ef6ddd00fa9ac2d8f9b264dcc274b2e
 }
 
 // Xử lý xóa sản phẩm khỏi giỏ hàng
@@ -120,6 +116,8 @@ if (isset($_POST["update_cart"])) {
     <link rel="stylesheet" href="../../plugins/icons-1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/reponsive.css">
     <link rel="stylesheet" href="css/home.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -159,7 +157,7 @@ if (isset($_POST["update_cart"])) {
                                     $item_total = $item_quantity * $item_price;
                                     $total += $item_total;
                                 ?>
-                                    <tr>
+                                    <tr class="cart-item" data-item-id="<?php echo $values["item_id"]; ?>" data-quantity="<?php echo $item_quantity; ?>">
                                         <td><?php echo $stt++; ?></td>
                                         <td><?php echo $item_name; ?></td>
                                         <td>
@@ -237,38 +235,136 @@ if (isset($_POST["update_cart"])) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
-                            <button type="button" class="btn btn-success buyshop" id="sendInvoiceButton" data-bs-toggle="modal">Thanh Toán</button>
+                            <button type="button" class="btn btn-success " id="sendInvoiceButton" data-bs-toggle="modal">Thanh Toán</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            
+
         </div>
     </main>
     <!-- Trước khi kết thúc thẻ </body> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Đoạn script Ajax -->
     <script>
-        $(document).ready(function() {
-            // Xử lý sự kiện khi click vào nút "Đồng ý mua"
-            $(".buyshop").click(function() {
-                // Thực hiện gửi Ajax để lưu thông tin đơn hàng
-                $.ajax({
-                    url: "save_invoice.php", // Đường dẫn đến tệp xử lý lưu đơn hàng
-                    type: "POST",
-                    data: {}, // Bạn có thể truyền dữ liệu từ trang này qua Ajax nếu cần thiết
-                    success: function(response) {
-                        // Xử lý phản hồi từ tệp xử lý lưu đơn hàng (nếu cần)
-                        console.log(response);
-                    },
-                    error: function(xhr, status, error) {
+        // Hàm kiểm tra số lượng tồn kho của sản phẩm
+        function checkInventoryAndSendInvoice() {
+            // Kiểm tra số lượng tồn kho của từng sản phẩm trong giỏ hàng
+            var cartItems = document.getElementsByClassName('cart-item');
+            for (var i = 0; i < cartItems.length; i++) {
+                var cartItem = cartItems[i];
+                var itemId = cartItem.dataset.itemId;
+                var itemQuantityInput = cartItem.querySelector('.item-quantity');
+                var itemQuantity = parseInt(itemQuantityInput.value);
+
+                // Kiểm tra số lượng tồn kho từ trường "data-quantity" trong HTML
+                var availableQuantity = parseInt(cartItem.dataset.quantity);
+                if (itemQuantity > availableQuantity) {
+                    Swal.fire({
+                        title: "Sản phẩm không đủ số lượng trong kho!",
+                        text: "Sản phẩm " + itemId + " chỉ còn " + availableQuantity + " sản phẩm trong kho.",
+                        icon: "error",
+                        confirmButtonText: "OK"
+                    });
+                    return; // Dừng xử lý nếu có ít nhất một sản phẩm không đủ số lượng
+                }
+            }
+
+            // Nếu số lượng sản phẩm đều đủ trong kho, thực hiện gửi hóa đơn và lưu đơn hàng
+            sendInvoiceAndSaveOrder();
+        }
+
+        // Hàm xử lý gửi hóa đơn và lưu đơn hàng
+        function sendInvoiceAndSaveOrder() {
+            // Thực hiện gửi Ajax để lưu thông tin đơn hàng
+            $.ajax({
+                url: "save_invoice.php", // Đường dẫn đến tệp xử lý lưu đơn hàng
+                type: "POST",
+                data: {}, // Bạn có thể truyền dữ liệu từ trang này qua Ajax nếu cần thiết
+                success: function(response) {
+                    // Xử lý phản hồi từ tệp xử lý lưu đơn hàng (nếu cần)
+                    console.log(response);
+
+                    // Kiểm tra phản hồi từ server
+                    var responseData = JSON.parse(response);
+                    if (responseData.status === "success") {
+                        // Thông báo mua hàng thành công
+                        Swal.fire({
+                            title: "Thành công!",
+                            text: "Bạn đã mua hàng thành công!",
+                            icon: "success",
+                            confirmButtonText: "OK"
+                        });
+
+                        // Tiến hành gửi email hóa đơn
+                        var cartData = <?php echo isset($cart_data) ? json_encode($cart_data) : '[]'; ?>;
+                        var emailInput = document.getElementById('emailInput');
+                        var email = emailInput.value.trim();
+                        if (email !== '') {
+                            var data = new FormData();
+                            data.append('mail', email);
+                            data.append('subject', 'Hóa đơn mua hàng');
+                            data.append('cart_data', JSON.stringify(cartData));
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('POST', 'sendmail.php', true);
+                            xhr.onload = function() {
+                                if (xhr.status === 200) {
+                                    alert('Hóa đơn đã được gửi thành công');
+                                    location.reload(); // Tải lại trang để reset giỏ hàng
+                                } else {
+                                    alert('Đã xảy ra lỗi khi gửi hóa đơn');
+                                }
+                            };
+                            xhr.send(data);
+                        } else {
+                            alert('Vui lòng nhập địa chỉ email');
+                        }
+                    } else if (responseData.status === "out_of_stock") {
+                        // Hiển thị thông báo lỗi về sản phẩm không đủ số lượng trong kho
+                        var errorMessage = responseData.errors.join('\n');
+                        Swal.fire({
+                            title: "Sản phẩm đã hết hàng!",
+                            text: errorMessage,
+                            icon: "error",
+                            confirmButtonText: "OK"
+                        });
+                    } else if (responseData.status === "empty_cart") {
+                        // Thông báo giỏ hàng trống
+                        Swal.fire({
+                            title: "Giỏ hàng trống!",
+                            text: "Không có sản phẩm nào trong giỏ hàng.",
+                            icon: "warning",
+                            confirmButtonText: "OK"
+                        });
+                    } else {
                         // Xử lý lỗi (nếu có)
-                        console.error(error);
+                        Swal.fire({
+                            title: "Lỗi!",
+                            text: "Đã xảy ra lỗi khi xử lý đơn hàng.",
+                            icon: "error",
+                            confirmButtonText: "OK"
+                        });
                     }
-                });
+                },
+                error: function(xhr, status, error) {
+                    // Xử lý lỗi (nếu có)
+                    console.error(error);
+                    Swal.fire({
+                        title: "Lỗi!",
+                        text: "Đã xảy ra lỗi khi xử lý đơn hàng.",
+                        icon: "error",
+                        confirmButtonText: "OK"
+                    });
+                }
             });
-        });
+        }
+
+        // Xử lý sự kiện khi click vào nút "Đồng ý mua và gửi hóa đơn"
+        var sendInvoiceButton = document.getElementById('sendInvoiceButton');
+        sendInvoiceButton.addEventListener('click', checkInventoryAndSendInvoice);
     </script>
+    <!-- Kết thúc đoạn script Ajax -->
 
     <?php require "footer.php" ?>
 </body>
@@ -346,33 +442,6 @@ if (isset($_POST["update_cart"])) {
             var cartTotalElement = document.getElementById('cart-total');
             cartTotalElement.innerText = formatCurrency(total);
         }
-
-        var cartData = <?php echo isset($cart_data) ? json_encode($cart_data) : '[]'; ?>;
-
-        var sendInvoiceButton = document.getElementById('sendInvoiceButton');
-        sendInvoiceButton.addEventListener('click', function() {
-            var emailInput = document.getElementById('emailInput');
-            var email = emailInput.value.trim();
-            if (email !== '') {
-                var data = new FormData();
-                data.append('mail', email);
-                data.append('subject', 'Hóa đơn mua hàng');
-                data.append('cart_data', JSON.stringify(cartData));
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'sendmail.php', true);
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        alert('Hóa đơn đã được gửi thành công');
-                        location.reload(); // Tải lại trang để reset giỏ hàng
-                    } else {
-                        alert('Đã xảy ra lỗi khi gửi hóa đơn');
-                    }
-                };
-                xhr.send(data);
-            } else {
-                alert('Vui lòng nhập địa chỉ email');
-            }
-        });
     });
 </script>
 

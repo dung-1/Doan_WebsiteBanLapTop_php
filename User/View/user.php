@@ -25,6 +25,13 @@ if (isset($_SESSION['username'])) {
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/hover.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .out-of-stock-msg {
+            color: red;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -90,13 +97,31 @@ if (isset($_SESSION['username'])) {
                                         </div>';
 
                                 if (isset($_SESSION['username'])) {
-                                    echo '<form method="post" action="cart.php">
-                                        <input type="hidden" name="hidden_id" value="' . $product_id . '">
-                                        <input type="hidden" name="hidden_name" value="' . $product_name . '">
-                                        <input type="hidden" name="hidden_price" value="' . $price . '">
-                                        <input type="hidden" name="quantity" value="1">
-                                        <button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart "><i class="bi bi-bag-plus-fill"></i> Mua ngay</button>
-                                    </form>';
+                                    // Kiểm tra số lượng sản phẩm trong kho
+                                    $sql_inventory = "SELECT quantity FROM inventories WHERE product_id = $product_id";
+                                    $result_inventory = $conn->query($sql_inventory);
+                                    if ($result_inventory->rowCount() > 0) {
+                                        $inventory = $result_inventory->fetch(PDO::FETCH_ASSOC);
+                                        $quantity_in_stock = $inventory['quantity'];
+
+                                        // Nếu sản phẩm hết hàng, không hiển thị nút "Mua ngay"
+                                        if ($quantity_in_stock <= 0) {
+                                                echo '<button class="btn btn-danger btn-out-of-stock" disabled>Hết hàng</button>';
+
+                                        } else {
+                                            // Hiển thị nút "Mua ngay" nếu sản phẩm còn hàng
+                                            echo '<form method="post" action="cart.php">
+                                                <input type="hidden" name="hidden_id" value="' . $product_id . '">
+                                                <input type="hidden" name="hidden_name" value="' . $product_name . '">
+                                                <input type="hidden" name="hidden_price" value="' . $price . '">
+                                                <input type="hidden" name="quantity" value="1">
+                                                <button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart"><i class="bi bi-bag-plus-fill"></i> Mua ngay</button>
+                                            </form>';
+                                        }
+                                    } else {
+                                            echo '<button class="btn btn-danger btn-out-of-stock" disabled>Hết hàng</button>';
+
+                                    }
                                 } else {
                                     echo '<a href="loginPage.php?login_required=1" class="btn btn-primary" onclick="showBtnBuyAlert()">Mua ngay</a>';
                                 }
@@ -124,15 +149,31 @@ if (isset($_SESSION['username'])) {
                                     </div>';
 
                                 if (isset($_SESSION['username'])) {
-                                    echo '<form method="post" action="cart.php">
-                                        <input type="hidden" name="hidden_id" value="' . $row['product_id'] . '">
-                                        <input type="hidden" name="hidden_name" value="' . $row['product_name'] . '">
-                                        <input type="hidden" name="hidden_price" value="' . $row['price'] . '">
-                                        <input type="hidden" name="quantity" value="1">
-                                        <button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart "> Mua ngay</button>
-                                    </form>';
+                                    // Kiểm tra số lượng sản phẩm trong kho
+                                    $sql_inventory = "SELECT quantity FROM inventories WHERE product_id = " . $row['product_id'];
+                                    $result_inventory = $conn->query($sql_inventory);
+                                    if ($result_inventory->rowCount() > 0) {
+                                        $inventory = $result_inventory->fetch(PDO::FETCH_ASSOC);
+                                        $quantity_in_stock = $inventory['quantity'];
+
+                                        // Nếu sản phẩm hết hàng, không hiển thị nút "Mua ngay"
+                                        if ($quantity_in_stock <= 0) {
+                                            echo '<button class="btn btn-danger btn-out-of-stock" disabled>Hết hàng</button>';
+                                        } else {
+                                            // Hiển thị nút "Mua ngay" nếu sản phẩm còn hàng
+                                            echo '<form method="post" action="cart.php">
+                                                <input type="hidden" name="hidden_id" value="' . $row['product_id'] . '">
+                                                <input type="hidden" name="hidden_name" value="' . $row['product_name'] . '">
+                                                <input type="hidden" name="hidden_price" value="' . $row['price'] . '">
+                                                <input type="hidden" name="quantity" value="1">
+                                                <button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart"><i class="bi bi-bag-plus-fill"></i> Mua ngay</button>
+                                            </form>';
+                                        }
+                                    } else {
+                                        echo '<button class="btn btn-danger btn-out-of-stock" disabled>Hết hàng</button>';
+                                    }
                                 } else {
-                                    echo '<a href="loginPage.php?login_required=1" class="btn btn-primary" onclick="showBtnBuyAlert()"><i class="bi bi-bag-plus-fill"></i>Mua ngay</a>';
+                                    echo '<a href="loginPage.php?login_required=1" class="btn btn-primary" onclick="showBtnBuyAlert()">Mua ngay</a>';
                                 }
 
                                 echo '</div>
@@ -155,6 +196,7 @@ if (isset($_SESSION['username'])) {
             }
             ?>
         </div>
+
         <script>
             const showMoreButtons = document.querySelectorAll(".product-item .btn-show-more");
             showMoreButtons.forEach((button) => {
@@ -170,24 +212,9 @@ if (isset($_SESSION['username'])) {
         </script>
 
     </main>
+
+
     <?php require "footer.php" ?>
-    <style>
-        .product__show {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .product-item .btn-show-more {
-            margin: 20px auto;
-        }
-
-        @media (max-width: 768px) {
-            .product-item .btn-show-more {
-                margin: 10px auto;
-            }
-        }
-    </style>
 </body>
 
 </html>
