@@ -94,6 +94,7 @@ if (isset($_SESSION['username'])) {
                                         <input type="hidden" name="hidden_id" value="' . $product_id . '">
                                         <input type="hidden" name="hidden_name" value="' . $product_name . '">
                                         <input type="hidden" name="hidden_price" value="' . $price . '">
+                                        <input type="hidden" name="hidden_price_discount" value="' . $discounted_price . '">
                                         <input type="hidden" name="quantity" value="1">
                                         <button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart "><i class="bi bi-bag-plus-fill"></i> Mua ngay</button>
                                     </form>';

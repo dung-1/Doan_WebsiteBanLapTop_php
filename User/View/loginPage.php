@@ -31,6 +31,8 @@ if (isset($_SESSION['username'])) {
 
     <link rel="stylesheet" href="../View/css/reponsive.css">
     <link rel="stylesheet" href="../View/css/home.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body>
