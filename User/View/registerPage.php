@@ -39,7 +39,7 @@ if (isset($_SESSION['username'])) {
 <body>
     <?php include 'header.php'; ?>
     <div class="login-form">
-        <form action="../model/xuLyRegisterPage.php" method="post" onsubmit="return validateForm() && validateUsername() && checkUsernameExist()">
+        <form action="../model/xuLyRegisterPage.php" method="post" onsubmit="return validateForm() && validateUsername() ">
             <section class="vh-80">
                 <div class="container py-5 h-20">
                     <div class="row d-flex justify-content-center align-items-center h-80">
@@ -109,6 +109,7 @@ if (isset($_SESSION['username'])) {
             email: false
         };
         var isUsernameValid = false;
+        var isUsernameExist = false; // Thêm biến để kiểm tra lỗi "username đã tồn tại"
 
         function validateUsername() {
             var username = document.getElementById("username").value;
@@ -132,7 +133,6 @@ if (isset($_SESSION['username'])) {
                 return true;
             }
         }
-
 
         function checkUsernameExist() {
             if (!isUsernameValid) {
@@ -158,13 +158,13 @@ if (isset($_SESSION['username'])) {
                             });
                             usernameError.classList.add("invalid-feedback");
                             document.getElementById("username").classList.add("is-invalid");
-                            isUsernameValid = false; // Đặt lại giá trị của biến isUsernameValid thành false
+                            isUsernameExist = true; // Đặt biến isUsernameExist thành true
                         } else {
                             // Username không tồn tại, xóa thông báo lỗi
                             usernameError.textContent = "";
                             usernameError.classList.remove("invalid-feedback");
                             document.getElementById("username").classList.remove("is-invalid");
-                            isUsernameValid = true; // Đặt lại giá trị của biến isUsernameValid thành true
+                            isUsernameExist = false; // Đặt biến isUsernameExist thành false
                         }
                     } else {
                         console.error("Error:", xhr.status);
@@ -175,7 +175,6 @@ if (isset($_SESSION['username'])) {
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.send("username=" + encodeURIComponent(username));
         }
-
 
         function validateField(fieldName) {
             isFieldBlurred[fieldName] = true;
@@ -253,6 +252,17 @@ if (isset($_SESSION['username'])) {
             } else {
                 email.classList.remove('is-invalid');
             }
+
+            if (isUsernameExist) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi',
+                    text: 'Tên tài khoản đã tồn tại',
+                    confirmButtonText: 'Đóng'
+                });
+                return false;
+            }
+
             if (username.value.trim() === "" && password.value.trim() === "" && fullName.value.trim() === "" && phone.value.trim() === "" && email.value.trim() === "") {
                 Swal.fire({
                     icon: 'error',
@@ -262,6 +272,7 @@ if (isset($_SESSION['username'])) {
                 });
                 return false;
             }
+
             return true;
         }
 
@@ -278,6 +289,7 @@ if (isset($_SESSION['username'])) {
             return emailRegex.test(email);
         }
     </script>
+    
 </body>
 
 </html>

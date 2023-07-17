@@ -64,8 +64,8 @@
                     <section class="py-5">
                         <div class="container px-4 px-lg-5 my-5">
                             <div class="row gx-4 gx-lg-5 align-items-center">
-                                    <div class="col-md-6 col-sm-12  ">
-                                    <img id="zoom_01"class="card-img-detail mb-5 mb-md-0 zoom" src="<?php echo $product_image; ?>" alt="Hình ảnh sản phẩm"  data-zoom-image="<?php echo $product_image; ?>"/>
+                                <div class="col-md-6 col-sm-12">
+                                    <img class="card-img-detail mb-5 mb-md-0" src="../../public/img/products/<?php echo $product_image; ?>" alt="Hình ảnh sản phẩm">
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <h1 class="display-6 fw-bolder"><?php echo $product_name; ?></h1>

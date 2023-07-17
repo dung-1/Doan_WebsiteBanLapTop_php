@@ -243,7 +243,6 @@ if (isset($_SESSION['username'])) {
                         </li>
 
                         <li>
-
                             <p></p>
                         </li>
                         <li>
