@@ -25,7 +25,6 @@ if (isset($_SESSION['username'])) {
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/hover.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 </head>
 
 <body>
@@ -96,10 +95,10 @@ if (isset($_SESSION['username'])) {
                                         <input type="hidden" name="hidden_name" value="' . $product_name . '">
                                         <input type="hidden" name="hidden_price" value="' . $price . '">
                                         <input type="hidden" name="quantity" value="1">
-                                        <button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart "> Mua ngay</button>
+                                        <button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart "><i class="bi bi-bag-plus-fill"></i> Mua ngay</button>
                                     </form>';
                                 } else {
-                                    echo '<a href="loginPage.php?login_required=1" class="btn btn-primary" onclick="showBtnBuyAlert()"><i class="bi bi-bag-plus-fill"></i>Mua ngay</a>';
+                                    echo '<a href="loginPage.php?login_required=1" class="btn btn-primary" onclick="showBtnBuyAlert()">Mua ngay</a>';
                                 }
 
                                 echo '</div>
