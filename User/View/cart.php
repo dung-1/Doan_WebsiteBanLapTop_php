@@ -44,7 +44,21 @@ if (isset($_POST["add_to_cart"])) {
 
     $item_data = json_encode($cart_data);
     setcookie('shopping_cart', $item_data, time() + (86400 * 30));
-    header("location:cart.php?success=1");
+    if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+        $username = $_SESSION['username'];
+
+        // Chuỗi URL chứa tham số 'success' với tên người dùng được mã hóa
+        $url = "cart.php?success=" . urlencode($username);
+
+        // Chuyển hướng người dùng đến trang cart.php với tham số 'success' chứa tên người dùng
+        header("Location: " . $url);
+        exit; // Chắc chắn dừng thực hiện mã sau khi chuyển hướng
+    } else {
+        // Trường hợp không có tên người dùng được lưu trong biến $_SESSION['username']
+        // Xử lý tùy ý ở đây, ví dụ: chuyển hướng người dùng đến trang đăng nhập
+        header("Location: login.php");
+        exit; // Chắc chắn dừng thực hiện mã sau khi chuyển hướng
+    }
 }
 
 // Xử lý xóa sản phẩm khỏi giỏ hàng
@@ -175,7 +189,7 @@ if (isset($_POST["update_cart"])) {
             ?>
 
             <div class="text-center mt-4">
-                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#emailModal"><i class="bi bi-receipt"></i>In hóa đơn qua email</button>
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#emailModal"><i class="bi bi-receipt"></i>Thanh Toán</button>
             </div>
 
             <!-- Modal -->
@@ -183,7 +197,46 @@ if (isset($_POST["update_cart"])) {
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="emailModalLabel">Nhập địa chỉ email</h5>
+                            <h5 class="modal-title" id="emailModalLabel">Thanh Toán</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="emailInput" class="form-label">Họ và Tên Người Nhận</label>
+                                <input type="text" class="form-control" name="user_name" placeholder="Nhập Tên">
+                            </div>
+                            <div class="mb-3">
+                                <label for="emailInput" class="form-label">Số Điện Thoại </label>
+                                <input type="tel" class="form-control" name="phone" placeholder="Nhập Tên">
+                            </div>
+                            <div class="mb-3">
+                                <label for="emailInput" class="form-label">Địa chỉ(số nhà/huyện(Phường),tỉnh(Tp))</label>
+                                <input type="text" class="form-control" name="addres" placeholder="Nhập Tên">
+                            </div>
+                            <div class="mb-3">
+                                <label for="emailInput" class="form-label">Phương Thức Thanh Toán</label>
+                                <select class="form-select text-capitalize" name="pay" aria-label="Default select example">
+                                    <option selected>Chọn phương thức thanh toán</option>
+                                    <option value="1">Chuyển Tiền Qua Momo</option>
+                                    <option value="2">Chuyển Tiền Qua Thẻ</option>
+                                    <option value="3">Thanh Toán Khi Nhận hàng</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+                            <button type="button" class="btn btn-success" id="buyshop" data-bs-toggle="modal" data-bs-target="#emailModal1234">Đồng ý mua</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="emailModal1234" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="emailModalLabel">Bạn có muốn in hóa đơn</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
                         </div>
@@ -196,13 +249,38 @@ if (isset($_POST["update_cart"])) {
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
-                            <button type="button" class="btn btn-success" id="sendInvoiceButton">Gửi hóa đơn</button>
+                            <button type="button" class="btn btn-success" id="sendInvoiceButton" data-bs-toggle="modal">IN HÓA ĐƠN</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+
+    <!-- Trước khi kết thúc thẻ </body> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function() {
+            // Xử lý sự kiện khi click vào nút "Đồng ý mua"
+            $("#buyshop").click(function() {
+                // Thực hiện gửi Ajax để lưu thông tin đơn hàng
+                $.ajax({
+                    url: "save_invoice.php", // Đường dẫn đến tệp xử lý lưu đơn hàng
+                    type: "POST",
+                    data: {}, // Bạn có thể truyền dữ liệu từ trang này qua Ajax nếu cần thiết
+                    success: function(response) {
+                        // Xử lý phản hồi từ tệp xử lý lưu đơn hàng (nếu cần)
+                        console.log(response);
+                    },
+                    error: function(xhr, status, error) {
+                        // Xử lý lỗi (nếu có)
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+
     <?php require "footer.php" ?>
 </body>
 
