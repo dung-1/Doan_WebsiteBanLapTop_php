@@ -5,7 +5,7 @@ require_once "../../Core/Conecting.php";
 // Lấy dữ liệu từ biểu mẫu đăng nhập
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
-    $password = $_POST["password"];
+    $password = md5($_POST['password']);
 
     // Kiểm tra sự tồn tại của tài khoản trong cơ sở dữ liệu
     $pdo = get_pdo();

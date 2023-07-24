@@ -84,7 +84,7 @@ if (isset($_SESSION['username'])) {
                             <div class="col-md-6 col-lg-3 hvr-float">
                                 <div class="card mb-3">
                                     <a href="product_detail.php?id=' . $product_id . '">
-                                        <img src="' . $product_image . '" class="card-img-top" alt="Hình ảnh sản phẩm">
+                                        <img src="../../public/img/products/' . $product_image . '" class="card-img-top" alt="Hình ảnh sản phẩm">
                                     </a>
                                     <div class="card-body">
                                         <h5 class="card-title">' . $product_name . '</h5>
@@ -184,7 +184,7 @@ if (isset($_SESSION['username'])) {
 
                         echo '
                         </div>
-                        <button class="btn btn-primary btn-show-more" data-category="' . $category_id . '">Hiển thị thêm</button>
+                        <button class="btn btn-outline-danger btn-show-more" data-category="' . $category_id . '">Hiển thị thêm</button>
                     </div>
                 </div>';
                     } else {

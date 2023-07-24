@@ -17,7 +17,7 @@ use PHPMailer\PHPMailer\Exception;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    $password = md5($_POST['password']);
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $full_name = $_POST['full_name'];
