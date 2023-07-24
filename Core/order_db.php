@@ -8,7 +8,7 @@ function get_all_orders()
 
     $sql = "SELECT o.*, u.username
     FROM orders o
-    INNER JOIN users u ON o.order_id = u.user_id WHERE u.role='customer'";
+    INNER JOIN users u ON o.user_id = u.user_id WHERE u.role='customer'";
     $stmt = $pdo->prepare($sql);
 
     $stmt->execute();

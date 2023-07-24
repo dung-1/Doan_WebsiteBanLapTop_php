@@ -332,7 +332,7 @@ if (isset($_POST["update_cart"])) {
         function sendInvoiceAndSaveOrder(name, email, phone, address, paymentMethod) {
             // Thực hiện gửi Ajax để lưu thông tin đơn hàng
             $.ajax({
-                url: "../model/save_invoice.php", // Đường dẫn đến tệp xử lý lưu đơn hàng
+                url: "save_invoice.php", // Đường dẫn đến tệp xử lý lưu đơn hàng
                 type: "POST",
                 data: {}, // Bạn có thể truyền dữ liệu từ trang này qua Ajax nếu cần thiết
                 success: function(response) {
