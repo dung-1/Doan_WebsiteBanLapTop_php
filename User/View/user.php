@@ -6,7 +6,7 @@ if (isset($_SESSION['username'])) {
         exit();
     }
 } else {
-    header('location:../View/loginPage.php');
+    header('location:loginPage.php');
     exit();
 }
 ?>

@@ -28,8 +28,7 @@ if (isset($_SESSION['username'])) {
     <link rel="stylesheet" href="css/hover.css">
     <link rel="stylesheet" href="../View/css/reponsive.css">
     <link rel="stylesheet" href="../View/css/home.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .is-invalid {
             border-color: red;
@@ -86,7 +85,7 @@ if (isset($_SESSION['username'])) {
                                     </div>
                                     <div>
                                         <?php $signup = "loginPage.php";   ?>
-                                        <p class="mb-0">Đã có tài khoản? <a href="<?php echo $signup; ?>" class="text-white-50 fw-bold">Đăng nhập</a>
+                                        <p class="mb-0">you have an account? <a href="<?php echo $signup; ?>" class="text-white-50 fw-bold">Login</a>
                                         </p>
                                     </div>
 

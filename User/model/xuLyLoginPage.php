@@ -27,18 +27,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header('location: ../../Admin/index.php');
                 exit();
             } else if ($_SESSION['role'] == 'customer') {
-                header('location: user.php');
+                header('location: ../View/user.php');
                 exit();
             }
         } else {
             $_SESSION['error'] = 'Mật khẩu không đúng!';
-            header('location: loginPage.php');
+            header('location: ../View/loginPage.php');
             exit();
         }
     } else {
 
         $_SESSION['error'] = 'Tài khoản không tồn tại!';
-        header('location: loginPage.php');
+        header('location: ../View/loginPage.php');
         exit();
     }
 }

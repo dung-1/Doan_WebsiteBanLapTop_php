@@ -39,7 +39,7 @@ if (isset($_SESSION['username'])) {
     <?php include 'header.php'; ?>
 
 
-    <form action="xuLyLoginPage.php" method="POST" onsubmit="return validateForm()">
+    <form action="../model/xuLyLoginPage.php" method="POST" onsubmit="return validateForm()">
 
         <section class="vh-80">
             <div class="container py-5 h-20">

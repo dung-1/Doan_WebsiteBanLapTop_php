@@ -6,7 +6,7 @@ if (isset($_SESSION['username'])) {
         exit();
     }
 } else {
-    header('location:../View/loginPage.php');
+    header('location:loginPage.php');
     exit();
 }
 
@@ -332,7 +332,7 @@ if (isset($_POST["update_cart"])) {
         function sendInvoiceAndSaveOrder(name, email, phone, address, paymentMethod) {
             // Thực hiện gửi Ajax để lưu thông tin đơn hàng
             $.ajax({
-                url: "save_invoice.php", // Đường dẫn đến tệp xử lý lưu đơn hàng
+                url: "../model/save_invoice.php", // Đường dẫn đến tệp xử lý lưu đơn hàng
                 type: "POST",
                 data: {}, // Bạn có thể truyền dữ liệu từ trang này qua Ajax nếu cần thiết
                 success: function(response) {
@@ -348,7 +348,7 @@ if (isset($_POST["update_cart"])) {
                         data.append('cart_data', JSON.stringify(cartData));
 
                         var xhr = new XMLHttpRequest();
-                        xhr.open('POST', 'sendmail.php', true);
+                        xhr.open('POST', '../model/sendmail.php', true);
                         xhr.onload = function() {
                             if (xhr.status === 200) {
                                 Swal.fire("Thành công", "Hóa đơn đã được gửi thành công!", "success").then(function() {
@@ -374,15 +374,6 @@ if (isset($_POST["update_cart"])) {
         // Xử lý sự kiện khi click vào nút "Đồng ý mua và gửi hóa đơn"
         var sendInvoiceButton = document.getElementById('sendInvoiceButton');
         sendInvoiceButton.addEventListener('click', checkInventoryAndSendInvoice);
-
-
-
-
-
-
-
-
-
 
 
 

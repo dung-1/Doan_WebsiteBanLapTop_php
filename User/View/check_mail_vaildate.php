@@ -1,3 +1,20 @@
+<?php
+session_start();
+if (isset($_SESSION['username'])) {
+    if ($_SESSION['role'] == 'admin') {
+        header('location: ../../Admin/index.php');
+        exit();
+    } else if ($_SESSION['role'] == 'customer') {
+        header('location:user.php');
+        exit();
+    }
+} else {
+    $_SESSION['previous_page'] = $_SERVER['REQUEST_URI'];
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +35,7 @@
 <body>
     <?php include 'header.php'; ?>
     <div class="login-form">
-    <form action="../View/send_mail_check.php" method="post" onsubmit="return validateForm()">
+    <form action="../model/send_mail_check.php" method="post" onsubmit="return validateForm()">
         <section class="vh-80">
             <div class="container py-5 h-20">
                 <div class="row d-flex justify-content-center align-items-center h-80">
