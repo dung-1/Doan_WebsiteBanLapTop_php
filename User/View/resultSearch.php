@@ -29,7 +29,7 @@ $result = $conn->query($sql);
     <script src="js/jquery-1.8.3.min.js"></script>
     <script src="js/jquery.elevatezoom.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
         .card {
             border: none;
@@ -93,7 +93,7 @@ $result = $conn->query($sql);
     <main>
         <div class="container">
             <?php if (empty($search_query)) : ?>
-                <h5 class="mt-3 text-danger">Vui lòng nhập từ khóa tìm kiếm!</h5>
+                <h5 class="mt-3 text-danger text-center fs-3">Vui lòng nhập từ khóa tìm kiếm!!!</h5>
             <?php else : ?>
                 <h3 class="mt-3">Kết quả tìm kiếm cho <span class="text-danger">"<?php echo $search_query; ?>"</span></h3>
                 <hr>

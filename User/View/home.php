@@ -30,6 +30,7 @@ if (isset($_SESSION['username'])) {
     <link rel="stylesheet" href="css/hover.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
 
 </head>
 
@@ -71,6 +72,15 @@ if (isset($_SESSION['username'])) {
                         <div class="row">';
 
                         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                            if ($row['discounted_price']) {
+                                // Tính toán số tiền được giảm giá
+                                $discount_amount = $row['price'] - $row['discounted_price'];
+                                // Tính toán phần trăm giảm giá
+                                $discount_percent = ($discount_amount / $row['price']) * 100;
+
+                                    // Hiển thị span giảm giá bên trên góc phải ảnh sản phẩm
+                                ;
+                            }
                             if ($product_count < 4) {
                                 $product_id = $row['product_id'];
                                 $product_image = $row['product_image'];
@@ -82,6 +92,7 @@ if (isset($_SESSION['username'])) {
                                 echo '
                             <div class="col-md-6 col-lg-3 hvr-float">
                                 <div class="card mb-3">
+                                <span class="discount-label">-' . round($discount_percent) . '%</span>
                                     <a href="product_detail.php?id=' . $product_id . '">
                                         <img src="../../public/img/products/' . $product_image . '" class="card-img-top" alt="Hình ảnh sản phẩm">
                                     </a>
@@ -103,26 +114,24 @@ if (isset($_SESSION['username'])) {
                                         $inventory = $result_inventory->fetch(PDO::FETCH_ASSOC);
                                         $quantity_in_stock = $inventory['quantity'];
 
-                                        // Nếu sản phẩm hết hàng, không hiển thị nút "Mua ngay"
-                                        if ($quantity_in_stock <= 0) {
-                                                echo '<button class="btn btn-danger btn-out-of-stock" disabled>Hết hàng</button>';
-
-                                        } else {
-                                            // Hiển thị nút "Mua ngay" nếu sản phẩm còn hàng
+                                        // Nếu sản phẩm còn hàng, hiển thị nút "Mua ngay" và thông báo số lượng còn lại
+                                        if ($quantity_in_stock > 0) {
                                             echo '<form method="post" action="cart.php">
-                                                <input type="hidden" name="hidden_id" value="' . $product_id . '">
-                                                <input type="hidden" name="hidden_name" value="' . $product_name . '">
-                                                <input type="hidden" name="hidden_price" value="' . $price . '">
-                                                <input type="hidden" name="quantity" value="1">
-                                                <button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart"><i class="bi bi-bag-plus-fill"></i> Mua ngay</button>
-                                            </form>';
+                                                        <input type="hidden" name="hidden_id" value="' . $product_id . '">
+                                                        <input type="hidden" name="hidden_name" value="' . $product_name . '">
+                                                        <input type="hidden" name="hidden_price" value="' . $price . '">
+                                                        <input type="hidden" name="quantity" value="1">
+                                                        <button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart"><i class="bi bi-cart-plus-fill"></i>Mua ngay</button>
+                                                        <span class="product-quantity-in-stock text-danger m-4 fs-6">Còn lại ' . $quantity_in_stock . '</span>
+                                                    </form>';
+                                        } else {
+                                            echo '<button class="btn btn-danger btn-out-of-stock" disabled>Hết hàng</button>';
                                         }
                                     } else {
-                                            echo '<button class="btn btn-danger btn-out-of-stock" disabled>Hết hàng</button>';
-
+                                        echo '<button class="btn btn-danger btn-out-of-stock" disabled>Hết hàng</button>';
                                     }
                                 } else {
-                                    echo '<a href="loginPage.php?login_required=1" class="btn btn-primary" onclick="showBtnBuyAlert()">Mua ngay</a>';
+                                    echo '<a href="loginPage.php?login_required=1" class="btn btn-primary" onclick="showBtnBuyAlert()"><i class="bi bi-cart-plus-fill"></i>Mua ngay</a>';
                                 }
 
                                 echo '</div>
@@ -135,7 +144,7 @@ if (isset($_SESSION['username'])) {
                                 echo '<div class="col-md-6 col-lg-3 hvr-float hidden-product" style="display: none;">
                             <div class="card mb-3">
                                 <a href="product_detail.php?id=' . $row['product_id'] . '">
-                                    <img src="../../public/img/products/' . $row['product_image'] . '" class="card-img-top" alt="Hình ảnh sản phẩm">
+                                    <img src="' . $row['product_image'] . '" class="card-img-top" alt="Hình ảnh sản phẩm">
                                 </a>
                                 <div class="card-body">
                                     <h5 class="card-title">' . $row['product_name'] . '</h5>
@@ -165,14 +174,14 @@ if (isset($_SESSION['username'])) {
                                                 <input type="hidden" name="hidden_name" value="' . $row['product_name'] . '">
                                                 <input type="hidden" name="hidden_price" value="' . $row['price'] . '">
                                                 <input type="hidden" name="quantity" value="1">
-                                                <button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart"><i class="bi bi-bag-plus-fill"></i> Mua ngay</button>
+                                                <button type="submit" name="add_to_cart" class="btn btn-primary btn-add-to-cart"><i class="bi bi-cart-plus-fill"></i>Mua ngay</button>
                                             </form>';
                                         }
                                     } else {
                                         echo '<button class="btn btn-danger btn-out-of-stock" disabled>Hết hàng</button>';
                                     }
                                 } else {
-                                    echo '<a href="loginPage.php?login_required=1" class="btn btn-primary" onclick="showBtnBuyAlert()">Mua ngay</a>';
+                                    echo '<a href="loginPage.php?login_required=1" class="btn btn-primary" onclick="showBtnBuyAlert()"><i class="bi bi-cart-plus-fill"></i>Mua ngay</a>';
                                 }
 
                                 echo '</div>
@@ -196,54 +205,24 @@ if (isset($_SESSION['username'])) {
             ?>
         </div>
 
-        <script>
-            const showMoreButtons = document.querySelectorAll(".product-item .btn-show-more");
-            showMoreButtons.forEach((button) => {
-                button.addEventListener("click", function() {
-                    const categoryID = this.getAttribute("data-category");
-                    const hiddenProducts = document.querySelectorAll(`.product-item[data-category='${categoryID}'] .hidden-product`);
-                    hiddenProducts.forEach((product) => {
-                        product.style.display = "block";
-                    });
-                    this.style.display = "none";
-                });
-            });
-        </script>
-
     </main>
 
     <?php require "footer.php" ?>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var countElement = document.getElementById('count_shopping_cart_store');
-            countElement.innerText = '0';
-            var countValue = 0;
-
-
-            function updateCartCounter() {
-                countValue += 1;
-                countElement.innerText = countValue;
-            }
-
-            var addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
-            addToCartButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    updateCartCounter();
-                    Swal.fire(
-                        'bạn tiến hàng đăng nhập để mua hàng',
-                        'success'
-                    )
+        // nút xem thêm sản phẩm
+        const showMoreButtons = document.querySelectorAll(".product-item .btn-show-more");
+        showMoreButtons.forEach((button) => {
+            button.addEventListener("click", function() {
+                const categoryID = this.getAttribute("data-category");
+                const hiddenProducts = document.querySelectorAll(`.product-item[data-category='${categoryID}'] .hidden-product`);
+                hiddenProducts.forEach((product) => {
+                    product.style.display = "block";
                 });
+                this.style.display = "none";
             });
         });
 
-        function resetCart() {
-            // Xóa giỏ hàng bằng cách xóa cookie shopping_cart
-            document.cookie = "shopping_cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        }
-    </script>
-    <script>
         document.addEventListener('DOMContentLoaded', function() {
             var countElement = document.getElementById('count_shopping_cart_store');
             var countValue = parseInt(countElement.innerText);
@@ -256,9 +235,10 @@ if (isset($_SESSION['username'])) {
             var addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
             addToCartButtons.forEach(function(button) {
                 button.addEventListener('click', function() {
+                    
                     updateCartCounter();
-                    alert('bạn tiến hàng đăng nhập để mua hàng',
-);
+                    alert("Bạn cần đăng nhập để mua hàng!!!");
+                    
                 });
             });
         });
@@ -268,7 +248,25 @@ if (isset($_SESSION['username'])) {
             document.cookie = "shopping_cart=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         }
     </script>
-  
+
 </body>
 
 </html>
+<style>
+    .product-item .card-img-top {
+        position: relative;
+    }
+
+    .product-item .discount-label {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background-color: #e74c3c;
+        color: #fff;
+        font-size: 14px;
+        padding: 8px 8px;
+        border-radius: 50%;
+        /* Thêm thuộc tính border-radius để bo tròn thành ô tròn */
+        z-index: 1;
+    }
+</style>

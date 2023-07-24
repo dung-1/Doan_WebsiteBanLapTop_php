@@ -55,6 +55,7 @@
                     <link rel="stylesheet" href="css/product_detail.css">
                     <script src="js/jquery-1.8.3.min.js"></script>
                     <script src="js/jquery.elevatezoom.js"></script>
+                    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
                 </head>
 

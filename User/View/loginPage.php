@@ -102,7 +102,7 @@ if (isset($_SESSION['username'])) {
 
                                 <div>
                                     <?php $signup = "registerPage.php";   ?>
-                                    <p class="mb-0">Don't have an account? <a href="<?php echo $signup; ?>" class="text-white-50 fw-bold">Sign Up</a>
+                                    <p class="mb-0">Chưa có tài khoản ? <a href="<?php echo $signup; ?>" class="text-white-50 fw-bold">Đăng ký ngay</a>
                                     </p>
                                 </div>
 
